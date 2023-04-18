@@ -1,6 +1,7 @@
 using PlaySoftBeta.DTOs;
 using PlaySoftBeta.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PlaySoftBeta.Controllers;
 
@@ -15,7 +16,7 @@ public class SongController : ControllerBase
     }
 
 
-    [HttpGet("{songID}")]
+    [HttpGet("{songID}"), Authorize]
     public async Task<ActionResult> GetSong(int songID)
     {
         var song = _songService.GetSong(songID);
@@ -31,7 +32,7 @@ public class SongController : ControllerBase
     }
 
 
-    [HttpPost()]
+    [HttpPost(), Authorize]
     public async Task<ActionResult> AddSongToPlaylist(PlaylistLinesDTO playlistLinesDTO)
     {
         _songService.AddSongToPlaylist(playlistLinesDTO);

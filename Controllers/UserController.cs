@@ -2,6 +2,7 @@ using PlaySoftBeta.Models;
 using PlaySoftBeta.DTOs;
 using PlaySoftBeta.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PlaySoftBeta.Controllers;
 
@@ -16,7 +17,7 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
-    [HttpGet("{ukid}")]
+    [HttpGet("{ukid}"), Authorize]
     public ActionResult<User> Get(int ukid)
     {
         var user = _userService.GetUser(ukid);
