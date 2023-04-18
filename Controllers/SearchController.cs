@@ -2,6 +2,7 @@ using PlaySoftBeta.DTOs;
 using PlaySoftBeta.Models;
 using PlaySoftBeta.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PlaySoftBeta.Controllers;
 
@@ -18,7 +19,7 @@ public class SearchController : ControllerBase
     }
 
 
-    [HttpGet("{name}")]
+    [HttpGet("{name}"), Authorize]
     public async Task<ActionResult> SearchSongsAndUsers(string name)
     {
         var songsAndUsers = _searchService.SearchByName(name);

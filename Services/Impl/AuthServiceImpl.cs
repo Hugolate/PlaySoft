@@ -15,7 +15,7 @@ public class AuthServiceImpl : IAuthService
         _logger = logger;
     }
 
-    public AuthLoginOutDTO Login(AuthLoginInDTO authLoginInDTO)
+    public bool Login(AuthLoginInDTO authLoginInDTO)
     {
         try
         {
@@ -24,10 +24,10 @@ public class AuthServiceImpl : IAuthService
             {
                 if (authLoginOutDTO.password.Equals(authLoginInDTO.password))
                 {
-                    return authLoginOutDTO;
+                    return true;
                 }
             }
-            return null;
+            return false;
         }
         catch (Exception e)
         {
