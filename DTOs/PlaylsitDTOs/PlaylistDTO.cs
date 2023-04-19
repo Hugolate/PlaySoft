@@ -4,7 +4,7 @@ namespace PlaySoftBeta.DTOs
     {
         public int playlistID { get; set; }
         public string playListName { get; set; }
-        public string userUKID { get; set; }
+        public int userUKID { get; set; }
         public string? playlistDescription { get; set; }
         public Boolean privacity { get; set; }
     }
