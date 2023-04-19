@@ -63,15 +63,17 @@ public class PlaylistServiceImpl : IPLaylistService
         }
     }
 
-    public List<SongIDSongOutDTO> GetSongsId(int playlistID, string orderKey, string order)
+    public List<SongIDSongOutDTO> GetSongsId(int playlistID, string? orderKey, string? order)
     {
         try
         {
-            if (orderKey.Equals("songName") || orderKey.Equals("songID") || orderKey.Equals("duration"))
+            //order == ASC/DESC
+            if (string.IsNullOrEmpty(order))
             {
-                return _playlistLinesRepository.GetSongsId(playlistID, orderKey, order);
+                order = "ASC";
             }
-            return null;
+            
+            return _playlistLinesRepository.GetSongsId(playlistID, orderKey, order);
         }
         catch (Exception e)
         {
