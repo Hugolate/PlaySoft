@@ -19,12 +19,12 @@ public class SearchServiceImpl : ISearchService
         _logger = logger;
     }
 
-    public SearchDTO SearchByName(string name)
+    public SearchDTO SearchByName(string query)
     {
         try
         {
-            var users = _userRepository.GetUserListByUsername(name);
-            var songs = _songRpository.GetSongListByName(name);
+            var users = _userRepository.GetUserListByUsername(query);
+            var songs = _songRpository.GetSongListByName(query);
 
             var searchDTO = new SearchDTO
             {

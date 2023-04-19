@@ -5,6 +5,6 @@ namespace PlaySoftBeta.Services;
 
 public interface ISearchService
 {
-    public SearchDTO SearchByName(string name);
+    public SearchDTO SearchByName(string query);
 
 }
