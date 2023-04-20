@@ -21,7 +21,7 @@ public class SearchController : ControllerBase
 
 
     [HttpGet("{name}"), Authorize]
-    public async Task<ActionResult> SearchSongsAndUsers(string name)
+    public async Task<ActionResult> SearchSongsAndUsers(string query)
     {
         var songsAndUsers = _searchService.SearchByName(query);
         if (songsAndUsers != null)
