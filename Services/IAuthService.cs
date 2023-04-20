@@ -5,6 +5,6 @@ namespace PlaySoftBeta.Services;
 
 public interface IAuthService
 {
-    public AuthLoginOutDTO Login(AuthLoginInDTO user);
+    public bool Login(AuthLoginInDTO user);
     public bool Register(AuhtRegisterUserDTO user);
 }

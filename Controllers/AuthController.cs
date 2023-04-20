@@ -1,7 +1,9 @@
 using PlaySoftBeta.DTOs;
-using PlaySoftBeta.Models;
-using PlaySoftBeta.Services;
 using Microsoft.AspNetCore.Mvc;
+using PlaySoftBeta.Services;
+using Jwt;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace PlaySoftBeta.Controllers;
 
@@ -15,15 +17,14 @@ public class AuthController : ControllerBase
     {
         _authService = authService;
     }
-    
+
     [HttpPost("login")]
-    public async Task<ActionResult<User>> GetUser(AuthLoginInDTO user)
+    public async Task<ActionResult<String>> GetUser(AuthLoginInDTO user)
     {
-        Console.WriteLine(user);
-        var loggedUser = _authService.Login(user);
-        if (loggedUser != null)
+
+        if (_authService.Login(user))
         {
-            return Ok(loggedUser);
+            return JwtManager.GenerateToken(user.email);
         }
         return BadRequest("this user doesn't exist");
     }

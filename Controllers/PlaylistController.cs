@@ -1,4 +1,4 @@
-
+using Microsoft.AspNetCore.Authorization;
 using PlaySoftBeta.DTOs;
 using PlaySoftBeta.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +16,7 @@ public class PlaylistController : ControllerBase
         _pLaylistService = pLaylistService;
     }
 
-    [HttpPost()]
+    [HttpPost(), Authorize]
     public async Task<ActionResult> CreatePlaylist(PlaylistDTO pLaylist)
     {
         if (_pLaylistService.CreatePlaylist(pLaylist))
@@ -26,7 +26,7 @@ public class PlaylistController : ControllerBase
         return BadRequest("Create playlist error");
     }
 
-    [HttpDelete()]
+    [HttpDelete(), Authorize]
     public async Task<ActionResult> DeletePlaylist(int pLaylistID)
     {
         if (_pLaylistService.DeletePlaylist(pLaylistID))
@@ -36,7 +36,7 @@ public class PlaylistController : ControllerBase
         return BadRequest("Playlist not found");
     }
 
-    [HttpPut()]
+    [HttpPut(), Authorize]
     public async Task<ActionResult> EditPLaylist(EditPLaylistDTO editPLaylistDTO)
     {
         if (_pLaylistService.EditPLaylist(editPLaylistDTO))
@@ -46,7 +46,7 @@ public class PlaylistController : ControllerBase
         return BadRequest("Error updating playlist");
     }
 
-    /* [HttpGet("{userUKID}")]
+     [HttpGet("{userUKID}"), Authorize]
      public async Task<ActionResult> GetOwnPlaylist(PlaylistLinesOrderDTO playlistLinesOrderDTO)
      {
          var playlists = _pLaylistService.GetOwnPlaylist(playlistLinesOrderDTO);
@@ -60,9 +60,9 @@ public class PlaylistController : ControllerBase
              return Ok("You don't have playlists yet");
          }
      }
- */
-    [HttpGet("{playlistID}")]
-    public async Task<ActionResult> GetSongsId(int playlistID, string? orderKey, string? order)
+
+    [HttpGet("{playlistID}"), Authorize]
+    public async Task<ActionResult> GetSongsId(int playlistID, string orderKey, string order)
     {
         var songsID = _pLaylistService.GetSongsId(playlistID, orderKey, order);
 
