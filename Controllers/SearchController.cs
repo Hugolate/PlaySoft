@@ -20,13 +20,13 @@ public class SearchController : ControllerBase
 
 
 
-    [HttpGet("{name}"), Authorize]
+    [HttpGet("{query}"), Authorize]
     public async Task<ActionResult> SearchSongsAndUsers(string query)
     {
-        var songsAndUsers = _searchService.SearchByName(query);
-        if (songsAndUsers != null)
+        var searchResponse = await  _searchService.SearchByName(query);
+        if (searchResponse != null)
         {
-            return Ok(songsAndUsers);
+            return Ok(searchResponse);
         }
         else
         {
