@@ -46,21 +46,6 @@ public class PlaylistController : ControllerBase
         return BadRequest("Error updating playlist");
     }
 
-     [HttpGet("{userUKID}"), Authorize]
-     public async Task<ActionResult> GetOwnPlaylist(PlaylistLinesOrderDTO playlistLinesOrderDTO)
-     {
-         var playlists = _pLaylistService.GetOwnPlaylist(playlistLinesOrderDTO);
-
-         if (playlists != null && playlists.Any())
-         {
-             return Ok(playlists);
-         }
-         else
-         {
-             return Ok("You don't have playlists yet");
-         }
-     }
-
     [HttpGet("{playlistID}"), Authorize]
     public async Task<ActionResult> GetSongsId(int playlistID, string orderKey, string order)
     {
