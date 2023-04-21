@@ -6,8 +6,24 @@ using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Jwt;
+using System.Globalization;
+using System;
+using System.Threading.Tasks;
+using SpotifyAPI.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var SpotifyConfig = builder.Configuration.GetSection("Spotify");
+var clientId = SpotifyConfig["ClientId"];
+var clientSecret = SpotifyConfig["ClientSecret"];
+
+var config = SpotifyClientConfig
+  .CreateDefault()
+  .WithAuthenticator(new ClientCredentialsAuthenticator(clientId, clientSecret));
+
+var spotify = new SpotifyClient(config);
+builder.Services.AddSingleton<ISpotifyClient>(spotify);
+
 builder.Services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("RepositoryContext")));
 
 builder.Services.AddCors(options =>
@@ -41,6 +57,7 @@ builder.Services.AddScoped<ISongService, SongServiceImpl>();
 builder.Services.AddScoped<IPlaylistLinesRepository, PlaylistLinesRepositoryImpl>();
 
 builder.Services.AddScoped<ISearchService, SearchServiceImpl>();
+
 
 
 builder.Services.AddAutoMapper(typeof(PlaysoftProfile));
@@ -97,6 +114,7 @@ builder.Services.AddAuthentication(opt =>
         };
     });
 builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 app.UseCors("AllowAllHeaders");

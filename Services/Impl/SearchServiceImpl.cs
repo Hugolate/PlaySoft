@@ -1,7 +1,7 @@
 using PlaySoftBeta.DTOs;
 using PlaySoftBeta.Models;
 using PlaySoftBeta.Repository;
-
+using SpotifyAPI.Web;
 
 namespace PlaySoftBeta.Services;
 
@@ -10,18 +10,22 @@ public class SearchServiceImpl : ISearchService
     private readonly IUserRepository _userRepository;
     private readonly ISongRepository _songRpository;
     private readonly ILogger<SearchServiceImpl> _logger;
+    private readonly ISpotifyClient _spotify;
 
-
-    public SearchServiceImpl(IUserRepository userRepository, ISongRepository songRepository, ILogger<SearchServiceImpl> logger)
+    public SearchServiceImpl(IUserRepository userRepository, ISongRepository songRepository, ILogger<SearchServiceImpl> logger, ISpotifyClient spotify)
     {
         _userRepository = userRepository;
         _songRpository = songRepository;
         _logger = logger;
+        _spotify = spotify;
     }
 
-    public SearchDTO SearchByName(string query)
+    public Task<SearchResponse> SearchByName(string query)
     {
-        try
+
+        return _spotify.Search.Item((new SearchRequest(SearchRequest.Types.Track, query)));
+
+        /*try
         {
             var users = _userRepository.GetUserListByUsername(query);
             var songs = _songRpository.GetSongListByName(query);
@@ -39,6 +43,8 @@ public class SearchServiceImpl : ISearchService
             _logger.LogError(e, "Error search");
             throw;
         }
+
+    }*/
 
     }
 }

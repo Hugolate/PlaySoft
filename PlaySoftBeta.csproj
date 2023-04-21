@@ -19,9 +19,13 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.29.0" />
     <PackageReference Include="Microsoft.OpenApi" Version="1.6.3" />
+    <PackageReference Include="Microsoft.Web.Administration" Version="11.1.0" />
     <PackageReference Include="SimpleJWTAuthentication" Version="1.0.2" />
+    <PackageReference Include="SpotifyAPI.Web" Version="7.0.0" />
     <!-- <PackageReference Include="npgsql" Version="6.0.3" /> -->
     <!-- <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.3" /> -->
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
@@ -30,5 +34,10 @@
     <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
     <PackageReference Include="System.Web.Http.Common" Version="4.0.20126.16343" />
   </ItemGroup>
+  <ItemGroup>
+  <Reference Include="SpotifyAPI.Web">
+    <HintPath>..\Dlls\SpotifyAPI.Web.dll</HintPath>
+  </Reference>
+</ItemGroup>
 
 </Project>
