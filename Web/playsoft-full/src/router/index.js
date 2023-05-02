@@ -4,29 +4,34 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [{
-        path: '/',
-        name: 'home',
-        component: () =>
-            import ('../views/HomeView.vue')
-    },
-    {
-        path: '/login',
-        name: 'login',
-        component: () =>
-            import ('../views/LoginView.vue')
-    },
-    {
-        path: '/playlists',
-        name: 'playlists',
-        component: () =>
-            import ('../views/PlaylistsView.vue')
-    },
-    {
-        path: '/songs',
-        name: 'songs',
-        component: () =>
-            import ('../views/SongsView.vue')
-    }
+    path: '/',
+    name: 'home',
+    component: () =>
+        import('../views/HomeView.vue')
+},
+{
+    path: '/login',
+    name: 'login',
+    component: () =>
+        import('../views/LoginView.vue')
+},
+{
+    path: '/playlists',
+    name: 'playlists',
+    component: () =>
+        import('../views/PlaylistsView.vue')
+},
+{
+    path: '/songs',
+    name: 'songs',
+    component: () =>
+        import('../views/SongsView.vue')
+},
+{
+    path: '/settings',
+    name: 'settings',
+    component: () => import('../views/ProfileView.vue')
+}
 ]
 
 const router = new VueRouter({
