@@ -8,24 +8,28 @@
 import anime from 'animejs/lib/anime.es.js';
 
 export default {
+    name: 'app',
+    mounted() {
+        const options = {
+            targets: ".box",
+            translateX: 250,
+            rotate: '1turn',
+            backgroundColor: '#FFF',
+            duration: 800
+        }
+        anime(options);
+    }
+}
 
-}
-const options = {
-    targets: ".box",
-    translateX: 250,
-    rotate: '1turn',
-    backgroundColor: '#FFF',
-    duration: 800
-}
-anime(options);
 </script>
 
 <style>
-body{
+body {
     background: #112;
 }
-.container{
-}
+
+.container {}
+
 .box {
     height: 200px;
     width: 200px;
