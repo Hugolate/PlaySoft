@@ -2,17 +2,18 @@
   <div class="home">
     <CabeceraPlaysoft></CabeceraPlaysoft>
     <HomePageNotLogin></HomePageNotLogin>
+    <SearchCard></SearchCard>
   </div>
 </template>
 
 <script>
 import CabeceraPlaysoft from '@/components/CabeceraPlaysoft.vue';
 import HomePageNotLogin from '@/components/HomePageNotLogin.vue';
-
+import SearchCard from '@/components/SearchCard.vue';
 export default {
   name: 'HomeView',
   components: {
-    CabeceraPlaysoft, HomePageNotLogin
+    CabeceraPlaysoft, HomePageNotLogin, SearchCard
   },
   data() {
     return {
