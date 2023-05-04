@@ -84,7 +84,6 @@ v-content {
     gap: 2px;
     flex-wrap: wrap;
     overflow: hidden;
-    z-index: 0;
     background: gray;
 }
 
@@ -113,7 +112,6 @@ section span {
     width: calc(6.25vw - 2px);
     height: calc(6.25vw - 2px);
     background-color: rgb(15, 15, 15);
-    z-index: 2;
     transition: 1.5s;
 }
 
