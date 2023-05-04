@@ -3,6 +3,7 @@
     <CabeceraPlaysoft></CabeceraPlaysoft>
     <SearchBar></SearchBar>
     <HomePageNotLogin></HomePageNotLogin>
+    <SearchCard></SearchCard>
   </div>
 </template>
 
