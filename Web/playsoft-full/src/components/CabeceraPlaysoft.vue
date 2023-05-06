@@ -66,4 +66,14 @@ span {
   color: rgb(118, 9, 113);
   padding: 1rem;
 }
+
+@media(max-width: 400px) {
+    .mr-2 {
+        display: none;
+    }
+    header{
+      display: flex;
+      justify-content: center;
+    }
+}
 </style>
