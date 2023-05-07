@@ -20,6 +20,28 @@
         <span class="mr-2" :class="item">LogOut</span>
       </div>
     </router-link>
+    <div class="sub-menu-wrap">
+      <div class="sub-menu">
+        <div class="user-info">
+          <img :src="$store.state.logo" width="70px">
+          <h2>Nombre usuario</h2>
+        </div>
+        <hr>
+
+        <a href="#" class="sub-menu-link">
+          <img :src="$store.state.settingPicture" alt="">
+          <p>Settings</p>
+          <span>></span>
+        </a>
+
+        <a href="#" class="sub-menu-link">
+          <img :src="$store.state.logoutPicture" alt="">
+          <p>Log Out</p>
+          <span>></span>
+        </a>
+
+      </div>
+    </div>
 
   </v-app-bar>
 </template>
@@ -50,6 +72,75 @@ export default {
 </script>
 
 <style>
+.sub-menu-wrap {
+  position: absolute;
+  top: 100%;
+  right: 10%;
+  width: 320px;
+}
+
+.sub-menu {
+  background-color: #fff;
+  padding: 20px;
+  margin: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.sub-menu hr {
+  border: 0;
+  height: 1px;
+  width: 100%;
+  background: #ccc;
+  margin: 15px 0 10px;
+}
+
+.sub-menu-link{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #525252;
+  margin: 12px 0;
+}
+
+.sub-menu-link p{
+  width: 100%;
+}
+
+.sub-menu-link span{
+  font-size: 22px;
+  transition: transform 0.5s;
+}
+
+.sub-menu-link:hover span{
+  transform: translateX(5px);
+}
+
+.sub-menu-link:hover p{
+  font-weight: 600;
+}
+
+.sub-menu-link img{
+  width: 40px;
+  background: #e5e5e5;
+  border-radius: 50%;
+  padding: 8px;
+  margin-right: 15px;
+}
+
+.user-info h3 {
+  font-weight: 500;
+}
+
+.user-info img {
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
 a {
   text-decoration: none;
 }
@@ -68,12 +159,12 @@ span {
 }
 
 @media(max-width: 400px) {
-    .mr-2 {
-        display: none;
-    }
-    header{
-      display: flex;
-      justify-content: center;
-    }
-}
-</style>
+  .mr-2 {
+    display: none;
+  }
+
+  header {
+    display: flex;
+    justify-content: center;
+  }
+}</style>
