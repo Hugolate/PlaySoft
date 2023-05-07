@@ -8,7 +8,7 @@
         <v-row align="center" justify="center" v-motion-roll-left>
           <v-col cols="12" sm="8" md="8">
             <v-card class="elevation-12">
-              <v-window v-model="step">
+              <v-window v-model="$store.state.step">
                 <v-window-item :value="1">
                   <v-row>
                     <v-col cols="12" md="8">
@@ -19,9 +19,9 @@
                             id="alert">{{ alertMessage }}</v-alert></template>
                         <v-form @submit.prevent="onSubmit">
 
-                          <v-text-field v-model="loginEmail" label="Email" type="text" color="#6c176d" />
+                          <v-text-field v-model="$store.state.loginEmail" label="Email" type="text" color="#6c176d" />
 
-                          <v-text-field v-model="loginPassword" id="password" label="Password"
+                          <v-text-field v-model="$store.state.loginPassword" id="password" label="Password"
                             type="password" color="#6c176d" />
                         </v-form>
                         <h3 class="text-center mt-4">Forgot your password ?</h3>
@@ -65,13 +65,13 @@
                           <v-alert v-show="registerError" style="margin-top: 20px; color: white" color="error"
                             icon="$error" id="alert">{{ alertMessage }}</v-alert></template>
                         <v-form>
-                          <v-text-field v-model="registerUsername" label="Name" type="text"
+                          <v-text-field v-model="$store.state.registerUsername" label="Name" type="text"
                             color="#6c176d" />
-                          <v-text-field v-model="registerEmail" label="Email" type="text" color="#6c176d" />
+                          <v-text-field v-model="$store.state.registerEmail" label="Email" type="text" color="#6c176d" />
 
-                          <v-text-field v-model="registerPassword" id="password" label="Password"
+                          <v-text-field v-model="$store.state.registerPassword" id="password" label="Password"
                             type="password" color="#6c176d" />
-                          <v-text-field v-model="repeatPassword" id="password" label="Repeat Password"
+                          <v-text-field v-model="$store.state.repeatPassword" id="password" label="Repeat Password"
                             type="password" color="#6c176d" />
                         </v-form>
                       </v-card-text>
@@ -98,13 +98,6 @@ export default {
       alertMessage: "",
       registerError: false,
       loginError: false,
-      step: this.$store.state.step,
-      loginEmail: this.$store.state.loginEmail,
-      loginPassword: this.$store.state.loginPassword,
-      registerUsername: this.$store.state.registerUsername,
-      registerEmail: this.$store.state.registerEmail,
-      registerPassword: this.$store.state.registerPassword,
-      repeatPassword: this.$store.state.repeatPassword
     };
   },
   props: {
