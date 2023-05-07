@@ -84,12 +84,15 @@ export default new Vuex.Store({
         clearForm(state) {
             state.playListName = ""
             state.playlistDescription = ""
+        },
+        updateQuery(state, query) {
+            state.query = query
         }
     },
     actions: {
         getPlaylistsAction({ commit, state }) {
             let IdUser = state.usuario
-            axios.get(`https://playsoft-api.azurewebsites.net/User/${IdUser}`)
+            axios.get(`https://tfgplaysoft.azurewebsites.net/User/${IdUser}`)
                 .then(function(response) {
                     state.PlayListsJSON = JSON.stringify(response.data.playlists);
                     commit('setPlaylists', state.PlayListsJSON)
@@ -102,12 +105,14 @@ export default new Vuex.Store({
         },
 
         doLogin({ commit, state }) {
-            axios.post("https://playsoft-api.azurewebsites.net/Auth/login", {
+            axios.post("https://tfgplaysoft.azurewebsites.net/Auth/login", {
                     email: state.loginEmail,
                     password: state.loginPassword,
                 })
                 .then(function(response) {
                     console.log(response);
+
+                    //commit("setToken,", response.data.)
                     commit("setUser", response.data.ukid)
                     commit("setLogged")
                     router.push({ path: '/playlists' })
@@ -115,6 +120,7 @@ export default new Vuex.Store({
                 })
                 .catch(e => {
                     state.loginError = true;
+
                     state.alertMessage = "This account doesn't exist";
                     console.log(e);
                     return false
@@ -125,7 +131,7 @@ export default new Vuex.Store({
         getSongs({ commit, state }) {
             state.Songs = []
             state.SongsLines = []
-            axios.get(`https://playsoft-api.azurewebsites.net/Playlist/${state.PlayListsID}?orderKey=songName&order=asc`)
+            axios.get(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}?orderKey=songName&order=asc`)
                 .then(function(response) {
                     commit('setSongs', JSON.stringify(response.data))
                     var songs = []
@@ -145,7 +151,7 @@ export default new Vuex.Store({
         },
 
         checkSong({ commit }, name) {
-            axios.get(`https://playsoft-api.azurewebsites.net/Search/${name}`)
+            axios.get(`https://tfgplaysoft.azurewebsites.net/Search/${name}`)
                 .then(function(respuesta) {
                     if (respuesta.data.songs.length > 0) {
                         let song = respuesta.data.songs[0]
@@ -164,7 +170,7 @@ export default new Vuex.Store({
                 });
         },
         postSong({ state }) {
-            axios.post('https://playsoft-api.azurewebsites.net/Song', {
+            axios.post('https://tfgplaysoft.azurewebsites.net/Song', {
                     playlistID: state.PlayListsID,
                     songID: state.addSong.songID,
                 })
@@ -181,7 +187,7 @@ export default new Vuex.Store({
         addPlaylist({ commit, dispatch, state }) {
             if (state.playListName != "") {
                 var user = state.usuario.toString()
-                axios.post("https://playsoft-api.azurewebsites.net/Playlist", {
+                axios.post("https://tfgplaysoft.azurewebsites.net/Playlist", {
                         playListName: state.playListName,
                         userUKID: user,
                         playlistDescription: state.playlistDescription,
@@ -209,7 +215,7 @@ export default new Vuex.Store({
         },
         doRegister({ state }) {
             axios
-                .post("https://playsoft-api.azurewebsites.net/Auth/register", {
+                .post("https://tfgplaysoft.azurewebsites.net/Auth/register", {
                     email: state.registerEmail,
                     username: state.registerUsername,
                     password: state.registerPassword,
@@ -226,17 +232,16 @@ export default new Vuex.Store({
                 });
         },
         Search({ state }) {
-            console.log(state.query)
+            console.log('query ' + state.query)
             axios
-                .post(`https://localhost:7279/Search/${state.query}`)
+                .post(`https://tfgplaysoft.azurewebsites.net//Search/${state.query}`)
                 .then(function(response) {
                     console.log(response);
-                    router.push({ path: 'search' })
+
 
                 })
                 .catch(e => {
                     console.log(e);
-                    router.push({ path: 'search' })
                 });
         }
     },
