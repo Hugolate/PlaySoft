@@ -20,11 +20,14 @@
         <span class="mr-2" :class="item">LogOut</span>
       </div>
     </router-link>
-    <div class="sub-menu-wrap">
+    <div>
+      <span class="mr-2" :class="item"><img :src="$store.state.logo" alt="" width="50px" @click="displayMenu()"></span>
+    </div>
+    <div class="sub-menu-wrap" id="subMenu">
       <div class="sub-menu">
         <div class="user-info">
-          <img :src="$store.state.logo" width="70px">
-          <h2>Nombre usuario</h2>
+          <img :src="$store.state.logo" >
+          <h3>Nombre usuario</h3>
         </div>
         <hr>
 
@@ -66,6 +69,10 @@ export default {
     cerrarSesion() {
       localStorage.clear()
       this.$router.push({ path: '/' })
+    },
+    displayMenu() {
+      let subMenu = document.getElementById("subMenu")
+      subMenu.classList.toggle("open-menu")
     }
   }
 }
@@ -75,14 +82,22 @@ export default {
 .sub-menu-wrap {
   position: absolute;
   top: 100%;
-  right: 10%;
+  right: 1%;
   width: 320px;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s;
+}
+
+.sub-menu-wrap.open-menu{
+  max-height: 400px;
 }
 
 .sub-menu {
   background-color: #fff;
   padding: 20px;
   margin: 10px;
+  border-radius: 3%;
 }
 
 .user-info {

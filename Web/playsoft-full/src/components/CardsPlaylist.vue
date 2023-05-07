@@ -31,7 +31,6 @@ export default {
         this.$store.dispatch('getPlaylistsAction')
         var PlayLists = JSON.parse(this.$store.state.PlayListsJSON);
         vue.PlayListsList = PlayLists
-
     },
     methods: {
         redirigir(nombrepl) {
