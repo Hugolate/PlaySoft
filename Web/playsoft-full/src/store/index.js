@@ -10,6 +10,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     logo: require('../assets/images/Logo.png'),
+    profilePicture: require('../assets/images/profile-icon.png'),
+    infoPicture: require('../assets/images/info.png'),
+    stylePicture: require('../assets/images/style.png'),
+    settingPicture: require('../assets/images/settings.png'),
+    logoutPicture: require('../assets/images/logout.png'),
     comprobarUsuario: false,
     registerUsername: "",
     registerEmail: "",

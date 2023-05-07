@@ -1,34 +1,22 @@
 <template>
-    <div class="container">
-        <div class="box"></div>
+    <div class="home">
+        <CabeceraPlaysoft></CabeceraPlaysoft>
+        <SettingsMenu></SettingsMenu>
     </div>
 </template>
 
 <script>
-import anime from 'animejs/lib/anime.es.js';
+import CabeceraPlaysoft from '@/components/CabeceraPlaysoft.vue';
+import SettingsMenu from '@/components/SettingsMenu.vue'
 
 export default {
 
+    name: 'app',
+    components: {
+        CabeceraPlaysoft, SettingsMenu
+    }
 }
-const options = {
-    targets: ".box",
-    translateX: 250,
-    rotate: '1turn',
-    backgroundColor: '#FFF',
-    duration: 800
-}
-anime(options);
+
 </script>
 
-<style>
-body{
-    background: #112;
-}
-.container{
-}
-.box {
-    height: 200px;
-    width: 200px;
-    background: linear-gradient(to bottom, purple, blue);
-}
-</style>
+<style></style>
