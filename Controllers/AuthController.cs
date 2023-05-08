@@ -19,16 +19,16 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<String>> GetUser(AuthLoginInDTO user)
+    public async Task<ActionResult<AuthTokenDTO>> GetUser(AuthLoginInDTO user)
     {
-        var AuthTokenDTO = new AuthtokenDTO
+        var AuthTokenDTO = new AuthTokenDTO
         {
             jwt = JwtManager.GenerateToken(user.email),
             ukid = _authService.Login(user),
         };
         if (AuthTokenDTO.ukid != 0)
         {
-            return JwtManager.GenerateToken(user.email);
+            return Ok(AuthTokenDTO);
         }
         return BadRequest("this user doesn't exist");
     }
