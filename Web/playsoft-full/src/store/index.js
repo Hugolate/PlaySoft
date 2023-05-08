@@ -51,8 +51,8 @@ export default new Vuex.Store({
         PlayListsID: 0,
         addSong: null,
         logged: false,
-        query: ""
-
+        query: "",
+        token: ""
     },
     getters: {
         getUsuario(state) {
@@ -87,10 +87,14 @@ export default new Vuex.Store({
         },
         updateQuery(state, query) {
             state.query = query
+        },
+        setToken(state, token) {
+            state.token = token
         }
     },
     actions: {
         getPlaylistsAction({ commit, state }) {
+            console.log(state.token)
             let IdUser = state.usuario
             axios.get(`https://tfgplaysoft.azurewebsites.net/User/${IdUser}`)
                 .then(function(response) {
@@ -110,10 +114,8 @@ export default new Vuex.Store({
                     password: state.loginPassword,
                 })
                 .then(function(response) {
-                    console.log(response);
-
-                    //commit("setToken,", response.data.)
-                    commit("setUser", response.data.ukid)
+                    commit("setUsuario", response.data.ukid)
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
                     commit("setLogged")
                     router.push({ path: '/playlists' })
                     return true;

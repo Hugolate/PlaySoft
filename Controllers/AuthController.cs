@@ -21,8 +21,12 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<ActionResult<String>> GetUser(AuthLoginInDTO user)
     {
-
-        if (_authService.Login(user))
+        var AuthTokenDTO = new AuthtokenDTO
+        {
+            jwt = JwtManager.GenerateToken(user.email),
+            ukid = _authService.Login(user),
+        };
+        if (AuthTokenDTO.ukid != 0)
         {
             return JwtManager.GenerateToken(user.email);
         }
