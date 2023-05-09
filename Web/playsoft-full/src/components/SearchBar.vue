@@ -3,7 +3,7 @@
         <v-container>
             <v-layout>
                 <v-flex xs12 sm6 md3>
-                    <v-text-field id="a" label="Search" type="text" v-model="query" @keypress="Search()"
+                    <v-text-field label="Search" type="text" v-model="query" @keypress="Search()"
                         solo></v-text-field>
                 </v-flex>
             </v-layout>
@@ -24,6 +24,7 @@ export default {
             this.$store.commit('updateQuery', this.query)
 
             if (this.$route.name != 'search') {
+                
                 router.push({ path: 'search' })
             }
             this.$store.dispatch('Search');

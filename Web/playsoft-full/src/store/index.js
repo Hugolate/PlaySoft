@@ -52,7 +52,8 @@ export default new Vuex.Store({
         addSong: null,
         logged: false,
         query: "",
-        token: ""
+        token: "",
+        searchTracks: []
     },
     getters: {
         getUsuario(state) {
@@ -90,11 +91,14 @@ export default new Vuex.Store({
         },
         setToken(state, token) {
             state.token = token
-        }
+        },
+        setTracks(state, tracks) {
+            state.searchTracks = tracks;
+        },
     },
     actions: {
         getPlaylistsAction({ commit, state }) {
-            console.log(state.token)
+            console.log(state.usuario)
             let IdUser = state.usuario
             axios.get(`https://tfgplaysoft.azurewebsites.net/User/${IdUser}`)
                 .then(function(response) {
@@ -114,7 +118,7 @@ export default new Vuex.Store({
                     password: state.loginPassword,
                 })
                 .then(function(response) {
-                    commit("setUsuario", response.data.ukid)
+                    commit("setUser", response.data.ukid)
                     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
                     commit("setLogged")
                     router.push({ path: '/playlists' })
@@ -233,13 +237,13 @@ export default new Vuex.Store({
                     console.log(e);
                 });
         },
-        Search({ state }) {
+        Search({ commit, state }) {
             console.log('query ' + state.query)
             axios
-                .post(`https://tfgplaysoft.azurewebsites.net//Search/${state.query}`)
+                .get(`https://tfgplaysoft.azurewebsites.net/Search/${state.query}`)
                 .then(function(response) {
-                    console.log(response);
-
+                    console.log(response.data.tracks.items);
+                    commit("setTracks", response.data.tracks.items)
 
                 })
                 .catch(e => {
