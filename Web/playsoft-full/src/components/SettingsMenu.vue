@@ -1,11 +1,14 @@
 <template>
-    <v-app id="inspire">
-        <v-main class="pa-0">
-            <section id="fondo" class="fondo1">
-                <span v-for="(obj, index) in 900" :key="index">
-                </span>
-            </section>
-            <v-container class="fill-height secciones" fluid style="justify-content: center;">
+    <!-- <v-app id="inspire">
+        <v-main class="pa-0"> -->
+    <section id="fondo" class="fondo1">
+        <template v-for="(obj, index) in 300">
+            <span :key="index" @click="animaciones(index)" class="background-span">
+
+            </span>
+        </template>
+    </section>
+    <!-- <v-container class="fill-height secciones" fluid style="justify-content: center;">
                 <div class="menu">
                     <div>
                         <img :src="$store.state.profilePicture" class="logo">
@@ -19,36 +22,23 @@
 
                 </div>
                 <div class="vertical-menu"></div>
-            </v-container>
-        </v-main>
-    </v-app>
+            </v-container> -->
+    <!-- </v-main>
+    </v-app> -->
 </template>
 
 <script>
-import anime from 'animejs/lib/anime.es.js';
+// import BackGround from '../components/BackGround.vue'
+import { anim } from '../assets/scripts/BackgroundAnim'
 export default {
 
     name: 'app',
-    mounted() {
-        const options = {
-            targets: '.box',
-            left: '240px',
-            backgroundColor: '#FFF',
-            borderRadius: ['0%', '50%'],
-            easing: 'easeInOutQuad',
-            translateX: 400
+    methods: {
+        animaciones(index) {
+            anim(index)
         }
-        anime(options);
-        const options2 = {
-            targets: '.prueba path',
-            strokeDashoffset: [anime.setDashoffset, 0],
-            easing: 'easeInOutQuad',
-            duration: 5000,
-            direction: 'alrenate',
-            loop: true
-        }
-        anime(options2);
-    }
+    },
+    // components: { BackGround }
 }
 </script>
 
@@ -123,9 +113,13 @@ section::before {
     width: 100%;
     height: 100%;
     background: linear-gradient(black, purple, black);
-    animation: animate 15s linear infinite;
+    animation: animate 5s linear infinite;
 }
 
+#fondo {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+}
 
 @keyframes animate {
     0% {
@@ -148,8 +142,8 @@ section span {
 }
 
 section span:hover {
-    background: rgb(128, 0, 128);
-    transition: 0s;
+    background: rgb(128, 0, 128) !important;
+    transition: 0s !important;
 }
 
 @media(max-width: 900px) {
@@ -164,5 +158,26 @@ section span:hover {
         width: calc(20vw- 2px);
         height: calc(20vw - 2px);
     }
+}
+
+.contenedor_span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(73, 30, 89, 1) 47%, rgba(61, 0, 74, 1) 100%);
+    background-size: 200% 200%;
+}
+
+.span {
+    place-self: center;
+    display: block;
+    width: 98%;
+    height: 99%;
+    background-color: rgb(22, 7, 41);
+    z-index: 3;
 }
 </style>

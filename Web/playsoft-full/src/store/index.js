@@ -106,7 +106,7 @@ export default new Vuex.Store({
     },
 
     doLogin({ commit, state }) {
-      axios.post("https://playsoft-api.azurewebsites.net/Auth/login", {
+      axios.post("https://tfgplaysoft.azurewebsites.net/Auth/login", {
         email: state.loginEmail,
         password: state.loginPassword,
       })
