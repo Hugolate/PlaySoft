@@ -10,16 +10,18 @@ using System.Globalization;
 using System;
 using System.Threading.Tasks;
 using SpotifyAPI.Web;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var SpotifyConfig = builder.Configuration.GetSection("Spotify");
-var clientId = SpotifyConfig["ClientId"];
-var clientSecret = SpotifyConfig["ClientSecret"];
+var client = new SecretClient(new Uri("https://PlaysoftVault.vault.azure.net/"), new DefaultAzureCredential());
+var clientId = await client.GetSecretAsync("client-id");
+var clientSecret = await  client.GetSecretAsync("clientSecret");
 
 var config = SpotifyClientConfig
   .CreateDefault()
-  .WithAuthenticator(new ClientCredentialsAuthenticator(clientId, clientSecret));
+  .WithAuthenticator(new ClientCredentialsAuthenticator(clientId.Value.Value, clientSecret.Value.Value));
 
 var spotify = new SpotifyClient(config);
 builder.Services.AddSingleton<ISpotifyClient>(spotify);
