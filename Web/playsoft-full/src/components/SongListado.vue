@@ -1,10 +1,7 @@
 <template>
     <v-app id="inspire">
         <v-main class="pa-0">
-            <section id="fondo" class="fondo1">
-                <span v-for="(obj, index) in 900" :key="index">
-                </span>
-            </section>
+            <BackGround></BackGround>
             <AddSongForm></AddSongForm>
             <v-container class="fill-height secciones canciones" fluid style="justify-content: center;">
                 <p id="animated" class="playlists wavy songs" v-for="song in this.$store.state.SongsLines"
@@ -18,6 +15,8 @@
 
 <script>
 import AddSongForm from './AddSongForm.vue';
+import BackGround from '../components/BackGround.vue'
+
 
 export default {
     name: 'SongsPage',
@@ -26,7 +25,7 @@ export default {
         };
     },
     components: {
-        AddSongForm
+        AddSongForm, BackGround
     },
     mounted: async function () {
         this.$store.dispatch('getSongs')

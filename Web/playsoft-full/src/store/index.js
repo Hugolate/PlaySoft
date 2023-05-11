@@ -126,7 +126,6 @@ export default new Vuex.Store({
                 })
                 .catch(e => {
                     state.loginError = true;
-
                     state.alertMessage = "This account doesn't exist";
                     console.log(e);
                     return false

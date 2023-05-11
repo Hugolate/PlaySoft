@@ -1,38 +1,21 @@
 <template>
-    <v-app id="inspire">
-        <v-main class="pa-0">
-            <BackGround></BackGround>
-            <v-container class="fill-height secciones" fluid style="justify-content: center;">
-                <div class="menu">
-                    <div>
-                        <img :src="$store.state.profilePicture" class="logo">
-                    </div>
-                    <div>
-                        <img :src="$store.state.stylePicture" class="logo">
-                    </div>
-                    <div>
-                        <img :src="$store.state.infoPicture" class="logo">
-                    </div>
-
-                </div>
-                <div class="vertical-menu"></div>
-            </v-container>
-        </v-main>
-    </v-app>
+  <section id="fondo" class="fondo1">
+        <template v-for="(obj, index) in 900">
+            <span :key="index" @click="animaciones(index)" class="background-span">
+            </span>
+        </template>
+    </section>
 </template>
 
 <script>
-import BackGround from '../components/BackGround.vue'
 import { anim } from '../assets/scripts/BackgroundAnim'
 export default {
-
-    name: 'app',
-    methods: {
+  name: "NoSE",
+  methods: {
         animaciones(index) {
             anim(index)
         }
     },
-    components: { BackGround }
 }
 </script>
 

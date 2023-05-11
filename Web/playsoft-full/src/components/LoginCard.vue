@@ -1,9 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-main class="pa-0">
-      <section id="fondo" class="fondo2">
-        <span v-for="(obj, index) in 900" :key="index"></span>
-      </section>
+      <BackGround></BackGround>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center" v-motion-roll-left>
           <v-col cols="12" sm="8" md="8">
@@ -92,6 +90,8 @@
 </template>
 
 <script>
+import BackGround from '../components/BackGround.vue'
+
 export default {
   data() {
     return {
@@ -132,6 +132,7 @@ export default {
     }
 
   },
+  components: { BackGround }
 };
 
 </script>
