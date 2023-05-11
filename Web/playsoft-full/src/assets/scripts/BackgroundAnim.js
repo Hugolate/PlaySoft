@@ -7,11 +7,11 @@ export function anim(index) {
   })
   anime({
     targets: ".background-span",
-    scale: 0.95,
-    backgroundColor: '#fff',
-    duration: 20,
-    delay: anime.stagger(20, { grid: [18, 9], from: index }),
-    endDelay: 50,
+    scale: 0.98,
+    backgroundColor: '#e994e6',
+    duration: 10,
+    delay: anime.stagger(10, { grid: [18, 9], from: index }),
+    endDelay: 10,
     direction: 'alternate',
     easing: 'easeInQuad'
   })

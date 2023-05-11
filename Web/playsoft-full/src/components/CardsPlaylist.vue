@@ -1,10 +1,7 @@
 <template>
     <v-app id="inspire">
         <v-main class="pa-0" style="z-index: 0; ">
-            <section id="fondo" class="fondo1">
-                <span v-for="(obj, index) in 900" :key="index">
-                </span>
-            </section>
+            <BackGround></BackGround>
             <CreatePlaylistForm></CreatePlaylistForm>
             <v-container style="flex-direction: column;" class="fill-height secciones pl-cont">
                 <p @click="redirigir(playlist.playListName)" id="animated" class="playlists wavy"
@@ -16,6 +13,7 @@
 </template>
 
 <script>
+import BackGround from '../components/BackGround.vue'
 import CreatePlaylistForm from './CreatePlaylistForm.vue';
 export default {
     name: 'PlayList',
@@ -25,7 +23,7 @@ export default {
             PlayListsList: []
         }
     },
-    components: { CreatePlaylistForm },
+    components: { CreatePlaylistForm, BackGround },
     mounted: function () {
         let vue = this;
         this.$store.dispatch('getPlaylistsAction')
