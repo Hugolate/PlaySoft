@@ -4,7 +4,6 @@ import axios from 'axios';
 import createPersistedState from 'vuex-persistedstate'
 import router from '@/router';
 
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -53,7 +52,8 @@ export default new Vuex.Store({
         logged: false,
         query: "",
         token: "",
-        searchTracks: []
+        searchTracks: [],
+        PlayListsJSON: ""
     },
     getters: {
         getUsuario(state) {
