@@ -17,6 +17,10 @@ public class RepositoryContext : DbContext
     public DbSet<Playlist> Playlists { get; set; }
     public DbSet<Song> Songs { get; set; }
     public DbSet<PlaylistLines> PlaylistLines { get; set; }
+    //Added new models - 13/05/23
+    public DbSet<Artist> Artist { get; set; }
+    public DbSet<Album> Album { get; set; }
+    public DbSet<AlbumLines> AlbumLines { get; set; }
 
 
 }

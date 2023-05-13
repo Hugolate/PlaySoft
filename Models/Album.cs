@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PlaySoftBeta.Models
 {
     public class Album
@@ -7,7 +10,8 @@ namespace PlaySoftBeta.Models
         public int albumID { get; set; }
         public string albumDescriptionName { get; set; }
         public string? albumDescription { get; set; }
-        
+        public IList<AlbumLines> AlbumLines { get; set; }
+
         public int artistID { get; set; }
         public Artist Artist { get; set; }
         
