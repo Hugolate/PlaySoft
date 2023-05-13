@@ -8,7 +8,7 @@ namespace PlaySoftBeta.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int albumID { get; set; }
-        public string albumDescriptionName { get; set; }
+        public string albumName { get; set; }
         public string? albumDescription { get; set; }
         public IList<AlbumLines> AlbumLines { get; set; }
 
