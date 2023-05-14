@@ -1,15 +1,11 @@
-namespace PlaySoftBeta.Models
+namespace PlaySoftBeta.DTOs
 {
-    public class Song
+    public class SongInDTO
     {
         public int songID { get; set; }
         public string spotifySongID { get; set; }
         public string songName { get; set; }
-
         public int durationMs { get; set; }
-        public DateTime publicationDate { get; set; }
-
-        public IList<PlaylistLines> PlaylistLines { get; set; }
 
         //Artist
         //Album

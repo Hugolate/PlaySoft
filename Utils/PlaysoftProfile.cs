@@ -15,6 +15,7 @@ public class PlaysoftProfile : Profile
         CreateMap<EditPLaylistDTO, Playlist>();
 
         CreateMap<Song, SongDTO>();
+        CreateMap<SongInDTO, Song>();
 
         CreateMap<PlaylistLinesDTO, PlaylistLines>();
         CreateMap<PlaylistLines, SongIDSongOutDTO>();
@@ -22,7 +23,7 @@ public class PlaysoftProfile : Profile
         CreateMap<PlaylistLines, SongIDSongOutDTO>();
 
         CreateMap<User, SearchUserDTO>();
-        CreateMap<Song, SearchSongDTO>();
+        CreateMap<Song, SearchSongDTO>(); 
         // Use CreateMap... Etc.. here (Profile methods are the same as configuration methods)
     }
 }

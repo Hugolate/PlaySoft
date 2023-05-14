@@ -7,5 +7,6 @@ public interface ISongRepository
 {
     SongDTO GetSong(int songID);
     List<SearchSongDTO> GetSongListByName(string songName);
+    void PostSong(SongInDTO songDTO);
 
  }

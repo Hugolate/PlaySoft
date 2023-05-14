@@ -60,4 +60,13 @@ public class PlaylistController : ControllerBase
             return Ok("You don't have songs yet");
         }
     }
+
+
+    [HttpPost("playlists/{playlistID}/songs"), Authorize]
+    public async Task<ActionResult> AddSongToPlaylist(int playlistID, [FromBody] PlaylistLinesDTO playlistLinesDTO)
+    {
+        playlistLinesDTO.playlistID = playlistID;
+        _pLaylistService.AddSongToPlaylist(playlistLinesDTO);
+        return Ok();
+    }
 }

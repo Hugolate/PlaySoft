@@ -72,7 +72,7 @@ public class PlaylistServiceImpl : IPLaylistService
             {
                 order = "ASC";
             }
-            
+
             return _playlistLinesRepository.GetSongsId(playlistID, orderKey, order);
         }
         catch (Exception e)
@@ -80,5 +80,12 @@ public class PlaylistServiceImpl : IPLaylistService
             _logger.LogError(e, "Error get playlist songs");
             throw;
         }
+    }
+    public void AddSongToPlaylist(PlaylistLinesDTO playlistLinesDTO)
+    {
+        //comprobar que la cancion no este ya en la playlist
+
+        _playlistLinesRepository.AddSong(playlistLinesDTO);
+        _playlistLinesRepository.Save();
     }
 }

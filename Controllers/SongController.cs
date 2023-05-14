@@ -31,11 +31,17 @@ public class SongController : ControllerBase
 
     }
 
-
     [HttpPost(), Authorize]
-    public async Task<ActionResult> AddSongToPlaylist(PlaylistLinesDTO playlistLinesDTO)
+    public async Task<ActionResult> AddSong(SongInDTO songDTO)
     {
-        _songService.AddSongToPlaylist(playlistLinesDTO);
-        return Ok();
+
+        if (_songService.NewSong(songDTO))
+        {
+            return Ok();
+        }
+        
+        return BadRequest("Not found");
+
+
     }
 }

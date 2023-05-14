@@ -30,7 +30,7 @@ namespace PlaySoftBeta.Repository
             _context.Users.Add(_mapper.Map<User>(authDTO));
         }
 
-        public Boolean CheckEmail(string userEmail)
+        public bool CheckEmail(string userEmail)
         {
             if (_context.Users.Any(user => user.email == userEmail))
             {

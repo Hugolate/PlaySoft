@@ -20,13 +20,6 @@ public class SongServiceImpl : ISongService
         _logger = logger;
     }
 
-    public void AddSongToPlaylist(PlaylistLinesDTO playlistLinesDTO)
-    {
-        //comprobar que la cancion no este ya en la playlist
-
-        _playlistLinesRepository.AddSong(playlistLinesDTO);
-        _playlistLinesRepository.Save();
-    }
     public SongDTO GetSong(int songID)
     {
         try
@@ -36,6 +29,19 @@ public class SongServiceImpl : ISongService
         catch (Exception e)
         {
             _logger.LogError(e, "Error get song");
+            throw;
+        }
+    }
+    public bool NewSong(SongInDTO songDTO)
+    {
+
+        try
+        {
+            _songRepository.PostSong(songDTO);
+            return true;
+        }
+        catch (System.Exception)
+        {
             throw;
         }
     }
