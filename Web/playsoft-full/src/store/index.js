@@ -89,11 +89,12 @@ export default new Vuex.Store({
         updateQuery(state, query) {
             state.query = query
         },
-        setToken(state, token) {
-            state.token = token
-        },
         setTracks(state, tracks) {
             state.searchTracks = tracks;
+        },
+        setToken(state, token) {
+            state.token = token;
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         },
     },
     actions: {
@@ -119,7 +120,7 @@ export default new Vuex.Store({
                 })
                 .then(function(response) {
                     commit("setUser", response.data.ukid)
-                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
+                    commit("setToken", response.data.jwt);
                     commit("setLogged")
                     router.push({ path: '/playlists' })
                     return true;
