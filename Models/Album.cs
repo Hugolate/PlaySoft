@@ -8,8 +8,17 @@ namespace PlaySoftBeta.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int albumID { get; set; }
+        public string spotifyAlbumID { get; set; }
         public string albumName { get; set; }
-        public string? albumDescription { get; set; }
+        public int totalTracks { get; set; }
+        public string image { get; set; }
+        public enum albumType
+        {
+            Single, 
+            Er, 
+            Album
+        }
+        public DateTime releaseDate { get; set; }
         public IList<AlbumLines> AlbumLines { get; set; }
 
         public int artistID { get; set; }
