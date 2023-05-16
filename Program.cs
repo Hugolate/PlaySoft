@@ -17,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var client = new SecretClient(new Uri("https://PlaysoftVault.vault.azure.net/"), new DefaultAzureCredential());
 var clientId = await client.GetSecretAsync("client-id");
-var clientSecret = await  client.GetSecretAsync("clientSecret");
+var clientSecret = await client.GetSecretAsync("clientSecret");
 
 var config = SpotifyClientConfig
   .CreateDefault()
@@ -26,8 +26,9 @@ var config = SpotifyClientConfig
 var spotify = new SpotifyClient(config);
 builder.Services.AddSingleton<ISpotifyClient>(spotify);
 
-builder.Services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("RepositoryContext")));
-
+builder.Services.AddDbContext<RepositoryContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("RepositoryContext")));
+        
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(
@@ -38,10 +39,7 @@ builder.Services.AddCors(options =>
         }
     );
 });
-builder.Services.AddDbContext<RepositoryContext>(options =>
-{
-    options.UseSqlServer(("RepositoryContext"));
-});
+
 
 builder.Services.AddCors();
 builder.Services.AddScoped<IAuthService, AuthServiceImpl>();

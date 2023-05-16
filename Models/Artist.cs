@@ -11,6 +11,7 @@ namespace PlaySoftBeta.Models
         public string spotifyArtistID { get; set; }
         public string artistName { get; set; }
         
-        public IList<Album> Album { get; set; }
+        public IList<ArtistAlbums> ArtistAlbum { get; set; }
+        public IList<ArtistSongs> ArtistSongs { get; set; }
     }
 }

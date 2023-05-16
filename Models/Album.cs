@@ -12,17 +12,15 @@ namespace PlaySoftBeta.Models
         public string albumName { get; set; }
         public int totalTracks { get; set; }
         public string image { get; set; }
+        public DateTime releaseDate { get; set; }
         public enum albumType
         {
-            Single, 
-            Er, 
+            Single,
+            Ep,
             Album
         }
-        public DateTime releaseDate { get; set; }
-        public IList<AlbumLines> AlbumLines { get; set; }
 
-        public int artistID { get; set; }
-        public Artist Artist { get; set; }
-        
+        public IList<Song> Songs { get; set; }
+        public IList<ArtistAlbums> ArtistAlbums { get; set; }
     }
 }

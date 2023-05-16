@@ -11,7 +11,8 @@ namespace PlaySoftBeta.Models
 
         public IList<PlaylistLines> PlaylistLines { get; set; }
 
-        //Artist
-        //Album
+        public int AlbumID { get; set; }
+        public Album User { get; set; }
+
     }
 }
