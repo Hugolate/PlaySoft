@@ -3,7 +3,7 @@
         <v-container>
             <v-layout>
                 <v-flex xs12 sm6 md3>
-                    <v-text-field label="Search" class="search" type="text" v-model="query" @keypress="Search()" autofocus 
+                    <v-text-field label="Search" class="search" type="text" v-model="query" @input="Search()" autofocus 
                         solo></v-text-field>
                 </v-flex>
             </v-layout>
@@ -16,21 +16,19 @@ import router from '@/router';
 export default {
     data() {
         return {
-            query: this.$store.state.query,
+            query: "",
         }
     },
     methods: {
         Search() {
             this.$store.commit('updateQuery', this.query)
-
             if (this.$route.name != 'search') {
-
                 router.push({ path: 'search' })
             }
             this.$store.dispatch('Search');
+            console.log(this.query)
         }
     },
-
 }
 </script>
 <style>
