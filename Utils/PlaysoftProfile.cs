@@ -15,6 +15,7 @@ public class PlaysoftProfile : Profile
         CreateMap<EditPLaylistDTO, Playlist>();
 
         CreateMap<Song, SongOutDTO>();
+        CreateMap<SongOutDTO, Song>();
         CreateMap<SongInDTO, Song>();
         CreateMap<Song, SearchSongOutDTO>();
 

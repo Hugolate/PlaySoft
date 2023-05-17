@@ -127,7 +127,7 @@ namespace PlaySoftBeta.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AlbumLines",
+                name: "ArtistSongs",
                 columns: table => new
                 {
                     artistID = table.Column<int>(type: "int", nullable: false),
@@ -135,15 +135,15 @@ namespace PlaySoftBeta.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AlbumLines", x => new { x.songID, x.artistID });
+                    table.PrimaryKey("PK_ArtistSongs", x => new { x.songID, x.artistID });
                     table.ForeignKey(
-                        name: "FK_AlbumLines_Artist_artistID",
+                        name: "FK_ArtistSongs_Artist_artistID",
                         column: x => x.artistID,
                         principalTable: "Artist",
                         principalColumn: "artistID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AlbumLines_Songs_songID",
+                        name: "FK_ArtistSongs_Songs_songID",
                         column: x => x.songID,
                         principalTable: "Songs",
                         principalColumn: "songID",
@@ -175,13 +175,13 @@ namespace PlaySoftBeta.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AlbumLines_artistID",
-                table: "AlbumLines",
+                name: "IX_ArtistAlbums_artistID",
+                table: "ArtistAlbums",
                 column: "artistID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtistAlbums_artistID",
-                table: "ArtistAlbums",
+                name: "IX_ArtistSongs_artistID",
+                table: "ArtistSongs",
                 column: "artistID");
 
             migrationBuilder.CreateIndex(
@@ -204,10 +204,10 @@ namespace PlaySoftBeta.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AlbumLines");
+                name: "ArtistAlbums");
 
             migrationBuilder.DropTable(
-                name: "ArtistAlbums");
+                name: "ArtistSongs");
 
             migrationBuilder.DropTable(
                 name: "PlaylistLines");

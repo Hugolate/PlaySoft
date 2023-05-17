@@ -6,7 +6,7 @@ namespace PlaySoftBeta.DTOs
         public string spotifySongID { get; set; }
         public string songName { get; set; }
         public int durationMs { get; set; }
-
+        public int? AlbumID { get; set; }
         //Artist
         //Album
     }

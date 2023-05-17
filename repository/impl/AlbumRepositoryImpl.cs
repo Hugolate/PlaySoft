@@ -17,7 +17,7 @@ namespace PlaySoftBeta.Repository
 
         public AlbumOutDTO GetAlbumBySpotifyID(string spotifyAlbumID)
         {
-            var album = _context.Album.Where(album => album.spotifyAlbumID.Equals(spotifyAlbumID));
+            var album = _context.Album.FirstOrDefault(album => album.spotifyAlbumID.Equals(spotifyAlbumID));
             return _mapper.Map<AlbumOutDTO>(album);
         }
 

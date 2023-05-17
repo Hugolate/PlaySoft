@@ -28,7 +28,7 @@ namespace PlaySoftBeta.Repository
 
         public SongOutDTO GetSongBySpotifyID(string spotifyArtistID)
         {
-            var song = _context.Artist.Where(album => album.spotifyArtistID.Equals(spotifyArtistID));
+            var song = _context.Songs.FirstOrDefault(song => song.spotifySongID.Equals(spotifyArtistID));
             return _mapper.Map<SongOutDTO>(song);
         }
 

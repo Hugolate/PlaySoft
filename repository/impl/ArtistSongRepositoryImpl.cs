@@ -17,13 +17,12 @@ namespace PlaySoftBeta.Repository
             _mapper = mapper;
         }
 
-
-        public void AddSongToArtist(ArtistInDTO artistInDTO, SongInDTO songInDTO)
+        public void AddSongToArtist(int artistID, int songID)
         {
             var newSongArtist = new ArtistSongs
             {
-                Artist = _mapper.Map<Artist>(artistInDTO),
-                Song = _mapper.Map<Song>(songInDTO)
+                artistID = artistID,
+                songID = songID
             };
             _context.ArtistSongs.Add(newSongArtist);
         }

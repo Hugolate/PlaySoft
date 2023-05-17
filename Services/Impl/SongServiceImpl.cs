@@ -42,23 +42,26 @@ public class SongServiceImpl : ISongService
 
         try
         {
-            _songRepository.PostSong(songInDTO);
             _albumRepository.PostAlbum(albumInDTO);
-            _artistRepository.PostArtist(artistInDTO);
+            _albumRepository.Save();
+            var album = _albumRepository.GetAlbumBySpotifyID(albumInDTO.spotifyAlbumID);
+            songInDTO.AlbumID = album.albumID;
 
-            /*var album = _albumRepository.GetAlbumBySpotifyID(albumInDTO.spotifyAlbumID);
-            var artist = _artistRepository.GetArtistBySpotifyID(artistInDTO.spotifyArtistID);
-            var song = _songRepository.GetSongBySpotifyID(artistInDTO.spotifyArtistID);
-*/
-            _artistAlbumRepository.AddAlbumToArtist(artistInDTO, albumInDTO);
-            _artistSongRepository.AddSongToArtist(artistInDTO, songInDTO);
+            _artistRepository.PostArtist(artistInDTO);
+            _songRepository.PostSong(songInDTO);
 
             _songRepository.Save();
-            _albumRepository.Save();
-            _artistAlbumRepository.Save();
             _artistRepository.Save();
-            _artistSongRepository.Save();
 
+            var artist = _artistRepository.GetArtistBySpotifyID(artistInDTO.spotifyArtistID);
+            var song = _songRepository.GetSongBySpotifyID(artistInDTO.spotifyArtistID);
+
+            _artistAlbumRepository.AddAlbumToArtist(artist.artistID, album.albumID);
+            _artistSongRepository.AddSongToArtist(artist.artistID, song.songID);
+
+
+            _artistSongRepository.Save();
+            _artistAlbumRepository.Save();
             return true;
         }
         catch (System.Exception)

@@ -17,17 +17,16 @@ namespace PlaySoftBeta.Repository
             _mapper = mapper;
         }
 
-        public void AddAlbumToArtist(ArtistInDTO artistInDTO, AlbumInDTO albumInDTO)
+        public void AddAlbumToArtist(int artistID, int albumID)
         {
             var newAlbumArtist = new ArtistAlbums
             {
-                Album = _mapper.Map<Album>(albumInDTO),
-                Artist = _mapper.Map<Artist>(artistInDTO)
+                albumID = albumID,
+                artistID = artistID
             };
 
             _context.ArtistAlbums.Add(newAlbumArtist);
         }
-
 
         public void Save()
         {
