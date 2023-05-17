@@ -36,5 +36,9 @@ namespace PlaySoftBeta.Repository
         {
             _context.Songs.Add(_mapper.Map<Song>(SongOutDTO));
         }
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
     }
 }
