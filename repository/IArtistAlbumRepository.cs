@@ -5,6 +5,6 @@ namespace PlaySoftBeta.Repository;
 
 public interface IArtistAlbumRepository
 {
-    void AddAlbumToArtist(int artistID, int albumID);
+    void AddAlbumToArtist(ArtistInDTO artistInDTO, AlbumInDTO albumInDTO);
     void Save();
 }

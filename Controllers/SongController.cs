@@ -32,10 +32,10 @@ public class SongController : ControllerBase
     }
 
     [HttpPost("create-with-artist-album"), Authorize]
-    public async Task<ActionResult> AddSong(SongInDTO SongOutDTO, ArtistInDTO ArtistInDTO, AlbumInDTO AlbumInDTO)
+    public async Task<ActionResult> AddSong(SongArtistAlbumDTO SongArtistAlbumDTO)
     {
 
-        if (_songService.NewSong(SongOutDTO, ArtistInDTO, AlbumInDTO))
+        if (_songService.NewSong(SongArtistAlbumDTO.songInDTO, SongArtistAlbumDTO.artistInDTO, SongArtistAlbumDTO.albumInDTO))
         {
             return Ok();
         }

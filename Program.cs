@@ -58,6 +58,10 @@ builder.Services.AddScoped<IPlaylistLinesRepository, PlaylistLinesRepositoryImpl
 
 builder.Services.AddScoped<ISearchService, SearchServiceImpl>();
 
+builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
+builder.Services.AddScoped<IArtistAlbumRepository, ArtistAlbumRepositoryImpl>();
+builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
+builder.Services.AddScoped<IArtistSongRepository, ArtistSongRepository>();
 
 
 builder.Services.AddAutoMapper(typeof(PlaysoftProfile));

@@ -27,7 +27,8 @@ public class PlaysoftProfile : Profile
 
         CreateMap<AlbumInDTO, Album>();
         CreateMap<Album, AlbumOutDTO>();
-
+        CreateMap<AlbumOutDTO, Album>();
+        
         CreateMap<ArtistInDTO, Artist>();
         CreateMap<Artist, ArtistOutDTO>();
         // Use CreateMap... Etc.. here (Profile methods are the same as configuration methods)

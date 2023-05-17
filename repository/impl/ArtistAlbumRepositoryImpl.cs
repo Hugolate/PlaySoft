@@ -28,16 +28,6 @@ namespace PlaySoftBeta.Repository
             _context.ArtistAlbums.Add(newAlbumArtist);
         }
 
-        public void AddAlbumToArtist(int artistID, int albumID)
-        {
-            var newAlbumArtist = new ArtistAlbums
-            {
-                albumID = albumID,
-                artistID = artistID
-            };
-
-            _context.ArtistAlbums.Add(newAlbumArtist);
-        }
 
         public void Save()
         {
