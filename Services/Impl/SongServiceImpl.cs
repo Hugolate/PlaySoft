@@ -46,12 +46,12 @@ public class SongServiceImpl : ISongService
             _albumRepository.PostAlbum(albumInDTO);
             _artistRepository.PostArtist(artistInDTO);
 
-            /*var album = _albumRepository.GetAlbumBySpotifyID(albumInDTO.spotifyAlbumID);
+            var album = _albumRepository.GetAlbumBySpotifyID(albumInDTO.spotifyAlbumID);
             var artist = _artistRepository.GetArtistBySpotifyID(artistInDTO.spotifyArtistID);
-            var song = _songRepository.GetSongBySpotifyID(artistInDTO.spotifyArtistID);*/
+            var song = _songRepository.GetSongBySpotifyID(artistInDTO.spotifyArtistID);
 
-            _artistAlbumRepository.AddAlbumToArtist(artistInDTO, albumInDTO);
-            _artistSongRepository.AddSongToArtist(artistInDTO, songInDTO);
+            _artistAlbumRepository.AddAlbumToArtist(artist.artistID, album.albumID);
+            _artistSongRepository.AddSongToArtist(artist.artistID, song.songID);
             return true;
         }
         catch (System.Exception)
