@@ -1,6 +1,6 @@
 namespace PlaySoftBeta.DTOs
 {
-    public class SearchSongDTO
+    public class SearchSongOutDTO
     {
 
         public int songID{ get; set; }

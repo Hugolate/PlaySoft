@@ -5,8 +5,8 @@ namespace PlaySoftBeta.Repository;
 
 public interface ISongRepository
 {
-    SongDTO GetSong(int songID);
-    List<SearchSongDTO> GetSongListByName(string songName);
-    void PostSong(SongInDTO songDTO);
-
- }
+    SongOutDTO GetSong(int songID);
+    List<SearchSongOutDTO> GetSongListByName(string songName);
+    void PostSong(SongInDTO SongOutDTO);
+    SongOutDTO GetSongBySpotifyID(string spotifyArtistID);
+}

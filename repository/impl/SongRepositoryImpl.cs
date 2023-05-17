@@ -14,20 +14,27 @@ namespace PlaySoftBeta.Repository
             _context = context;
             _mapper = mapper;
         }
-        public SongDTO GetSong(int songID)
+        public SongOutDTO GetSong(int songID)
         {
-            return _mapper.Map<SongDTO>(_context.Songs?.Find(songID));
+            return _mapper.Map<SongOutDTO>(_context.Songs?.Find(songID));
         }
 
 
-        public List<SearchSongDTO> GetSongListByName(string songName)
+        public List<SearchSongOutDTO> GetSongListByName(string songName)
         {
             var songList = _context.Songs.Where(song => song.songName.Contains(songName)).ToList();
-            return _mapper.Map<List<SearchSongDTO>>(songList);
+            return _mapper.Map<List<SearchSongOutDTO>>(songList);
         }
-        public void PostSong(SongInDTO songDTO)
+
+        public SongOutDTO GetSongBySpotifyID(string spotifyArtistID)
         {
-            _context.Songs.Add(_mapper.Map<Song>(songDTO));
+            var song = _context.Artist.Where(album => album.spotifyArtistID.Equals(spotifyArtistID));
+            return _mapper.Map<SongOutDTO>(song);
+        }
+
+        public void PostSong(SongInDTO SongOutDTO)
+        {
+            _context.Songs.Add(_mapper.Map<Song>(SongOutDTO));
         }
     }
 }

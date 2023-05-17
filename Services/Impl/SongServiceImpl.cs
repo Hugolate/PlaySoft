@@ -7,20 +7,25 @@ namespace PlaySoftBeta.Services;
 
 public class SongServiceImpl : ISongService
 {
-    private readonly IPLaylistRepository _playlistRepository;
+
     private readonly ISongRepository _songRepository;
-    private readonly IPlaylistLinesRepository _playlistLinesRepository;
+    private readonly IArtistRepository _artistRepository; 
+    private readonly IAlbumRepository _albumRepository;
+    private readonly IArtistAlbumRepository _artistAlbumRepository;
+    private readonly IArtistSongRepository _artistSongRepository;
     private readonly ILogger<SongServiceImpl> _logger;
 
-    public SongServiceImpl(ISongRepository songRepository, IPlaylistLinesRepository playlistLinesRepository, IPLaylistRepository playlistRepository, ILogger<SongServiceImpl> logger)
+    public SongServiceImpl(ISongRepository songRepository,IArtistSongRepository artistSongRepository, IAlbumRepository albumRepository, IArtistRepository artistRepository,IArtistAlbumRepository artistAlbumRepository, ILogger<SongServiceImpl> logger)
     {
         _songRepository = songRepository;
-        _playlistLinesRepository = playlistLinesRepository;
-        _playlistRepository = playlistRepository;
+        _albumRepository = albumRepository;
+        _artistRepository = artistRepository;
+        _artistSongRepository = artistSongRepository;
+        _artistAlbumRepository = artistAlbumRepository;
         _logger = logger;
     }
 
-    public SongDTO GetSong(int songID)
+    public SongOutDTO GetSong(int songID)
     {
         try
         {
@@ -32,12 +37,21 @@ public class SongServiceImpl : ISongService
             throw;
         }
     }
-    public bool NewSong(SongInDTO songDTO)
+    public bool NewSong(SongInDTO songInDTO, ArtistInDTO artistInDTO, AlbumInDTO albumInDTO)
     {
 
         try
         {
-            _songRepository.PostSong(songDTO);
+            _songRepository.PostSong(songInDTO);
+            _albumRepository.PostAlbum(albumInDTO);
+            _artistRepository.PostArtist(artistInDTO);
+
+            /*var album = _albumRepository.GetAlbumBySpotifyID(albumInDTO.spotifyAlbumID);
+            var artist = _artistRepository.GetArtistBySpotifyID(artistInDTO.spotifyArtistID);
+            var song = _songRepository.GetSongBySpotifyID(artistInDTO.spotifyArtistID);*/
+
+            _artistAlbumRepository.AddAlbumToArtist(artistInDTO, albumInDTO);
+            _artistSongRepository.AddSongToArtist(artistInDTO, songInDTO);
             return true;
         }
         catch (System.Exception)

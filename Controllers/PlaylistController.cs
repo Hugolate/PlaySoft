@@ -62,7 +62,7 @@ public class PlaylistController : ControllerBase
     }
 
 
-    [HttpPost("playlists/{playlistID}/songs"), Authorize]
+    [HttpPost("{playlistID}/songs"), Authorize]
     public async Task<ActionResult> AddSongToPlaylist(int playlistID, [FromBody] PlaylistLinesDTO playlistLinesDTO)
     {
         playlistLinesDTO.playlistID = playlistID;

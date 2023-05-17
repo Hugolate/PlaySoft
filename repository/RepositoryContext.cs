@@ -21,6 +21,6 @@ public class RepositoryContext : DbContext
     //Added new models - 13/05/23
     public DbSet<Artist> Artist { get; set; }
     public DbSet<Album> Album { get; set; }
-    public DbSet<ArtistSongs> AlbumLines { get; set; }
+    public DbSet<ArtistSongs> ArtistSongs { get; set; }
     public DbSet<ArtistAlbums> ArtistAlbums { get; set; }
 }

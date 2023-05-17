@@ -5,8 +5,8 @@ namespace PlaySoftBeta.Services;
 
 public interface ISongService
 {
-    public SongDTO GetSong(int songID);
+    public SongOutDTO GetSong(int songID);
     
-    public bool NewSong(SongInDTO songDTO);
+    public bool NewSong(SongInDTO SongOutDTO, ArtistInDTO ArtistInDTO, AlbumInDTO AlbumInDTO);
     
 }
