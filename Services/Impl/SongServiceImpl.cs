@@ -9,13 +9,13 @@ public class SongServiceImpl : ISongService
 {
 
     private readonly ISongRepository _songRepository;
-    private readonly IArtistRepository _artistRepository; 
+    private readonly IArtistRepository _artistRepository;
     private readonly IAlbumRepository _albumRepository;
     private readonly IArtistAlbumRepository _artistAlbumRepository;
     private readonly IArtistSongRepository _artistSongRepository;
     private readonly ILogger<SongServiceImpl> _logger;
 
-    public SongServiceImpl(ISongRepository songRepository,IArtistSongRepository artistSongRepository, IAlbumRepository albumRepository, IArtistRepository artistRepository,IArtistAlbumRepository artistAlbumRepository, ILogger<SongServiceImpl> logger)
+    public SongServiceImpl(ISongRepository songRepository, IArtistSongRepository artistSongRepository, IAlbumRepository albumRepository, IArtistRepository artistRepository, IArtistAlbumRepository artistAlbumRepository, ILogger<SongServiceImpl> logger)
     {
         _songRepository = songRepository;
         _albumRepository = albumRepository;
@@ -45,13 +45,20 @@ public class SongServiceImpl : ISongService
             _songRepository.PostSong(songInDTO);
             _albumRepository.PostAlbum(albumInDTO);
             _artistRepository.PostArtist(artistInDTO);
-    
+
             /*var album = _albumRepository.GetAlbumBySpotifyID(albumInDTO.spotifyAlbumID);
             var artist = _artistRepository.GetArtistBySpotifyID(artistInDTO.spotifyArtistID);
             var song = _songRepository.GetSongBySpotifyID(artistInDTO.spotifyArtistID);
 */
             _artistAlbumRepository.AddAlbumToArtist(artistInDTO, albumInDTO);
             _artistSongRepository.AddSongToArtist(artistInDTO, songInDTO);
+
+            _songRepository.Save();
+            _albumRepository.Save();
+            _artistAlbumRepository.Save();
+            _artistRepository.Save();
+            _artistSongRepository.Save();
+
             return true;
         }
         catch (System.Exception)
