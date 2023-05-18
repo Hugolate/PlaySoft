@@ -3,7 +3,7 @@
         <v-container>
             <v-layout>
                 <v-flex xs12 sm6 md3>
-                    <v-text-field label="Search" class="search" type="text" v-model="query" @input="Search()" autofocus 
+                    <v-text-field label="Search..." class="search" type="text" v-model="query" @input="Search()" autofocus 
                         solo></v-text-field>
                 </v-flex>
             </v-layout>
