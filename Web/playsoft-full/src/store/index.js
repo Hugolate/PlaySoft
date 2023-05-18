@@ -238,7 +238,7 @@ export default new Vuex.Store({
                 });
         },
         Search({ commit, state }) {
-            console.log('query ' + state.query)
+            
             axios
                 .get(`https://tfgplaysoft.azurewebsites.net/Search/${state.query}`)
                 .then(function(response) {
@@ -247,6 +247,7 @@ export default new Vuex.Store({
 
                 })
                 .catch(e => {
+                    
                     console.log(e);
                 });
         }
