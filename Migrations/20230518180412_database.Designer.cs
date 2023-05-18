@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PlaySoftBeta.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230517181013_database")]
+    [Migration("20230518180412_database")]
     partial class database
     {
         /// <inheritdoc />

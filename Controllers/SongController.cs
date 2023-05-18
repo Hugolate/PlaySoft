@@ -34,10 +34,10 @@ public class SongController : ControllerBase
     [HttpPost("create-with-artist-album"), Authorize]
     public async Task<ActionResult> AddSong(SongArtistAlbumDTO SongArtistAlbumDTO)
     {
-
-        if (_songService.NewSong(SongArtistAlbumDTO.songInDTO, SongArtistAlbumDTO.artistInDTO, SongArtistAlbumDTO.albumInDTO))
+        var songID = _songService.NewSong(SongArtistAlbumDTO.songInDTO, SongArtistAlbumDTO.artistInDTO, SongArtistAlbumDTO.albumInDTO);
+        if (songID != null)
         {
-            return Ok();
+            return Ok(songID);
         }
 
         return BadRequest("Not found");

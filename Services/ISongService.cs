@@ -7,6 +7,6 @@ public interface ISongService
 {
     public SongOutDTO GetSong(int songID);
     
-    public bool NewSong(SongInDTO SongOutDTO, ArtistInDTO ArtistInDTO, AlbumInDTO AlbumInDTO);
+    public int NewSong(SongInDTO SongOutDTO, ArtistInDTO ArtistInDTO, AlbumInDTO AlbumInDTO);
     
 }

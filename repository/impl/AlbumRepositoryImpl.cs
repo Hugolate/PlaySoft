@@ -18,7 +18,12 @@ namespace PlaySoftBeta.Repository
         public AlbumOutDTO GetAlbumBySpotifyID(string spotifyAlbumID)
         {
             var album = _context.Album.FirstOrDefault(album => album.spotifyAlbumID.Equals(spotifyAlbumID));
-            return _mapper.Map<AlbumOutDTO>(album);
+            if (album != null)
+            {
+                return _mapper.Map<AlbumOutDTO>(album);
+            }
+            return null;
+
         }
 
         public void PostAlbum(AlbumInDTO albumInDTO)

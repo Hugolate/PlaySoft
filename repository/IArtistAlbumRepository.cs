@@ -6,5 +6,6 @@ namespace PlaySoftBeta.Repository;
 public interface IArtistAlbumRepository
 {
     void AddAlbumToArtist(int artistID, int albumID);
+    bool CheckIfExist(int artistID, int albumID);
     void Save();
 }

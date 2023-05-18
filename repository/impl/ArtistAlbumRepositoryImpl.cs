@@ -28,6 +28,18 @@ namespace PlaySoftBeta.Repository
             _context.ArtistAlbums.Add(newAlbumArtist);
         }
 
+        public bool CheckIfExist(int artistID, int albumID)
+        {
+            if (_context.ArtistAlbums.Any(x => x.albumID == albumID && x.artistID == artistID))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void Save()
         {
             _context.SaveChanges();

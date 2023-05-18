@@ -37,32 +37,51 @@ public class SongServiceImpl : ISongService
             throw;
         }
     }
-    public bool NewSong(SongInDTO songInDTO, ArtistInDTO artistInDTO, AlbumInDTO albumInDTO)
+    public int NewSong(SongInDTO songInDTO, ArtistInDTO artistInDTO, AlbumInDTO albumInDTO)
     {
 
         try
         {
-            _albumRepository.PostAlbum(albumInDTO);
-            _albumRepository.Save();
             var album = _albumRepository.GetAlbumBySpotifyID(albumInDTO.spotifyAlbumID);
-            songInDTO.AlbumID = album.albumID;
-
-            _artistRepository.PostArtist(artistInDTO);
-            _songRepository.PostSong(songInDTO);
-
-            _songRepository.Save();
-            _artistRepository.Save();
-
             var artist = _artistRepository.GetArtistBySpotifyID(artistInDTO.spotifyArtistID);
-            var song = _songRepository.GetSongBySpotifyID(artistInDTO.spotifyArtistID);
+            var song = _songRepository.GetSongBySpotifyID(songInDTO.spotifySongID);
 
-            _artistAlbumRepository.AddAlbumToArtist(artist.artistID, album.albumID);
-            _artistSongRepository.AddSongToArtist(artist.artistID, song.songID);
+            if (album == null)
+            {
+                _albumRepository.PostAlbum(albumInDTO);
+                _albumRepository.Save();
+                album = _albumRepository.GetAlbumBySpotifyID(albumInDTO.spotifyAlbumID);
+            }
+
+            if (artist == null)
+            {
+                _artistRepository.PostArtist(artistInDTO);
+                _artistRepository.Save();
+                artist = _artistRepository.GetArtistBySpotifyID(artistInDTO.spotifyArtistID);
+            }
+
+            if (song == null)
+            {
+                songInDTO.AlbumID = album.albumID;
+                _songRepository.PostSong(songInDTO);
+                _songRepository.Save();
+                song = _songRepository.GetSongBySpotifyID(songInDTO.spotifySongID);
+            }
 
 
-            _artistSongRepository.Save();
-            _artistAlbumRepository.Save();
-            return true;
+            if (!_artistAlbumRepository.CheckIfExist(artist.artistID, album.albumID))
+            {
+                _artistAlbumRepository.AddAlbumToArtist(artist.artistID, album.albumID);
+                _artistAlbumRepository.Save();
+            }
+
+            if (!_artistSongRepository.CheckIfExist(artist.artistID, song.songID))
+            {
+                _artistSongRepository.AddSongToArtist(artist.artistID, song.songID);
+                _artistSongRepository.Save();
+            }
+
+            return song.songID;
         }
         catch (System.Exception)
         {
