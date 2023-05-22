@@ -15,10 +15,11 @@ public class PlaysoftProfile : Profile
         CreateMap<EditPLaylistDTO, Playlist>();
 
         CreateMap<Song, SongOutDTO>();
-        CreateMap<SongOutDTO, Song>();
         CreateMap<SongInDTO, Song>();
         CreateMap<Song, SearchSongOutDTO>();
-
+        CreateMap<Song, SongOutDTO>()
+                    .ForMember(dest => dest.ArtistSongs, opt => opt.MapFrom(src => src.ArtistSongs.Select(a => a.Artist)));
+                    
         CreateMap<PlaylistLinesDTO, PlaylistLines>();
         CreateMap<PlaylistLines, SongIDSongOutDTO>();
 
@@ -28,8 +29,8 @@ public class PlaysoftProfile : Profile
 
         CreateMap<AlbumInDTO, Album>();
         CreateMap<Album, AlbumOutDTO>();
-        CreateMap<AlbumOutDTO, Album>();
-        
+
+
         CreateMap<ArtistInDTO, Artist>();
         CreateMap<Artist, ArtistOutDTO>();
         // Use CreateMap... Etc.. here (Profile methods are the same as configuration methods)

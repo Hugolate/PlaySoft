@@ -171,6 +171,10 @@ namespace PlaySoftBeta.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("uri")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("songID");
 
                     b.HasIndex("AlbumID");
@@ -231,7 +235,7 @@ namespace PlaySoftBeta.Migrations
                         .IsRequired();
 
                     b.HasOne("PlaySoftBeta.Models.Song", "Song")
-                        .WithMany()
+                        .WithMany("ArtistSongs")
                         .HasForeignKey("songID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -303,6 +307,8 @@ namespace PlaySoftBeta.Migrations
 
             modelBuilder.Entity("PlaySoftBeta.Models.Song", b =>
                 {
+                    b.Navigation("ArtistSongs");
+
                     b.Navigation("PlaylistLines");
                 });
 

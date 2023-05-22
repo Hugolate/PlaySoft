@@ -67,6 +67,7 @@ namespace PlaySoftBeta.Migrations
                     songName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     durationMs = table.Column<int>(type: "int", nullable: false),
                     publicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    uri = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AlbumID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

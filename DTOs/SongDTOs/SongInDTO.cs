@@ -7,6 +7,7 @@ namespace PlaySoftBeta.DTOs
         public string songName { get; set; }
         public int durationMs { get; set; }
         public int? AlbumID { get; set; }
+        public string uri { get; set; }
         //Artist
         //Album
     }

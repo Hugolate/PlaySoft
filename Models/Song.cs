@@ -13,9 +13,10 @@ namespace PlaySoftBeta.Models
 
         public int durationMs { get; set; }
         public DateTime publicationDate { get; set; }
+        public string uri { get; set; }
 
         public IList<PlaylistLines> PlaylistLines { get; set; }
-
+        public IList<ArtistSongs> ArtistSongs { get; set; }
         public int AlbumID { get; set; }
         public Album Album { get; set; }
 

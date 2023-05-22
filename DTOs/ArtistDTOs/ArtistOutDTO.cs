@@ -5,6 +5,6 @@ namespace PlaySoftBeta.DTOs
     {
         public string spotifyArtistID { get; set; }
         public int artistID { get; set; }
-        public string name { get; set; }
+        public string artistName { get; set; }
     }
 }

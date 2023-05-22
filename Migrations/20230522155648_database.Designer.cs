@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PlaySoftBeta.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230518180412_database")]
+    [Migration("20230522155648_database")]
     partial class database
     {
         /// <inheritdoc />
@@ -174,6 +174,10 @@ namespace PlaySoftBeta.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("uri")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("songID");
 
                     b.HasIndex("AlbumID");
@@ -234,7 +238,7 @@ namespace PlaySoftBeta.Migrations
                         .IsRequired();
 
                     b.HasOne("PlaySoftBeta.Models.Song", "Song")
-                        .WithMany()
+                        .WithMany("ArtistSongs")
                         .HasForeignKey("songID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -306,6 +310,8 @@ namespace PlaySoftBeta.Migrations
 
             modelBuilder.Entity("PlaySoftBeta.Models.Song", b =>
                 {
+                    b.Navigation("ArtistSongs");
+
                     b.Navigation("PlaylistLines");
                 });
 

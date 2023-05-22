@@ -1,6 +1,8 @@
 using PlaySoftBeta.Models;
 using PlaySoftBeta.DTOs;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace PlaySoftBeta.Repository
 {
@@ -16,10 +18,13 @@ namespace PlaySoftBeta.Repository
         }
         public SongOutDTO GetSong(int songID)
         {
-            return _mapper.Map<SongOutDTO>(_context.Songs?.Find(songID));
+            return _mapper.Map<SongOutDTO>(_context.Songs?
+            .Include(s => s.Album)
+            .Include(s => s.ArtistSongs).ThenInclude(a => a.Artist)
+            .FirstOrDefault(s => s.songID == songID));
         }
 
-
+    
         public List<SearchSongOutDTO> GetSongListByName(string songName)
         {
             var songList = _context.Songs.Where(song => song.songName.Contains(songName)).ToList();
