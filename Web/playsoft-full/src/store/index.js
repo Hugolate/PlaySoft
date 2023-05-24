@@ -144,7 +144,7 @@ export default new Vuex.Store({
                     songs = JSON.parse(state.Songs);
                     for (let index = 0; index < songs.length; index++) {
                         var SongsLines = []
-                        axios.get(`https://playsoft-api.azurewebsites.net/Song/${songs[index].song.songID}`)
+                        axios.get(`https://tfgplaysoft.azurewebsites.net/Song/${songs[index].song.songID}`)
                             .then(function(respuesta) {
                                 SongsLines = JSON.stringify(respuesta.data)
                                 commit('setSongsLines', SongsLines)

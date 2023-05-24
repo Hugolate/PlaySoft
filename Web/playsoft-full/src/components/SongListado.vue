@@ -4,10 +4,11 @@
             <BackGround></BackGround>
             <AddSongForm></AddSongForm>
             <v-container class="fill-height secciones canciones" fluid style="justify-content: center;">
-                <p id="animated" class="playlists wavy songs" v-for="song in this.$store.state.SongsLines"
-                    :key="song.songID">{{
-                        song.songName }}
-                </p>
+                <div class="songs" v-for="song in this.$store.state.SongsLines" :key="song.songID">
+                    <p>{{ song.songName }} </p>
+                    <p>{{ song.songID }}</p>
+                   
+                </div>
             </v-container>
         </v-main>
     </v-app>
@@ -35,25 +36,19 @@ export default {
 
 <style>
 .songs {
-    font-size: xx-large;
+    font-size: large;
     color: white;
     z-index: 10;
     padding: 0px;
     color: white;
     text-shadow: 1px 1px 5px #e69cf8;
-    letter-spacing: .3rem;
+    letter-spacing: .2rem;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
 
-.wavy {
-    animation-name: wavy;
-    animation-duration: 2.3s;
-    animation-timing-function: ease;
-    animation-iteration-count: infinite;
-    position: relative;
-    top: 0;
-    left: 0;
-}
+
 
 @keyframes wavy {
     0% {
