@@ -13,7 +13,7 @@
             <v-container class="fill-height canciones" fluid style="justify-content: center; height: 0; margin-top: 400px;">
 
                 <div style="padding-top: 10px;" class="grid grid-header">
-                    <div id="title" class="arrowDiv" v-on:click="toggleArrow($event)">
+                    <div id="songName" class="arrowDiv" v-on:click="toggleArrow($event)">
                         Title
                         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="white" width="30" viewBox="0 0 20 20">
                             <path d="M7 10l5 5 5-5z"></path>
@@ -31,14 +31,14 @@
                             <path d="M7 10l5 5 5-5z"></path>
                         </svg>
                     </div>
-                    <div id="duration" class="arrowDiv" v-on:click="toggleArrow($event)">
+                    <div id="durationMs" class="arrowDiv" v-on:click="toggleArrow($event)">
                         Duration
                         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="white" width="30" viewBox="0 0 20 20">
                             <path d="M7 10l5 5 5-5z"></path>
                         </svg>
                     </div>
                 </div>
-                <div style="padding-top: 10px;" class="songs grid" v-for="song in this.$store.state.SongsLines"
+                <div style="padding-top: 10px;" class="songs grid" v-for="song in this.$store.state.Songs"
                     :key="song.songID">
                     <div class="head">
                         <div style="margin-right: 40px;">
@@ -85,14 +85,17 @@ export default {
         BackGround
     },
     mounted() {
-        this.$store.dispatch('getSongs')
+
+        this.$store.dispatch('getSongs', { undefined, orderKey: undefined });
     },
     methods: {
         toggleArrow(event) {
+
             const filters = document.getElementsByClassName("arrowDiv")
             const clickedDivId = event.target.id;
             const divElement = document.getElementById(clickedDivId);
             const svgElement = divElement.querySelector('svg');
+
             for (let i = 0; i < filters.length; i++) {
                 let svg = filters[i].getElementsByTagName("svg")[0];
                 if (svg != svgElement && !svg.classList.contains("arrow")) {
@@ -100,7 +103,7 @@ export default {
                     svg.classList.toggle("arrow");
                 }
             }
-            console.log(filters)
+
             if (svgElement.classList.contains("arrow")) {
 
                 svgElement.classList.toggle("arrow")
@@ -114,11 +117,20 @@ export default {
                 svgElement.classList.toggle("ASC")
                 svgElement.classList.toggle("arrow")
             }
-            this.$store.dispatch('getSongs', event.target.class, svgElement.class)
+            let order = '';
+
+            if (svgElement.classList.contains("ASC")) {
+                order = "ASC";
+            } else {
+                order = "DESC"
+            }
+
+            this.$store.dispatch('getSongs', { order, orderKey: clickedDivId });
+
         },
         millisToMinutesAndSeconds(millis) {
 
-            if(millis > 0){
+            if (millis > 0) {
 
                 var minutes = Math.floor(millis / 60000);
                 var seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -127,7 +139,7 @@ export default {
                         (minutes + 1) + ":00" :
                         minutes + ":" + (seconds < 10 ? "0" : "") + seconds
                 );
-            }else{
+            } else {
                 return "00:00"
             }
         },

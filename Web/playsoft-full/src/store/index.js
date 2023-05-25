@@ -134,24 +134,24 @@ export default new Vuex.Store({
             return false;
         },
 
-        getSongs({ commit, state }, order, orderKey) {
+        getSongs({ commit, state }, { order, orderKey }) {
+            console.log(order)
+            console.log(orderKey)
+            let url = (`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}`);
+            if (order != undefined && order != null && orderKey != undefined && orderKey != null) {
+                url += `?orderKey=${orderKey}&order=${order}`
+            }
+            console.log(url)
             state.Songs = []
-            state.SongsLines = []
-            axios.get(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}?orderKey=${orderKey}&order=${order}`)
+
+            axios.get(url)
                 .then(function(response) {
+                    console.log(response.data)
                     commit('setSongs', JSON.stringify(response.data))
-                    var songs = []
-                    songs = JSON.parse(state.Songs);
-                    for (let index = 0; index < songs.length; index++) {
-                        var SongsLines = []
-                        axios.get(`https://tfgplaysoft.azurewebsites.net/Song/${songs[index].song.songID}`)
-                            .then(function(respuesta) {
-                                SongsLines = JSON.stringify(respuesta.data)
-                                commit('setSongsLines', SongsLines)
-                            })
-                    }
                 })
+
         },
+
         getPlaylistID({ commit }, id) {
             commit('setClickPlID', id)
         },

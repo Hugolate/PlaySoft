@@ -2,7 +2,7 @@ using PlaySoftBeta.Models;
 using PlaySoftBeta.DTOs;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-
+using System.Linq.Dynamic.Core;
 
 namespace PlaySoftBeta.Repository
 {
@@ -24,19 +24,20 @@ namespace PlaySoftBeta.Repository
 
         public List<SongIDSongOutDTO> GetSongsId(int playlistID, string? orderKey, string? order)
         {
-            var query = $"SELECT s.songID, p.playlistID FROM PlaylistLines p INNER JOIN Songs s ON s.songID = p.songID WHERE playlistID = {playlistID}";
-
-            if (!string.IsNullOrEmpty(orderKey) && !string.IsNullOrEmpty(order))
-            {
-                query += $" ORDER BY s.{orderKey} {order} OFFSET 0 ROWS";
+            var query = _context.PlaylistLines
+                .Where(pl => pl.playlistID == 1)
+                .Include(pl => pl.Song)
+                    .ThenInclude(s => s.Album)
+                .Include(pl => pl.Song)
+                    .ThenInclude(s => s.ArtistSongs)
+                        .ThenInclude(a => a.Artist);
+            if(order.Equals("ASC")){
+                
             }
+            var orderedQuery = query.OrderBy(orderKey +" "+ order);
 
-            var playlistLines = _context.PlaylistLines
-                .FromSqlRaw(query)
-                .Include(playlistLines => playlistLines.Song)
-                .ToList();
 
-            return _mapper.Map<List<SongIDSongOutDTO>>(playlistLines);
+            return _mapper.Map<List<SongIDSongOutDTO>>(orderedQuery);
         }
 
         public void Save()
