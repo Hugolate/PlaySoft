@@ -22,11 +22,11 @@ namespace PlaySoftBeta.Repository
             _context.PlaylistLines.Add(_mapper.Map<PlaylistLines>(playlistLinesDTO));
         }
 
-        public List<SongIDSongOutDTO> GetSongsId(int playlistID, string? orderKey, string order)
+        public List<SongIDSongOutDTO> GetSongsId(int playlistID, string? orderKey, string? order)
         {
             var query = $"SELECT s.songID, p.playlistID FROM PlaylistLines p INNER JOIN Songs s ON s.songID = p.songID WHERE playlistID = {playlistID}";
 
-            if (!string.IsNullOrEmpty(orderKey))
+            if (!string.IsNullOrEmpty(orderKey) && !string.IsNullOrEmpty(order))
             {
                 query += $" ORDER BY s.{orderKey} {order} OFFSET 0 ROWS";
             }

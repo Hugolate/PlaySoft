@@ -18,8 +18,8 @@ public class PlaysoftProfile : Profile
         CreateMap<SongInDTO, Song>();
         CreateMap<Song, SearchSongOutDTO>();
         CreateMap<Song, SongOutDTO>()
-                    .ForMember(dest => dest.ArtistSongs, opt => opt.MapFrom(src => src.ArtistSongs.Select(a => a.Artist)));
-                    
+           .ForMember(dest => dest.ArtistSongs, opt => opt.MapFrom(src => src.ArtistSongs.Select(a => a.Artist).ToList()));
+
         CreateMap<PlaylistLinesDTO, PlaylistLines>();
         CreateMap<PlaylistLines, SongIDSongOutDTO>();
 

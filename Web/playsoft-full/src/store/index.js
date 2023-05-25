@@ -134,10 +134,10 @@ export default new Vuex.Store({
             return false;
         },
 
-        getSongs({ commit, state }) {
+        getSongs({ commit, state }, order, orderKey) {
             state.Songs = []
             state.SongsLines = []
-            axios.get(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}?orderKey=songName&order=asc`)
+            axios.get(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}?orderKey=${orderKey}&order=${order}`)
                 .then(function(response) {
                     commit('setSongs', JSON.stringify(response.data))
                     var songs = []

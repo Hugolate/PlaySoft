@@ -47,7 +47,7 @@ public class PlaylistController : ControllerBase
     }
 
     [HttpGet("{playlistID}"), Authorize]
-    public async Task<ActionResult> GetSongsId(int playlistID, string orderKey, string order)
+    public async Task<ActionResult> GetSongsId(int playlistID, string? orderKey, string? order)
     {
         var songsID = _pLaylistService.GetSongsId(playlistID, orderKey, order);
 
