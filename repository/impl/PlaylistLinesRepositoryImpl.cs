@@ -31,13 +31,18 @@ namespace PlaySoftBeta.Repository
                 .Include(pl => pl.Song)
                     .ThenInclude(s => s.ArtistSongs)
                         .ThenInclude(a => a.Artist);
-            if(order.Equals("ASC")){
-                
+
+            if (orderKey != null && order != null)
+            {
+                return _mapper.Map<List<SongIDSongOutDTO>>(query.OrderBy(orderKey + " " + order));
             }
-            var orderedQuery = query.OrderBy(orderKey +" "+ order);
+            else if (orderKey != null)
+            {
+                return _mapper.Map<List<SongIDSongOutDTO>>(query.OrderBy(orderKey));
+            }
 
 
-            return _mapper.Map<List<SongIDSongOutDTO>>(orderedQuery);
+            return _mapper.Map<List<SongIDSongOutDTO>>(query);
         }
 
         public void Save()
