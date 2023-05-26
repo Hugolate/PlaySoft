@@ -13,6 +13,7 @@ public class PlaysoftProfile : Profile
         CreateMap<Playlist, PlaylistDTO>();
         CreateMap<PlaylistDTO, Playlist>();
         CreateMap<EditPLaylistDTO, Playlist>();
+        CreateMap<Playlist, EditPLaylistDTO>();
 
         CreateMap<Song, SongOutDTO>();
         CreateMap<SongInDTO, Song>();

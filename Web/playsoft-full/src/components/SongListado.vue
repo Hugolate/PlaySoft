@@ -7,7 +7,7 @@
                     <path d="M0 0h48v48H0z" fill="none" />
                     <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm-4 29V15l12 9-12 9z" />
                 </svg>
-
+                <div>{{ this.$store.state.Songs.song[0].playlist.playlistName }}</div>
             </div>
 
             <v-container class="fill-height canciones" fluid style="justify-content: center; height: 0; margin-top: 400px;">
@@ -25,13 +25,13 @@
                             <path d="M7 10l5 5 5-5z"></path>
                         </svg>
                     </div>
-                    <div id="artist" style="display: flex;" class="arrowDiv" v-on:click="toggleArrow($event)">
+                    <div id="artistName" style="display: flex;" class="arrowDiv" v-on:click="toggleArrow($event)">
                         Artists
                         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="white" width="30" viewBox="0 0 20 20">
                             <path d="M7 10l5 5 5-5z"></path>
                         </svg>
                     </div>
-                    <div id="durationMs" class="arrowDiv" v-on:click="toggleArrow($event)">
+                    <div id="Song.durationMs" class="arrowDiv" v-on:click="toggleArrow($event)">
                         Duration
                         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="white" width="30" viewBox="0 0 20 20">
                             <path d="M7 10l5 5 5-5z"></path>
@@ -52,17 +52,18 @@
                         </div>
                         <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fondosanimales.com%2FImagenes%2Fperro-pug.jpg&f=1&nofb=1&ipt=c8c58f056ac3478e97632947e7abfaa15bb7821ce4d54b9e88cc784181410225&ipo=images"
                             style="width: 40px;height: 40px;" alt="">
-                        <p style="max-width: 20px;" class="songName">{{ song.songName }} </p>
+                        <p style="max-width: 20px;" class="songName">{{ song.song.songName }} </p>
                     </div>
                     <div>
-                        <p>{{ song.album.albumName }} </p>
+                        <p>{{ song.song.album.albumName }} </p>
                     </div>
                     <div style="display: flex; gap: 5px;">
-                        <p class="artists" v-for="artistSongs in song.artistSongs" :key="artistSongs.spotifyArtistID">{{
-                            artistSongs.artistName }} </p>
+                        <p class="artists" v-for="artistSongs in song.song.artistSongs" :key="artistSongs.spotifyArtistID">
+                            {{
+                                artistSongs.artistName }} </p>
                     </div>
                     <div>
-                        <p>{{ millisToMinutesAndSeconds(song.durationMs) }}</p>
+                        <p>{{ millisToMinutesAndSeconds(song.song.durationMs) }}</p>
                     </div>
                 </div>
             </v-container>
@@ -105,25 +106,26 @@ export default {
             }
 
             if (svgElement.classList.contains("arrow")) {
-
+                console.log("1")
                 svgElement.classList.toggle("arrow")
                 svgElement.classList.toggle("DESC")
             } else if (svgElement.classList.contains("DESC")) {
-
+                console.log("2")
                 svgElement.classList.toggle("DESC")
                 svgElement.classList.toggle("ASC")
             } else {
 
-                svgElement.classList.toggle("ASC")
+                svgElement.classList.remove("ASC")
                 svgElement.classList.toggle("arrow")
+         
             }
             let order = '';
 
             if (svgElement.classList.contains("ASC")) {
-                order = "ASC";
-            } else {
-                order = "DESC"
-            }
+                order = "DESC";
+            } else if (svgElement.classList.contains("DESC")) {
+                order = "ASC"
+            } else order = null;
 
             this.$store.dispatch('getSongs', { order, orderKey: clickedDivId });
 
@@ -172,7 +174,7 @@ export default {
 
 .main-opt {
 
-    z-index: 10;
+    z-index: 1;
     top: 270px;
     left: 100px;
     position: absolute;
@@ -191,7 +193,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     width: 80%;
-    z-index: 10;
+    z-index: 1;
 }
 
 
@@ -201,7 +203,7 @@ export default {
     border-top: 1px solid rgb(119, 111, 111);
     align-items: center;
     color: white;
-    z-index: 10;
+    z-index: 1;
     padding: 0px;
     color: white;
     text-shadow: 1px 1px 5px #e69cf8;

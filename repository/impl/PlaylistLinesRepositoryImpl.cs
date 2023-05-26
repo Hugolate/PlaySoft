@@ -27,6 +27,7 @@ namespace PlaySoftBeta.Repository
         {
             var query = _context.PlaylistLines
                 .Where(pl => pl.playlistID == 1)
+                .Include(pl => pl.Playlist)
                 .Include(pl => pl.Song)
                     .ThenInclude(s => s.Album)
                 .Include(pl => pl.Song)

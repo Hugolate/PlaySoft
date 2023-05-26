@@ -68,7 +68,7 @@ export default new Vuex.Store({
             state.usuario = user;
         },
         setSongs(state, Songs) {
-            state.Songs = Songs;
+            state.Songs = Songs
         },
         setClickPlID(state, Id) {
             state.PlayListsID = Id
@@ -135,19 +135,15 @@ export default new Vuex.Store({
         },
 
         getSongs({ commit, state }, { order, orderKey }) {
-            console.log(order)
-            console.log(orderKey)
+
             let url = (`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}`);
             if (order != undefined && order != null && orderKey != undefined && orderKey != null) {
                 url += `?orderKey=${orderKey}&order=${order}`
             }
-            console.log(url)
             state.Songs = []
-
             axios.get(url)
                 .then(function(response) {
-                    console.log(response.data)
-                    commit('setSongs', JSON.stringify(response.data))
+                    commit('setSongs', response.data)
                 })
 
         },
