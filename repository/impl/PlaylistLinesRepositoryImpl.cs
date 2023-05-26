@@ -3,6 +3,7 @@ using PlaySoftBeta.DTOs;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 
 namespace PlaySoftBeta.Repository
 {
@@ -32,6 +33,12 @@ namespace PlaySoftBeta.Repository
                     .ThenInclude(s => s.ArtistSongs)
                         .ThenInclude(a => a.Artist);
 
+            if (orderKey == "artistName")
+            {
+                orderKey = "Song.ArtistSongs.Select(x => x.Artist.artistName).FirstOrDefault()";
+            }
+
+
             if (orderKey != null && order != null)
             {
                 return _mapper.Map<List<SongIDSongOutDTO>>(query.OrderBy(orderKey + " " + order));
@@ -44,6 +51,8 @@ namespace PlaySoftBeta.Repository
 
             return _mapper.Map<List<SongIDSongOutDTO>>(query);
         }
+
+
 
         public void Save()
         {

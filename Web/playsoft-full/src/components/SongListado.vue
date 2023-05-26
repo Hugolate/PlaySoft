@@ -13,13 +13,13 @@
             <v-container class="fill-height canciones" fluid style="justify-content: center; height: 0; margin-top: 400px;">
 
                 <div style="padding-top: 10px;" class="grid grid-header">
-                    <div id="songName" class="arrowDiv" v-on:click="toggleArrow($event)">
+                    <div id="Song.songName" class="arrowDiv" v-on:click="toggleArrow($event)">
                         Title
                         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="white" width="30" viewBox="0 0 20 20">
                             <path d="M7 10l5 5 5-5z"></path>
                         </svg>
                     </div>
-                    <div id="album" class="arrowDiv" v-on:click="toggleArrow($event)">
+                    <div id="Song.Album.albumName" class="arrowDiv" v-on:click="toggleArrow($event)">
                         Album
                         <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="white" width="30" viewBox="0 0 20 20">
                             <path d="M7 10l5 5 5-5z"></path>
