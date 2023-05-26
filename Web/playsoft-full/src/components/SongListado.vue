@@ -2,12 +2,19 @@
     <v-app id="inspire">
         <v-main class="pa-0">
             <BackGround></BackGround>
-            <div class="main-opt"> <svg height="72" viewBox="0 0 48 48" width="72" xmlns="http://www.w3.org/2000/svg"
-                    fill="gray">
-                    <path d="M0 0h48v48H0z" fill="none" />
-                    <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm-4 29V15l12 9-12 9z" />
-                </svg>
-                <div>{{ this.$store.state.Songs.song[0].playlist.playlistName }}</div>
+            <div class="main-opt">
+                <p class="pl-name">{{ this.$store.state.Songs[0].playlist.playListName }}</p>
+                <div style="display: flex;">
+                    <p class="description">
+                        {{ this.$store.state.Songs[0].playlist.playlistDescription }} 
+                    </p>
+
+                    <!-- <svg height="72" viewBox="0 0 48 48" width="72" xmlns="http://www.w3.org/2000/svg" fill="gray">
+                        <path d="M0 0h48v48H0z" fill="none" />
+                        <path
+                            d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm-4 29V15l12 9-12 9z" />
+                    </svg> -->
+                </div>
             </div>
 
             <v-container class="fill-height canciones" fluid style="justify-content: center; height: 0; margin-top: 400px;">
@@ -117,7 +124,7 @@ export default {
 
                 svgElement.classList.remove("ASC")
                 svgElement.classList.toggle("arrow")
-         
+
             }
             let order = '';
 
@@ -175,12 +182,13 @@ export default {
 .main-opt {
 
     z-index: 1;
-    top: 270px;
-    left: 100px;
+    top: 180px;
+    right: 180px;
     position: absolute;
-    display: flex;
+    justify-content: center;
     align-items: center;
-
+    display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
@@ -197,8 +205,21 @@ export default {
 }
 
 
+.pl-name {
+    font-size: xx-large;
+    color: white;
+    text-shadow: 1px 1px 5px #e69cf8;
 
-
+}
+.description{
+    font-size: medium;
+    color: white;
+    text-shadow: 1px 1px 5px #e69cf8;
+    max-width: 400px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: center;
+}
 .songs {
     border-top: 1px solid rgb(119, 111, 111);
     align-items: center;
@@ -206,7 +227,7 @@ export default {
     z-index: 1;
     padding: 0px;
     color: white;
-    text-shadow: 1px 1px 5px #e69cf8;
+
     letter-spacing: .2rem;
     cursor: pointer;
 
