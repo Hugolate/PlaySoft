@@ -1,7 +1,6 @@
 <template>
     <v-app id="inspire">
         <v-main class="pa-0">
-            <BackGround></BackGround>
             <v-container class="fill-height secciones" fluid style="justify-content: center;">
                 <h1 class="text">Welcome to PlaySoft</h1>
                 <h2 class="text">The music service of the future</h2>
@@ -34,7 +33,6 @@
 </template>
 
 <script>
-import BackGround from '../components/BackGround.vue'
 
 export default {
     name: 'HomePageNotLogin',
@@ -50,7 +48,7 @@ export default {
             this.$router.push({ path: '/' })
         }
     },
-    components: { BackGround }
+    components: {  }
 }
 </script>
 
@@ -85,6 +83,7 @@ v-content {
     flex-wrap: wrap;
     overflow: hidden;
     background: gray;
+    z-index: 1;
 }
 
 section::before {

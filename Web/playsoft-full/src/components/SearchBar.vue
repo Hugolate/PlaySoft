@@ -1,7 +1,7 @@
 <template>
     <v-form class="form">
         <v-container>
-            <v-layout>
+            <v-layout class="layout">
                 <v-flex xs12 sm6 md3>
                     <v-text-field label="Search..." class="search" type="text" v-model="query" @input="Search()" autofocus 
                         solo></v-text-field>
@@ -32,11 +32,22 @@ export default {
 }
 </script>
 <style>
+
+.layout{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 40px;
+    gap: 15px;
+    align-items: center;
+}
 .form {
-    position: absolute;
+    height: 20vh;
+    display: flex;
+    align-items: flex-end;
     top: 70px;
     z-index: 1;
     left: 10px;
-    width: 70%;
+    width: 100%;
 }
 </style>

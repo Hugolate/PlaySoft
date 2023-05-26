@@ -17,31 +17,24 @@
                 </div>
             </v-list-item>
 
-            <div class="dropdown">
-                <button @click="animaciones()" class="dropbtn">Add to..</button>
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
-                </div>
+            <div class="save-btn">
+                <button @click="showModal = true">Save</button>
             </div>
+            <ModalPlaylists v-show="showModal" @close-modal="showModal = false" />
         </v-card>
     </div>
 </template>
 <script>
-import { anim } from '../assets/scripts/DropDown'
+
+import ModalPlaylists from '../components/ModalPlaylists.vue';
+
 export default {
-    /* watch: {
-         '$store.state.searchTracks': function () {
-             console.log(this.$store.state.searchTracks)
-         }
-     }*/
-    name: 'app',
-    methods: {
-        animaciones() {
-            anim()
+    components: { ModalPlaylists },
+    data() {
+        return {
+            showModal: false,
         }
-    }
+    },
 }
 
 </script>
@@ -50,10 +43,10 @@ export default {
 .cont {
     display: flex;
     flex-direction: column;
-    margin-top: 200px;
+    /* margin-top: 200px; */
     margin-left: 40px;
     gap: 15px;
-
+    align-items: center;
 }
 
 .fondo2 {

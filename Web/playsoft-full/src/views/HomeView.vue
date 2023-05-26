@@ -1,8 +1,8 @@
 <template>
   <div class="home">
+    <BackGround></BackGround>
     <CabeceraPlaysoft></CabeceraPlaysoft>
     <HomePageNotLogin></HomePageNotLogin>
-    <SearchBar></SearchBar>
     <SearchCard></SearchCard>
   </div>
 </template>
@@ -10,14 +10,15 @@
 <script>
 import CabeceraPlaysoft from '@/components/CabeceraPlaysoft.vue';
 import HomePageNotLogin from '@/components/HomePageNotLogin.vue';
-import SearchBar from '@/components/SearchBar.vue';
+import BackGround from '@/components/BackGround.vue';
+
 
 export default {
   name: 'HomeView',
   components: {
     CabeceraPlaysoft,
     HomePageNotLogin,
-    SearchBar
+    BackGround
 },
   data() {
     return {
