@@ -10,18 +10,18 @@
 
     <v-spacer></v-spacer>
     <router-link to="/">
-      <span class="mr-2" :class="item">Home</span>
+      <span class="mr-2" >Home</span>
     </router-link>
     <router-link to="/login" v-if="!this.$store.state.logged">
-      <span class="mr-2" :class="item">Login</span>
+      <span class="mr-2" >Login</span>
     </router-link>
     <router-link to="/playlists" v-else-if="this.$store.state.logged">
       <div @click="cerrarSesion()">
-        <span class="mr-2" :class="item">LogOut</span>
+        <span class="mr-2" >LogOut</span>
       </div>
     </router-link>
     <div>
-      <span class="mr-2" :class="item"><img :src="$store.state.logo" alt="" width="50px" @click="displayMenu()"></span>
+      <span class="mr-2" ><img :src="$store.state.logo" alt="" width="50px" @click="displayMenu()"></span>
     </div>
     <div class="sub-menu-wrap" id="subMenu">
       <div class="sub-menu">

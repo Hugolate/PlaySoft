@@ -1,9 +1,8 @@
 <template>
   <div class="home">
-    <BackGround></BackGround>
+    <BackGround class="fondoextra"></BackGround>
     <CabeceraPlaysoft></CabeceraPlaysoft>
     <HomePageNotLogin></HomePageNotLogin>
-    <SearchCard></SearchCard>
   </div>
 </template>
 
@@ -30,3 +29,10 @@ export default {
   },
 }
 </script>
+
+<style>
+.fondoextra{
+  height: 300vh;
+  z-index: 1;
+}
+</style>

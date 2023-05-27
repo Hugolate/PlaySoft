@@ -1,7 +1,7 @@
 <template>
     <v-app id="inspire">
         <v-main class="pa-0">
-            <v-container class="fill-height secciones" fluid style="justify-content: center;">
+            <v-container class="fill-height secciones" fluid style="justify-content: center; flex-direction: column;">
                 <h1 class="text">Welcome to PlaySoft</h1>
                 <h2 class="text">The music service of the future</h2>
             </v-container>
@@ -70,20 +70,6 @@ v-content {
     z-index: 2;
     color: white;
     text-align: center;
-}
-
-.fondo1 {
-    position: absolute;
-    width: 100vw;
-    height: 350vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
-    flex-wrap: wrap;
-    overflow: hidden;
-    background: gray;
-    z-index: 1;
 }
 
 section::before {
