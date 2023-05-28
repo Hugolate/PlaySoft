@@ -67,12 +67,6 @@ public class PlaylistServiceImpl : IPLaylistService
     {
         try
         {
-            //order == ASC/DESC
-            if (string.IsNullOrEmpty(order))
-            {
-                order = "ASC";
-            }
-
             return _playlistLinesRepository.GetSongsId(playlistID, orderKey, order);
         }
         catch (Exception e)

@@ -24,7 +24,19 @@ namespace PlaySoftBeta.Repository
             .FirstOrDefault(s => s.songID == songID));
         }
 
-    
+        public List<SongOutDTO> GetAllSongs()
+        {
+            return _mapper.Map<List<SongOutDTO>>(_context.Songs);
+
+        }
+
+        public void DeleteSong(int songID)
+        {
+            if (songID != null)
+            {
+                _context.Songs.Remove(_context.Songs.FirstOrDefault(song => song.songID.Equals(songID)));
+            }
+        }
         public List<SearchSongOutDTO> GetSongListByName(string songName)
         {
             var songList = _context.Songs.Where(song => song.songName.Contains(songName)).ToList();

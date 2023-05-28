@@ -25,39 +25,47 @@ namespace PlaySoftBeta.Repository
 
         public List<SongIDSongOutDTO> GetSongsId(int playlistID, string? orderKey, string? order)
         {
-            var query = _context.PlaylistLines
-                .Where(pl => pl.playlistID == 1)
-                .Include(pl => pl.Playlist)
-                .Include(pl => pl.Song)
-                    .ThenInclude(s => s.Album)
-                .Include(pl => pl.Song)
-                    .ThenInclude(s => s.ArtistSongs)
-                        .ThenInclude(a => a.Artist);
-
-            if (orderKey == "artistName")
+            try
             {
-                orderKey = "Song.ArtistSongs.Select(x => x.Artist.artistName).FirstOrDefault()";
+                var query = _context.PlaylistLines
+              .Where(pl => pl.playlistID == playlistID)
+              .Include(pl => pl.Playlist)
+              .Include(pl => pl.Song)
+                  .ThenInclude(s => s.Album)
+              .Include(pl => pl.Song)
+                  .ThenInclude(s => s.ArtistSongs)
+                      .ThenInclude(a => a.Artist);
+
+                if (orderKey == "artistName")
+                {
+                    orderKey = "Song.ArtistSongs.Select(x => x.Artist.artistName).FirstOrDefault()";
+                }
+
+
+                if (orderKey != null && order != null)
+                {
+                    return _mapper.Map<List<SongIDSongOutDTO>>(query.OrderBy(orderKey + " " + order));
+                }
+                else if (orderKey != null)
+                {
+                    return _mapper.Map<List<SongIDSongOutDTO>>(query.OrderBy(orderKey));
+                }
+
+
+                return _mapper.Map<List<SongIDSongOutDTO>>(query);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
             }
 
-
-            if (orderKey != null && order != null)
-            {
-                return _mapper.Map<List<SongIDSongOutDTO>>(query.OrderBy(orderKey + " " + order));
-            }
-            else if (orderKey != null)
-            {
-                return _mapper.Map<List<SongIDSongOutDTO>>(query.OrderBy(orderKey));
-            }
-
-
-            return _mapper.Map<List<SongIDSongOutDTO>>(query);
         }
-
-
 
         public void Save()
         {
             _context.SaveChanges();
         }
+
     }
 }

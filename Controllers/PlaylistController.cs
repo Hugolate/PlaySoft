@@ -57,7 +57,7 @@ public class PlaylistController : ControllerBase
         }
         else
         {
-            return Ok("You don't have songs yet");
+            return BadRequest("You don't have songs yet");
         }
     }
 
