@@ -17,6 +17,16 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
+    [HttpDelete(), Authorize]
+    public async Task<ActionResult> DeleteUser(int userID)
+    {
+        if (_userService.DeleteUser(userID))
+        {
+            return Ok("Deleted");
+        }
+        return BadRequest("Playlist not found");
+    }
+
     [HttpGet("{ukid}"), Authorize]
     public ActionResult<User> Get(int ukid)
     {

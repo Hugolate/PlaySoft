@@ -17,6 +17,14 @@ namespace PlaySoftBeta.Repository
             _mapper = mapper;
         }
 
+        public void DeleteArtistSong(int songID)
+        {
+            var linesList = _context.ArtistSongs.Where(artistSong => artistSong.songID == songID).ToList();
+            if (linesList.Any() && linesList != null)
+            {
+                _context.ArtistSongs.RemoveRange(linesList);
+            }
+        }
         public void AddSongToArtist(int artistID, int songID)
         {
             var newSongArtist = new ArtistSongs

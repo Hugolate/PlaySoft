@@ -22,6 +22,13 @@ namespace PlaySoftBeta.Repository
             return _mapper.Map<List<SearchUserDTO>>(userList);
         }
 
+        public void DeleteUser(int userID)
+        {
+            _context.Users.Remove(_context.Users.SingleOrDefault(user => user.UKID.Equals(userID)));
+
+        }
+
+
         public UserDTO GetUser(int ukid)
         {
             var user = _context.Users
@@ -32,7 +39,7 @@ namespace PlaySoftBeta.Repository
 
         public void Save()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
     }
 }

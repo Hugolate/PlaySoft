@@ -13,18 +13,33 @@ public class SongServiceImpl : ISongService
     private readonly IAlbumRepository _albumRepository;
     private readonly IArtistAlbumRepository _artistAlbumRepository;
     private readonly IArtistSongRepository _artistSongRepository;
+    private readonly IPlaylistLinesRepository _playlistLinesRepository;
     private readonly ILogger<SongServiceImpl> _logger;
 
-    public SongServiceImpl(ISongRepository songRepository, IArtistSongRepository artistSongRepository, IAlbumRepository albumRepository, IArtistRepository artistRepository, IArtistAlbumRepository artistAlbumRepository, ILogger<SongServiceImpl> logger)
+    public SongServiceImpl(ISongRepository songRepository, IArtistSongRepository artistSongRepository, IAlbumRepository albumRepository, IArtistRepository artistRepository,
+                             IArtistAlbumRepository artistAlbumRepository, IPlaylistLinesRepository playlistLinesRepository, ILogger<SongServiceImpl> logger)
     {
         _songRepository = songRepository;
         _albumRepository = albumRepository;
         _artistRepository = artistRepository;
         _artistSongRepository = artistSongRepository;
         _artistAlbumRepository = artistAlbumRepository;
+        _playlistLinesRepository = playlistLinesRepository;
         _logger = logger;
     }
+    public List<SongOutDTO> GetAllSongs()
+    {
+        try
+        {
+            return _songRepository.GetAllSongs();
+        }
+        catch (System.Exception)
+        {
 
+            throw;
+        }
+
+    }
     public SongOutDTO GetSong(int songID)
     {
         try
@@ -36,6 +51,22 @@ public class SongServiceImpl : ISongService
             _logger.LogError(e, "Error get song");
             throw;
         }
+    }
+
+    public bool DeleteSong(int songID)
+    {
+        try
+        {
+            _songRepository.DeleteSong(songID);
+            _songRepository.Save();
+            return true;
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+
     }
     public int NewSong(SongInDTO songInDTO, ArtistInDTO artistInDTO, AlbumInDTO albumInDTO)
     {

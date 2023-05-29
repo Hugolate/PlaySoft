@@ -7,5 +7,6 @@ namespace PlaySoftBeta.Repository;
     {
         List<SearchUserDTO> GetUserListByUsername(string username);
         UserDTO GetUser(int ukid);
+        void DeleteUser (int playlistID);
         void Save();
     }

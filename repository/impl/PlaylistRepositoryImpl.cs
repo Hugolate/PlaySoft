@@ -36,6 +36,7 @@ namespace PlaySoftBeta.Repository
 
         public void DeletePlaylist(int playlistID)
         {
+
             _context.Playlists.Remove(_context.Playlists.SingleOrDefault(playlist => playlist.playlistID.Equals(playlistID)));
 
         }

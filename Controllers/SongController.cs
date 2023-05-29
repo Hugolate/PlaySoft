@@ -31,6 +31,25 @@ public class SongController : ControllerBase
 
     }
 
+    [HttpGet(), Authorize]
+    public async Task<ActionResult> GetAll()
+    {
+        var songs = _songService.GetAllSongs();
+
+        return Ok(songs);
+
+    }
+
+    [HttpDelete(), Authorize]
+    public async Task<ActionResult> DeleteSong(int songID)
+    {
+        if (_songService.DeleteSong(songID))
+        {
+            return Ok("Deleted");
+        }
+        return BadRequest("Playlist not found");
+    }
+
     [HttpPost("create-with-artist-album"), Authorize]
     public async Task<ActionResult> AddSong(SongArtistAlbumDTO SongArtistAlbumDTO)
     {
