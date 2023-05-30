@@ -16,9 +16,9 @@ namespace PlaySoftBeta.Repository
             _mapper = mapper;
         }
 
-        public List<AlbumOutDTO> GetAllAlbums()
+        public List<AlbumOutDTO> GetAllAlbums(int pageNumber)
         {
-            return _mapper.Map<List<AlbumOutDTO>>(_context.Album);
+            return _mapper.Map<List<AlbumOutDTO>>(_context.Album.OrderBy(a => a.albumID).Skip((pageNumber - 1) * 20).Take(20));
         }
 
         public AlbumOutDTO GetAlbumBySpotifyID(string spotifyAlbumID)
@@ -42,6 +42,10 @@ namespace PlaySoftBeta.Repository
         public void PostAlbum(AlbumInDTO albumInDTO)
         {
             _context.Album.Add(_mapper.Map<Album>(albumInDTO));
+        }
+        public int CountAlbums()
+        {
+            return _context.Album.Count();
         }
 
         public void Save()

@@ -17,13 +17,41 @@ public class ArtistServiceImpl : IArtistService
         _logger = logger;
     }
 
+    public int CountArtists()
+    {
+        return _artistRepository.CountArtists();
+    }
+
     public bool DeleteArtist(int artistID)
     {
         throw new NotImplementedException();
     }
 
-    public List<ArtistOutDTO> GetAllArtists()
+    public override bool Equals(object? obj)
     {
-        return _artistRepository.GetAllArtists();
+        return base.Equals(obj);
+    }
+
+    public List<ArtistOutDTO> GetAllArtists(int pageNumber)
+    {
+        try
+        {
+            return _artistRepository.GetAllArtists(pageNumber);
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+
+    public override string? ToString()
+    {
+        return base.ToString();
     }
 }

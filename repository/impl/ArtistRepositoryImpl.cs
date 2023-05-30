@@ -15,9 +15,9 @@ namespace PlaySoftBeta.Repository
             _mapper = mapper;
         }
 
-        public List<ArtistOutDTO> GetAllArtists()
+        public List<ArtistOutDTO> GetAllArtists(int pageNumber)
         {
-            return _mapper.Map<List<ArtistOutDTO>>(_context.Artist);
+            return _mapper.Map<List<ArtistOutDTO>>(_context.Artist.OrderBy(a => a.artistID).Skip((pageNumber - 1) * 20).Take(20));
         }
 
         public ArtistOutDTO GetArtistBySpotifyID(string spotifyArtistID)
@@ -33,6 +33,11 @@ namespace PlaySoftBeta.Repository
         public void PostArtist(ArtistInDTO artistInDTO)
         {
             _context.Artist.Add(_mapper.Map<Artist>(artistInDTO));
+        }
+
+        public int CountArtists()
+        {
+            return _context.Artist.Count();
         }
 
         public void Save()

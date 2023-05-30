@@ -19,9 +19,9 @@ public class AlbumController : ControllerBase
     }
 
     [HttpGet(), Authorize]
-    public async Task<ActionResult> GetAll()
+    public async Task<ActionResult> GetAll(int pageNumber)
     {
-        var albums = _albumService.GetAllAlbums();
+        var albums = _albumService.GetAllAlbums(pageNumber);
 
         return Ok(albums);
 
@@ -35,5 +35,14 @@ public class AlbumController : ControllerBase
             return Ok("Deleted");
         }
         return BadRequest("Playlist not found");
+    }
+
+    [HttpGet("count"), Authorize]
+    public async Task<ActionResult> Count()
+    {
+        var albumNumber = _albumService.CountAlbums();
+
+        return Ok(albumNumber);
+
     }
 }

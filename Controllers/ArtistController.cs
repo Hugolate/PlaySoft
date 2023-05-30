@@ -19,9 +19,9 @@ public class ArtistController : ControllerBase
     }
 
     [HttpGet(), Authorize]
-    public async Task<ActionResult> GetAll()
+    public async Task<ActionResult> GetAll(int pageNumber)
     {
-        var artists = _artistService.GetAllArtists();
+        var artists = _artistService.GetAllArtists(pageNumber);
 
         return Ok(artists);
 
@@ -35,5 +35,14 @@ public class ArtistController : ControllerBase
             return Ok("Deleted");
         }
         return BadRequest("Playlist not found");
+    }
+
+    [HttpGet("count"), Authorize]
+    public async Task<ActionResult> Count()
+    {
+        var artistsNumber = _artistService.CountArtists();
+
+        return Ok(artistsNumber);
+
     }
 }

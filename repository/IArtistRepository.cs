@@ -6,7 +6,8 @@ namespace PlaySoftBeta.Repository;
 public interface IArtistRepository
 {
     void PostArtist(ArtistInDTO artistInDTO);
-    List<ArtistOutDTO> GetAllArtists();
+    List<ArtistOutDTO> GetAllArtists(int pageNumber);
     ArtistOutDTO GetArtistBySpotifyID(string spotifyArtistID);
+    int CountArtists();
     void Save();
 }

@@ -19,6 +19,11 @@ public class AlbumServiceImpl : IAlbumService
         _logger = logger;
     }
 
+    public int CountAlbums()
+    {
+        return _albumRepository.CountAlbums();
+    }
+
     public bool DeleteAlbum(int artistID)
     {
         try
@@ -36,8 +41,16 @@ public class AlbumServiceImpl : IAlbumService
         }
     }
 
-    public List<AlbumOutDTO> GetAllAlbums()
+    public List<AlbumOutDTO> GetAllAlbums(int pageNumber)
     {
-        return _albumRepository.GetAllAlbums();
+        try
+        {
+            return _albumRepository.GetAllAlbums(pageNumber);
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
     }
 }

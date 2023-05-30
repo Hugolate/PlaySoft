@@ -7,6 +7,6 @@ public interface IArtistService
 {
 
     public bool DeleteArtist(int artistID);
-    public List<ArtistOutDTO> GetAllArtists();
-
+    public List<ArtistOutDTO> GetAllArtists(int pageNumber);
+    public int CountArtists();
 }

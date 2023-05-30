@@ -24,9 +24,10 @@ namespace PlaySoftBeta.Repository
             .FirstOrDefault(s => s.songID == songID));
         }
 
-        public List<SongOutDTO> GetAllSongs()
+        public List<SongOutDTO> GetAllSongs(int pageNumber)
         {
-            return _mapper.Map<List<SongOutDTO>>(_context.Songs);
+
+            return _mapper.Map<List<SongOutDTO>>(_context.Songs.OrderBy(s => s.songID).Skip((pageNumber - 1) * 3).Take(3));
 
         }
 
@@ -52,6 +53,11 @@ namespace PlaySoftBeta.Repository
         public void PostSong(SongInDTO SongOutDTO)
         {
             _context.Songs.Add(_mapper.Map<Song>(SongOutDTO));
+        }
+
+        public int CountSongs()
+        {
+            return _context.Artist.Count();
         }
         public void Save()
         {

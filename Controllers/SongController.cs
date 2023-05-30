@@ -32,9 +32,9 @@ public class SongController : ControllerBase
     }
 
     [HttpGet(), Authorize]
-    public async Task<ActionResult> GetAll()
+    public async Task<ActionResult> GetAll(int pageNumber)
     {
-        var songs = _songService.GetAllSongs();
+        var songs = _songService.GetAllSongs(pageNumber);
 
         return Ok(songs);
 
@@ -60,7 +60,14 @@ public class SongController : ControllerBase
         }
 
         return BadRequest("Not found");
+    }
 
+    [HttpGet("count"), Authorize]
+    public async Task<ActionResult> Count()
+    {
+        var songsNumber = _songService.CountSongs();
+
+        return Ok(songsNumber);
 
     }
 }

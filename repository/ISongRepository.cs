@@ -9,9 +9,10 @@ public interface ISongRepository
     void DeleteSong(int songID);
     SongOutDTO GetSong(int songID);
 
-    List<SongOutDTO> GetAllSongs();
+    List<SongOutDTO> GetAllSongs(int pageNumber);
     List<SearchSongOutDTO> GetSongListByName(string songName);
     void PostSong(SongInDTO SongOutDTO);
-    void Save();
     SongOutDTO GetSongBySpotifyID(string spotifyArtistID);
+    int CountSongs();
+    void Save();
 }

@@ -53,7 +53,9 @@ export default new Vuex.Store({
         logged: false,
         query: "",
         token: "",
-        searchTracks: []
+        searchTracks: [],
+        adminList: [],
+        count: 0,
     },
     getters: {
         getUsuario(state) {
@@ -95,6 +97,12 @@ export default new Vuex.Store({
         setToken(state, token) {
             state.token = token;
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        },
+        setAdminList(state, list) {
+            state.adminList = list
+        },
+        setCount(state, count) {
+            state.count = count
         },
     },
     actions: {
@@ -143,6 +151,7 @@ export default new Vuex.Store({
             state.Songs = []
             axios.get(url)
                 .then(function(response) {
+
                     commit('setSongs', response.data)
                 })
 
@@ -233,6 +242,32 @@ export default new Vuex.Store({
                     console.log(e);
                 });
         },
+
+        getAll({ commit }, { model, pagenumber }) {
+            axios
+                .get(`https://tfgplaysoft.azurewebsites.net/${model}?$pageNumber=${pagenumber}`)
+                .then(function(response) {
+                    commit('setAdminList', response.data)
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
+        getCount({ commit }, { model }) {
+            axios
+                .get(`https://tfgplaysoft.azurewebsites.net/${model}count`)
+                .then(function(response) {
+
+                    commit('setCount', response.data)
+
+                })
+                .catch(e => {
+
+                    console.log(e);
+                });
+        },
+
         Search({ commit, state }) {
 
             axios

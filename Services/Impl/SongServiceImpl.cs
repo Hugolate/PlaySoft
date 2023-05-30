@@ -27,11 +27,11 @@ public class SongServiceImpl : ISongService
         _playlistLinesRepository = playlistLinesRepository;
         _logger = logger;
     }
-    public List<SongOutDTO> GetAllSongs()
+    public List<SongOutDTO> GetAllSongs(int pageNumber)
     {
         try
         {
-            return _songRepository.GetAllSongs();
+            return _songRepository.GetAllSongs(pageNumber);
         }
         catch (System.Exception)
         {
@@ -118,5 +118,10 @@ public class SongServiceImpl : ISongService
         {
             throw;
         }
+    }
+
+    public int CountSongs()
+    {
+        return _songRepository.CountSongs();
     }
 }

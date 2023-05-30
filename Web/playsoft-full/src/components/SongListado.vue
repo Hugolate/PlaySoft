@@ -93,7 +93,7 @@ export default {
         BackGround
     },
     mounted() {
-
+        console.log("AAA")
         this.$store.dispatch('getSongs', { undefined, orderKey: undefined });
     },
     methods: {
@@ -113,11 +113,11 @@ export default {
             }
 
             if (svgElement.classList.contains("arrow")) {
-                console.log("1")
+
                 svgElement.classList.toggle("arrow")
                 svgElement.classList.toggle("DESC")
             } else if (svgElement.classList.contains("DESC")) {
-                console.log("2")
+
                 svgElement.classList.toggle("DESC")
                 svgElement.classList.toggle("ASC")
             } else {
