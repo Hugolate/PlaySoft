@@ -17,8 +17,10 @@ export default {
     data() {
         return {
             query: "",
+            
         }
     },
+    
     methods: {
         Search() {
             this.$store.commit('updateQuery', this.query)

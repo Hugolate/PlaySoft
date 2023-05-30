@@ -2,8 +2,8 @@
   <div class="home">
     <BackGround></BackGround>
     <CabeceraPlaysoft></CabeceraPlaysoft>
-    <SearchBar class="hola"></SearchBar>
-    <CardsPlaylist></CardsPlaylist>
+    <SearchBar></SearchBar>
+    <CardsPlaylist :PlayListsList="PlayListsList"></CardsPlaylist>
 
   </div>
 </template>
@@ -22,16 +22,25 @@ export default {
   },
   data() {
     return {
+      PlayListsList: [],
       languages: [
         { title: "español", value: "es" },
         { title: "inglés", value: "en" },
       ],
     };
   },
+  mounted: function () {
+    let vue = this;
+    this.$store.dispatch('getPlaylistsAction')
+    setTimeout(() => {
+      var PlayLists = JSON.parse(this.$store.state.PlayListsJSON);
+      vue.PlayListsList = PlayLists
+    }, 100);
+
+
+  },
 }
 </script>
 
-<style>
-.hola {}
-</style>
+<style></style>
 

@@ -7,7 +7,6 @@
                 <p @click="redirigir(playlist.playListName)" id="animated" class="playlists wavy"
                     v-for="playlist in PlayListsList" :key="playlist.playlistID">{{ playlist.playListName }}</p>
             </v-container>
-
         </v-main>
     </v-app>
 </template>
@@ -17,18 +16,14 @@ import BackGround from '../components/BackGround.vue'
 import CreatePlaylistForm from './CreatePlaylistForm.vue';
 export default {
     name: 'PlayList',
-    props: ["productItem"],
-    data() {
+    props: ["productItem","PlayListsList"],
+    data: function () {
         return {
-            PlayListsList: []
+            pito: 'holaasdas'
         }
     },
     components: { CreatePlaylistForm, BackGround },
-    mounted: function () {
-        let vue = this;
-        this.$store.dispatch('getPlaylistsAction')
-        var PlayLists = JSON.parse(this.$store.state.PlayListsJSON);
-        vue.PlayListsList = PlayLists
+    mounted: function(){
     },
     methods: {
         redirigir(nombrepl) {

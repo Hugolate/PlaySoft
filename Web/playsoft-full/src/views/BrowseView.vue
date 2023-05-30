@@ -3,7 +3,7 @@
         <BackGround></BackGround>
         <CabeceraPlaysoft></CabeceraPlaysoft>
         <SearchBar></SearchBar>
-        <SearchCard></SearchCard>
+        <SearchCard :PlayListsList="PlayListsList"></SearchCard>
     </div>
 </template>
   
@@ -23,15 +23,23 @@ export default {
     },
     data() {
         return {
+            PlayListsList: [],
             languages: [
                 { title: "español", value: "es" },
                 { title: "inglés", value: "en" },
             ],
         };
+    }, 
+    mounted: function () {
+        let vue = this;
+        this.$store.dispatch('getPlaylistsAction')
+        var PlayLists = JSON.parse(this.$store.state.PlayListsJSON);
+        vue.PlayListsList = PlayLists
+        
+        
     },
 }
 </script>
 
-<style>
-</style>
+<style></style>
   

@@ -102,7 +102,7 @@ export default new Vuex.Store({
             console.log(state.usuario)
             let IdUser = state.usuario
             axios.get(`https://tfgplaysoft.azurewebsites.net/User/${IdUser}`)
-                .then(function(response) {
+                .then(function (response) {
                     state.PlayListsJSON = JSON.stringify(response.data.playlists);
                     commit('setPlaylists', state.PlayListsJSON)
                 })
@@ -115,10 +115,10 @@ export default new Vuex.Store({
 
         doLogin({ commit, state }) {
             axios.post("https://tfgplaysoft.azurewebsites.net/Auth/login", {
-                    email: state.loginEmail,
-                    password: state.loginPassword,
-                })
-                .then(function(response) {
+                email: state.loginEmail,
+                password: state.loginPassword,
+            })
+                .then(function (response) {
                     commit("setUser", response.data.ukid)
                     commit("setToken", response.data.jwt);
                     commit("setLogged")
@@ -138,14 +138,14 @@ export default new Vuex.Store({
             state.Songs = []
             state.SongsLines = []
             axios.get(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}?orderKey=songName&order=asc`)
-                .then(function(response) {
+                .then(function (response) {
                     commit('setSongs', JSON.stringify(response.data))
                     var songs = []
                     songs = JSON.parse(state.Songs);
                     for (let index = 0; index < songs.length; index++) {
                         var SongsLines = []
                         axios.get(`https://playsoft-api.azurewebsites.net/Song/${songs[index].song.songID}`)
-                            .then(function(respuesta) {
+                            .then(function (respuesta) {
                                 SongsLines = JSON.stringify(respuesta.data)
                                 commit('setSongsLines', SongsLines)
                             })
@@ -158,7 +158,7 @@ export default new Vuex.Store({
 
         checkSong({ commit }, name) {
             axios.get(`https://tfgplaysoft.azurewebsites.net/Search/${name}`)
-                .then(function(respuesta) {
+                .then(function (respuesta) {
                     if (respuesta.data.songs.length > 0) {
                         let song = respuesta.data.songs[0]
                         console.log(song)
@@ -175,13 +175,34 @@ export default new Vuex.Store({
                     console.log(e);
                 });
         },
-        postSong({ state }) {
-            axios.post('https://tfgplaysoft.azurewebsites.net/Song', {
-                    playlistID: state.PlayListsID,
-                    songID: state.addSong.songID,
+        postSong({ dispatch }, track) {
+
+            alert('id artist: ' + track.name)
+            axios.post('https://tfgplaysoft.azurewebsites.net/Song/create-with-artist-album',
+                {
+                    songInDTO: {
+                        songID: 0,
+                        spotifySongID: track.id,
+                        songName: track.name,
+                        durationMs: track.durationMs,
+                        albumID: 0,
+                        uri: track.uri,
+                    },
+                    albumInDTO: {
+                        spotifyAlbumID: track.album.id,
+                        albumName: track.album.name,
+                        releaseDate: track.album.releaseDate,
+                        image: track.album.images[0].url,
+                        totalTracks: track.album.totalTracks,
+                    },
+                    artistInDTO: {
+                        spotifyArtistID: track.artists[0].id,
+                        artistName: track.artists[0].name
+                    }
                 })
-                .then(function(response) {
-                    response.data
+                .then(function (response) {
+                    console(response.data)
+                    dispatch('addSongLine', track.name)
                     location.reload();
                 })
                 .catch(e => {
@@ -190,20 +211,27 @@ export default new Vuex.Store({
                     console.log(e);
                 });
         },
+        addSongLine({ commit }, songname) {
+            commit;
+            axios.post("https://tfgplaysoft.azurewebsites.net/Playlist/valuepid/songs", {
+                playlistID: 0,
+                songID: 0
+            })
+        },
         addPlaylist({ commit, dispatch, state }) {
             if (state.playListName != "") {
                 var user = state.usuario.toString()
                 axios.post("https://tfgplaysoft.azurewebsites.net/Playlist", {
-                        playListName: state.playListName,
-                        userUKID: user,
-                        playlistDescription: state.playlistDescription,
-                        privacity: state.privacity,
+                    playListName: state.playListName,
+                    userUKID: user,
+                    playlistDescription: state.playlistDescription,
+                    privacity: state.privacity,
 
-                    })
-                    .then(function(response) {
+                })
+                    .then(function (response) {
                         response.data
                         dispatch('getPlaylistsAction')
-                        setTimeout(function() {
+                        setTimeout(function () {
                             commit('clearForm');
                             location.reload();
                         }, 1000);
@@ -226,7 +254,7 @@ export default new Vuex.Store({
                     username: state.registerUsername,
                     password: state.registerPassword,
                 })
-                .then(function(response) {
+                .then(function (response) {
                     console.log(response);
                     location.reload();
 
@@ -238,16 +266,16 @@ export default new Vuex.Store({
                 });
         },
         Search({ commit, state }) {
-            
+
             axios
                 .get(`https://tfgplaysoft.azurewebsites.net/Search/${state.query}`)
-                .then(function(response) {
+                .then(function (response) {
                     console.log(response.data.tracks.items);
                     commit("setTracks", response.data.tracks.items)
 
                 })
                 .catch(e => {
-                    
+
                     console.log(e);
                 });
         }

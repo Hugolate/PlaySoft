@@ -1,7 +1,6 @@
 <template>
     <div class="cont">
-
-        <v-card class="mx-auto" max-width="344" style="background-color: rgb(34, 31, 34);"
+        <v-card class="mx-auto"  max-width="400" min-width="400" border-radius="15" style="background-color: rgb(34, 31, 34);"
             v-for="(track) in this.$store.state.searchTracks" :key="track.id" outlined>
             <v-list-item three-line>
                 <v-list-item-content style=" margin-right: 20px; align-self:normal">
@@ -18,9 +17,9 @@
             </v-list-item>
 
             <div class="save-btn">
-                <button @click="showModal = true">Save</button>
+                <button @click="showModal = true">Add to...</button>
             </div>
-            <ModalPlaylists v-show="showModal" @close-modal="showModal = false" />
+            <ModalPlaylists v-show="showModal" @close-modal="showModal = false" :PlayListsList="PlayListsList" :track="track"/>
         </v-card>
     </div>
 </template>
@@ -30,7 +29,8 @@ import ModalPlaylists from '../components/ModalPlaylists.vue';
 
 export default {
     components: { ModalPlaylists },
-    data() {
+    props:["PlayListsList"], 
+    data: function() {
         return {
             showModal: false,
         }
@@ -40,6 +40,15 @@ export default {
 </script>
 
 <style>
+.save-btn{
+    background-color: rgba(128, 0, 128, 0.461);
+    border-radius: 15px;
+    padding: 5px;
+    cursor: pointer;
+}
+.save-btn:hover{
+    background-color: rgb(128, 0, 128);
+}
 .cont {
     display: flex;
     flex-direction: column;
@@ -112,3 +121,4 @@ export default {
     display: block;
 }
 </style>
+
