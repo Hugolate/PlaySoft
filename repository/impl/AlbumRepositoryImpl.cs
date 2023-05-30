@@ -18,7 +18,7 @@ namespace PlaySoftBeta.Repository
 
         public List<AlbumOutDTO> GetAllAlbums(int pageNumber)
         {
-            return _mapper.Map<List<AlbumOutDTO>>(_context.Album.OrderBy(a => a.albumID).Skip((pageNumber - 1) * 20).Take(20));
+            return _mapper.Map<List<AlbumOutDTO>>(_context.Album.OrderBy(a => a.albumID).Skip((pageNumber - 1) * 10).Take(10));
         }
 
         public AlbumOutDTO GetAlbumBySpotifyID(string spotifyAlbumID)

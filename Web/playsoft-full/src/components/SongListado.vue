@@ -6,7 +6,7 @@
                 <p class="pl-name">{{ this.$store.state.Songs[0].playlist.playListName }}</p>
                 <div style="display: flex;">
                     <p class="description">
-                        {{ this.$store.state.Songs[0].playlist.playlistDescription }} 
+                        {{ this.$store.state.Songs[0].playlist.playlistDescription }}
                     </p>
 
                     <!-- <svg height="72" viewBox="0 0 48 48" width="72" xmlns="http://www.w3.org/2000/svg" fill="gray">
@@ -161,6 +161,7 @@ export default {
 </script>
 
 <style>
+
 .ASC {
     transform: rotate(180deg);
 }
@@ -211,7 +212,8 @@ export default {
     text-shadow: 1px 1px 5px #e69cf8;
 
 }
-.description{
+
+.description {
     font-size: medium;
     color: white;
     text-shadow: 1px 1px 5px #e69cf8;
@@ -220,6 +222,7 @@ export default {
     overflow-wrap: break-word;
     text-align: center;
 }
+
 .songs {
     border-top: 1px solid rgb(119, 111, 111);
     align-items: center;
@@ -227,14 +230,18 @@ export default {
     z-index: 1;
     padding: 0px;
     color: white;
-
     letter-spacing: .2rem;
-    cursor: pointer;
-
-
 }
 
 
+div {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 @keyframes wavy {
     0% {
@@ -336,7 +343,7 @@ section span {
 }
 
 #cancion:hover {
-    cursor: pointer;
+
     height: 100px;
     display: inline-flex;
     align-items: center;
@@ -363,5 +370,4 @@ section span:hover {
         width: calc(20vw- 2px);
         height: calc(20vw - 2px);
     }
-}
-</style>
+}</style>

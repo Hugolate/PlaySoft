@@ -55,7 +55,7 @@ export default new Vuex.Store({
         token: "",
         searchTracks: [],
         adminList: [],
-        count: 0,
+        totalPages: 0,
     },
     getters: {
         getUsuario(state) {
@@ -102,7 +102,7 @@ export default new Vuex.Store({
             state.adminList = list
         },
         setCount(state, count) {
-            state.count = count
+            state.totalPages = count / 10
         },
     },
     actions: {
@@ -243,11 +243,13 @@ export default new Vuex.Store({
                 });
         },
 
-        getAll({ commit }, { model, pagenumber }) {
+        getAll({ commit }, payload) {
+            const model = payload.model;
+            const pageNumber = payload.pageNumber;
             axios
-                .get(`https://tfgplaysoft.azurewebsites.net/${model}?$pageNumber=${pagenumber}`)
+                .get(`https://tfgplaysoft.azurewebsites.net/${model}?pageNumber=${pageNumber}`)
                 .then(function(response) {
-                    commit('setAdminList', response.data)
+                    commit('setAdminList', response.data);
                 })
                 .catch(e => {
                     console.log(e);
@@ -256,10 +258,10 @@ export default new Vuex.Store({
 
         getCount({ commit }, { model }) {
             axios
-                .get(`https://tfgplaysoft.azurewebsites.net/${model}count`)
+                .get(`https://tfgplaysoft.azurewebsites.net/${model}/count`)
                 .then(function(response) {
 
-                    commit('setCount', response.data)
+                    commit('setCount', response.data);
 
                 })
                 .catch(e => {

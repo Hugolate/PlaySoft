@@ -27,7 +27,7 @@ namespace PlaySoftBeta.Repository
         public List<SongOutDTO> GetAllSongs(int pageNumber)
         {
 
-            return _mapper.Map<List<SongOutDTO>>(_context.Songs.OrderBy(s => s.songID).Skip((pageNumber - 1) * 3).Take(3));
+            return _mapper.Map<List<SongOutDTO>>(_context.Songs.OrderBy(s => s.songID).Skip((pageNumber - 1) * 10).Take(10));
 
         }
 
