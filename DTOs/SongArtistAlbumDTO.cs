@@ -5,6 +5,6 @@ namespace PlaySoftBeta.DTOs
     {
         public SongInDTO songInDTO { get; set; }
         public AlbumInDTO albumInDTO { get; set; }
-        public ArtistInDTO artistInDTO { get; set; }
+        public List<ArtistInDTO> artistInDTO { get; set; }
     }
 }

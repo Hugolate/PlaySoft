@@ -8,6 +8,6 @@ public interface ISongService
     public SongOutDTO GetSong(int songID);
     public List<SongOutDTO> GetAllSongs(int pageNumber);
     public bool DeleteSong(int songID);
-    public int NewSong(SongInDTO SongOutDTO, ArtistInDTO ArtistInDTO, AlbumInDTO AlbumInDTO);
+    public int NewSong(SongInDTO SongOutDTO, List<ArtistInDTO> ArtistInDTO, AlbumInDTO AlbumInDTO);
     public int CountSongs();
 }

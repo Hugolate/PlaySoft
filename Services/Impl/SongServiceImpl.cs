@@ -68,14 +68,16 @@ public class SongServiceImpl : ISongService
         }
 
     }
-    public int NewSong(SongInDTO songInDTO, ArtistInDTO artistInDTO, AlbumInDTO albumInDTO)
+    public int NewSong(SongInDTO songInDTO, List<ArtistInDTO> artistInDTO, AlbumInDTO albumInDTO)
     {
 
         try
         {
             var album = _albumRepository.GetAlbumBySpotifyID(albumInDTO.spotifyAlbumID);
-            var artist = _artistRepository.GetArtistBySpotifyID(artistInDTO.spotifyArtistID);
+            var artists = new List<ArtistOutDTO>();
             var song = _songRepository.GetSongBySpotifyID(songInDTO.spotifySongID);
+
+
 
             if (album == null)
             {
@@ -84,12 +86,7 @@ public class SongServiceImpl : ISongService
                 album = _albumRepository.GetAlbumBySpotifyID(albumInDTO.spotifyAlbumID);
             }
 
-            if (artist == null)
-            {
-                _artistRepository.PostArtist(artistInDTO);
-                _artistRepository.Save();
-                artist = _artistRepository.GetArtistBySpotifyID(artistInDTO.spotifyArtistID);
-            }
+
 
             if (song == null)
             {
@@ -99,17 +96,30 @@ public class SongServiceImpl : ISongService
                 song = _songRepository.GetSongBySpotifyID(songInDTO.spotifySongID);
             }
 
-
-            if (!_artistAlbumRepository.CheckIfExist(artist.artistID, album.albumID))
+            foreach (var artist in artistInDTO)
             {
-                _artistAlbumRepository.AddAlbumToArtist(artist.artistID, album.albumID);
-                _artistAlbumRepository.Save();
+
+                if (_artistRepository.GetArtistBySpotifyID(artist.spotifyArtistID) == null)
+                {
+                    _artistRepository.PostArtist(artist);
+                    _artistRepository.Save();
+                    artists.Add(_artistRepository.GetArtistBySpotifyID(artist.spotifyArtistID));
+                }
             }
-
-            if (!_artistSongRepository.CheckIfExist(artist.artistID, song.songID))
+            foreach (var artist in artists)
             {
-                _artistSongRepository.AddSongToArtist(artist.artistID, song.songID);
-                _artistSongRepository.Save();
+
+                if (!_artistAlbumRepository.CheckIfExist(artist.artistID, album.albumID))
+                {
+                    _artistAlbumRepository.AddAlbumToArtist(artist.artistID, album.albumID);
+                    _artistAlbumRepository.Save();
+                }
+
+                if (!_artistSongRepository.CheckIfExist(artist.artistID, song.songID))
+                {
+                    _artistSongRepository.AddSongToArtist(artist.artistID, song.songID);
+                    _artistSongRepository.Save();
+                }
             }
 
             return song.songID;
