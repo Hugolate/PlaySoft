@@ -15,6 +15,20 @@ namespace PlaySoftBeta.Repository
             _mapper = mapper;
         }
 
+        public void DeleteArtist(int artistID)
+        {
+            try
+            {
+                _context.Artist.Remove(_context.Artist.FirstOrDefault(artist => artist.artistID.Equals(artistID)));
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+            
+        }
+
         public List<ArtistOutDTO> GetAllArtists()
         {
             return _mapper.Map<List<ArtistOutDTO>>(_context.Artist);

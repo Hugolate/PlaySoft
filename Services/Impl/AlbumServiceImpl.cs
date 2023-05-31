@@ -19,13 +19,11 @@ public class AlbumServiceImpl : IAlbumService
         _logger = logger;
     }
 
-    public bool DeleteAlbum(int artistID)
+    public bool DeleteAlbum(int albumID)
     {
         try
         {
-            _artistAlbumRepository.DeleteArtistAlbum(artistID);
-            _artistAlbumRepository.Save();
-            _albumRepository.DeleteAlbum(artistID);
+            _albumRepository.DeleteAlbum(albumID);
             _artistAlbumRepository.Save();
             return true;
         }

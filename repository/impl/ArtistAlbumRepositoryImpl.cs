@@ -40,15 +40,37 @@ namespace PlaySoftBeta.Repository
             }
         }
 
-        public void DeleteArtistAlbum(int albumID)
+        public bool getLineByAlbumID(int albumID)
         {
-            var linesList = _context.ArtistAlbums.Where(artistAlbum => artistAlbum.albumID == albumID).ToList();
-            if (linesList.Any() && linesList != null)
+            try
             {
-                _context.ArtistAlbums.RemoveRange(linesList);
+                if (_context.ArtistAlbums.FirstOrDefault(a => a.albumID == albumID) != null)
+                {
+                    return false;
+                }
+                return true;
             }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+
         }
 
+        public List<AlbumOutDTO> GetAlbumByArtistID(int artistId)
+        {
+            try
+            {
+                return _mapper.Map<List<AlbumOutDTO>>(_context.Album.Include(a => a.ArtistAlbums.Where(aa => aa.artistID == artistId)).ToList());
+
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
         public void Save()
         {
             _context.SaveChanges();

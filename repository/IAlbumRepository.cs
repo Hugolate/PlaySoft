@@ -9,5 +9,6 @@ public interface IAlbumRepository
     void PostAlbum(AlbumInDTO albumInDTO);
     List<AlbumOutDTO> GetAllAlbums();
     AlbumOutDTO GetAlbumBySpotifyID(string spotifyAlbumID);
+    
     void Save();
 }
