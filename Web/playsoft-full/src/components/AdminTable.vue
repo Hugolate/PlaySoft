@@ -6,24 +6,24 @@
             <button id="Album" @click="getAll($event)">Album</button>
         </div>
         <div>
-            <div class="parent" v-if="$store.state.adminList[0].songID">
+            <div class="parent" v-if="adminList[0].songID">
                 <div>SongID</div>
                 <div>Song Name</div>
                 <div>Song Uri</div>
                 <div>Duration Ms</div>
             </div>
-            <div class="parent" v-else-if="$store.state.adminList[0].albumID">
+            <div class="parent" v-else-if="adminList[0].albumID">
                 <div>AlbumId</div>
                 <div>Album Name</div>
                 <div>Release Date</div>
             </div>
-            <div class="parent" v-else-if="$store.state.adminList[0].artistID">
+            <div class="parent" v-else-if="adminList[0].artistID">
                 <div>ArtistID</div>
                 <div>Artist Name</div>
             </div>
 
-            <div v-for="(item, index) in this.$store.state.adminList" :key="index">
-                <div class="parent" v-if="item.songID">
+            <div v-for="(item, index) in adminList" :key="index">
+                <div v-on:click.right.prevent="deleteItem(item.songID)" class="parent" v-if="item.songID">
                     <div>{{ item.songID }}</div>
                     <div>{{ item.songName }}</div>
                     <div>{{ item.uri }}</div>
@@ -60,24 +60,32 @@ export default {
             page: 1
         }
     },
+    computed: {
+        adminList() {
+            return this.$store.state.adminList;
+        },
+    },
     mounted() {
         this.model = "song"
         this.$store.dispatch('getAll', { model: 'song', pageNumber: 1 });
     },
     methods: {
         getAll(event) {
+            this.$store.dispatch('getCount', { model: this.model });
             if (this.page > this.$store.state.totalPages) {
                 this.page = this.$store.state.totalPages
             }
             if (event != null) {
-
                 this.page = 1;
                 this.model = event.target.id;
-
-                this.$store.dispatch('getCount', { model: this.model });
             }
-            console.log(this.model)
+            console.log(this.model, "AAA")
             this.$store.dispatch('getAll', { model: this.model, pageNumber: this.page });
+        },
+        deleteItem(id) {
+
+            this.$store.dispatch('deleteRow', { model: this.model, id: id })
+            this.getAll(null)
         },
         previousPage() {
             console.log("previous")

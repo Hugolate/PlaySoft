@@ -157,6 +157,7 @@ export default new Vuex.Store({
 
         },
 
+
         getPlaylistID({ commit }, id) {
             commit('setClickPlID', id)
         },
@@ -239,6 +240,26 @@ export default new Vuex.Store({
                 .catch(e => {
                     this.alertMessage = "Email already in use";
                     this.registerError = true;
+                    console.log(e);
+                });
+        },
+
+        deleteRow(context, payload) {
+            const model = payload.model;
+            const id = payload.id;
+
+            let modelID = "";
+            if (model == "song") {
+                modelID = "songID";
+            } else if (model == "artist") {
+                modelID = "artistID";
+            } else if (model == "album") {
+                modelID == "albumID"
+            }
+            console.log(model, id, modelID)
+            axios
+                .delete(`https://tfgplaysoft.azurewebsites.net/${model}?${modelID}=${id}`)
+                .catch(e => {
                     console.log(e);
                 });
         },
