@@ -151,7 +151,7 @@ export default new Vuex.Store({
             state.Songs = []
             axios.get(url)
                 .then(function(response) {
-
+                    console.log(response.data, "AA")
                     commit('setSongs', response.data)
                 })
 

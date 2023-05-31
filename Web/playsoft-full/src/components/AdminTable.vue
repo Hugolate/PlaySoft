@@ -23,18 +23,18 @@
             </div>
 
             <div v-for="(item, index) in adminList" :key="index">
-                <div v-on:click.right.prevent="deleteItem(item.songID)" class="parent" v-if="item.songID">
+                <div v-on:click.right.prevent="deleteItem(item.songID)" class="parent hv" v-if="item.songID">
                     <div>{{ item.songID }}</div>
                     <div>{{ item.songName }}</div>
                     <div>{{ item.uri }}</div>
                     <div>{{ item.durationMs }}ms</div>
                 </div>
-                <div class="parent" v-else-if="item.albumID">
+                <div class="parent hv" v-else-if="item.albumID">
                     <div>{{ item.albumID }}</div>
                     <div>{{ item.albumName }}</div>
                     <div>{{ item.releaseDate }}</div>
                 </div>
-                <div class="parent" v-else-if="item.artistID">
+                <div class="parent hv" v-else-if="item.artistID">
                     <div>{{ item.artistID }}</div>
                     <div>{{ item.artistName }}</div>
 
@@ -124,12 +124,11 @@ button {
     display: grid;
     grid-template-columns: repeat(4, 0.5fr);
     grid-template-rows: (20, 150px);
-
+    transition: background-color 1.2s ease-in-out;
 }
 
 .parent div {
     border: black 1px solid;
-
 
 }
 
@@ -141,6 +140,9 @@ button {
     gap: 12px;
 }
 
+.hv:hover {
+    background-color: rgb(253, 65, 65);
+}
 .btn-cont {
     display: flex;
     gap: 20px;
