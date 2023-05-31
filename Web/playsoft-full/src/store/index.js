@@ -55,7 +55,7 @@ export default new Vuex.Store({
         token: "",
         searchTracks: [],
         adminList: [],
-        count: 0,
+        totalPages: 0,
     },
     getters: {
         getUsuario(state) {
@@ -102,7 +102,7 @@ export default new Vuex.Store({
             state.adminList = list
         },
         setCount(state, count) {
-            state.count = count
+            state.totalPages = count / 10
         },
     },
     actions: {
@@ -156,6 +156,7 @@ export default new Vuex.Store({
                 })
 
         },
+
 
         getPlaylistID({ commit }, id) {
             commit('setClickPlID', id)
@@ -243,11 +244,33 @@ export default new Vuex.Store({
                 });
         },
 
-        getAll({ commit }, { model, pagenumber }) {
+        deleteRow(context, payload) {
+            const model = payload.model;
+            const id = payload.id;
+
+            let modelID = "";
+            if (model == "song") {
+                modelID = "songID";
+            } else if (model == "artist") {
+                modelID = "artistID";
+            } else if (model == "album") {
+                modelID == "albumID"
+            }
+            console.log(model, id, modelID)
             axios
-                .get(`https://tfgplaysoft.azurewebsites.net/${model}?$pageNumber=${pagenumber}`)
+                .delete(`https://tfgplaysoft.azurewebsites.net/${model}?${modelID}=${id}`)
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
+        getAll({ commit }, payload) {
+            const model = payload.model;
+            const pageNumber = payload.pageNumber;
+            axios
+                .get(`https://tfgplaysoft.azurewebsites.net/${model}?pageNumber=${pageNumber}`)
                 .then(function(response) {
-                    commit('setAdminList', response.data)
+                    commit('setAdminList', response.data);
                 })
                 .catch(e => {
                     console.log(e);
@@ -256,10 +279,10 @@ export default new Vuex.Store({
 
         getCount({ commit }, { model }) {
             axios
-                .get(`https://tfgplaysoft.azurewebsites.net/${model}count`)
+                .get(`https://tfgplaysoft.azurewebsites.net/${model}/count`)
                 .then(function(response) {
 
-                    commit('setCount', response.data)
+                    commit('setCount', response.data);
 
                 })
                 .catch(e => {
