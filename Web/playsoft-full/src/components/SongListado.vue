@@ -2,9 +2,9 @@
     <v-app id="inspire">
         <v-main class="pa-0">
             <BackGround></BackGround>
-            <div v-if="songList === undefined || !(songList.length == 0)">
 
-
+            <div v-if="isloading">a</div>
+            <div v-else-if="songList !== undefined || songList.length > 0">
                 <div class="main-opt">
                     <p class="pl-name">{{ songList[0].playlist.playListName }}</p>
                     <div style="display: flex;">
@@ -85,6 +85,7 @@
             <div v-else>
                 <h1 class="no-song">You don't have songs in this playlist.</h1>
             </div>
+
         </v-main>
     </v-app>
 </template>
@@ -98,6 +99,7 @@ export default {
     name: 'SongsPage',
     data() {
         return {
+            isloading: true,
         };
     },
     computed: {
@@ -108,11 +110,19 @@ export default {
     components: {
         BackGround
     },
-    mounted() {
-        console.log("AAA")
-        this.$store.dispatch('getSongs', { undefined, orderKey: undefined });
-        console.log(this.$store.state.Songs)
+    async mounted() {
+        try {
+            this.$store.dispatch('getSongs', { undefined, orderKey: undefined });
+        } catch (error) {
+            console.error('Error fetching song list:', error);
+        } finally {
+            this.isloading = false;
+            console.log(this.isloading)
+        }
     },
+
+
+
     methods: {
         toggleArrow(event) {
 
@@ -190,7 +200,7 @@ export default {
 .grid-header {
 
     font-size: larger;
-    
+
 }
 
 .no-song {
