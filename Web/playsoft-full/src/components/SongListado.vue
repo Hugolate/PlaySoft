@@ -198,7 +198,8 @@ export default {
 }
 
 .grid-header {
-
+    color: white;
+    text-shadow: 1px 1px 5px #e69cf8;
     font-size: larger;
 
 }
