@@ -8,6 +8,7 @@ public interface IArtistRepository
     void PostArtist(ArtistInDTO artistInDTO);
     List<ArtistOutDTO> GetAllArtists(int pageNumber);
     ArtistOutDTO GetArtistBySpotifyID(string spotifyArtistID);
+    void DeleteArtist(int artistID);
     int CountArtists();
     void Save();
 }

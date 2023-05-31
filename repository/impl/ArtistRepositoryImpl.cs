@@ -19,6 +19,19 @@ namespace PlaySoftBeta.Repository
         {
             return _mapper.Map<List<ArtistOutDTO>>(_context.Artist.OrderBy(a => a.artistID).Skip((pageNumber - 1) * 20).Take(20));
         }
+        public void DeleteArtist(int artistID)
+        {
+            try
+            {
+                _context.Artist.Remove(_context.Artist.FirstOrDefault(artist => artist.artistID.Equals(artistID)));
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+
+        }
 
         public ArtistOutDTO GetArtistBySpotifyID(string spotifyArtistID)
         {
