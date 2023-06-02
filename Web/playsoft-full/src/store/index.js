@@ -149,20 +149,10 @@ export default new Vuex.Store({
                 url += `?orderKey=${orderKey}&order=${order}`
             }
             state.Songs = []
-            state.SongsLines = []
-            axios.get(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}?orderKey=songName&order=asc`)
-                .then(function (response) {
-                    commit('setSongs', JSON.stringify(response.data))
-                    var songs = []
-                    songs = JSON.parse(state.Songs);
-                    for (let index = 0; index < songs.length; index++) {
-                        var SongsLines = []
-                        axios.get(`https://playsoft-api.azurewebsites.net/Song/${songs[index].song.songID}`)
-                            .then(function (respuesta) {
-                                SongsLines = JSON.stringify(respuesta.data)
-                                commit('setSongsLines', SongsLines)
-                            })
-                    }
+            axios.get(url)
+                .then(function(response) {
+                    console.log(response.data, "AA")
+                    commit('setSongs', response.data)
                 })
 
         },
