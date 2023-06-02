@@ -15,7 +15,7 @@
     <router-link to="/login" v-if="!this.$store.state.logged">
       <span class="mr-2" >Login</span>
     </router-link>
-    <router-link to="/playlists" v-else-if="this.$store.state.logged">
+    <router-link to="/" v-else-if="this.$store.state.logged">
       <div @click="cerrarSesion()">
         <span class="mr-2" >LogOut</span>
       </div>
@@ -69,7 +69,7 @@ export default {
   methods: {
     cerrarSesion() {
       localStorage.clear()
-      this.$router.push({ path: '/' })
+      this.$router.push({ path: '/' }).catch(()=>{});
     },
     displayMenu() {
       let subMenu = document.getElementById("subMenu")

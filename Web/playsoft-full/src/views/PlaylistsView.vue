@@ -35,7 +35,7 @@ export default {
     setTimeout(() => {
       var PlayLists = JSON.parse(this.$store.state.PlayListsJSON);
       vue.PlayListsList = PlayLists
-    }, 100);
+    }, 500);
 
 
   },

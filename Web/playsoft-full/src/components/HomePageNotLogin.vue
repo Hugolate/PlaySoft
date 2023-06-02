@@ -7,15 +7,15 @@
             </v-container>
             <v-divider :thickness="20" class="border-opacity-100" color="white" style="position: sticky;"></v-divider>
             <v-container class="fill-height" fluid style="justify-content: center;">
-                <h1 class="text" style="margin-top: 9rem;" v-motion-slide-visible-once-top :enter="{
+                <h1 class="text" style="margin-top: 9rem;" :enter="{
                     scale: 2,
                 }">Hear all the music that you want</h1>
                 <v-container class="fill-height" fluid style="justify-content: space-around;">
-                    <h2 class="text" v-motion-slide-visible-once-left :enter="{
+                    <h2 class="text" :enter="{
                         scale: 2,
                     }">A new proyect from <em>NullSoft</em></h2>
                     <!-- <h2 class="text" v-motion-slide-visible-once-right>By Hugo Lahoz and Ricardo Ros</h2> -->
-                    <img :src="$store.state.logo" width="300" style="z-index: 1;" v-motion-slide-visible-once-right>
+                    <img :src="$store.state.logo" width="300" style="z-index: 1;">
                 </v-container>
             </v-container>
             <v-container class="fill-height" fluid style="justify-content: space-around;">
@@ -42,13 +42,16 @@ export default {
         };
     },
     mounted: function () {
+
         if (this.$store.state.logged) {
-            this.$router.push({ path: '/playlists' })
+            this.$router.push({ path: '/playlists' }).catch(() => { });
         } else if (!this.$store.state.logged) {
-            this.$router.push({ path: '/' })
+            this.$router.push({ path: '/' }).catch(() => { });
         }
+
+
     },
-    components: {  }
+    components: {}
 }
 </script>
 

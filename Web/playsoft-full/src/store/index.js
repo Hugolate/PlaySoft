@@ -130,7 +130,7 @@ export default new Vuex.Store({
                     commit("setUser", response.data.ukid)
                     commit("setToken", response.data.jwt);
                     commit("setLogged")
-                    router.push({ path: '/playlists' })
+                    router.push({ path: '/playlists' }).catch(()=>{});
                     return true;
                 })
                 .catch(e => {
@@ -149,23 +149,14 @@ export default new Vuex.Store({
                 url += `?orderKey=${orderKey}&order=${order}`
             }
             state.Songs = []
-            state.SongsLines = []
-            axios.get(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}?orderKey=songName&order=asc`)
+            axios.get(url)
                 .then(function (response) {
-                    commit('setSongs', JSON.stringify(response.data))
-                    var songs = []
-                    songs = JSON.parse(state.Songs);
-                    for (let index = 0; index < songs.length; index++) {
-                        var SongsLines = []
-                        axios.get(`https://playsoft-api.azurewebsites.net/Song/${songs[index].song.songID}`)
-                            .then(function (respuesta) {
-                                SongsLines = JSON.stringify(respuesta.data)
-                                commit('setSongsLines', SongsLines)
-                            })
-                    }
+                    console.log(response.data, "AA")
+                    commit('setSongs', response.data)
                 })
 
         },
+
 
 
         getPlaylistID({ commit }, id) {
@@ -315,7 +306,7 @@ export default new Vuex.Store({
             const pageNumber = payload.pageNumber;
             axios
                 .get(`https://tfgplaysoft.azurewebsites.net/${model}?pageNumber=${pageNumber}`)
-                .then(function(response) {
+                .then(function (response) {
                     commit('setAdminList', response.data);
                 })
                 .catch(e => {
@@ -326,7 +317,7 @@ export default new Vuex.Store({
         getCount({ commit }, { model }) {
             axios
                 .get(`https://tfgplaysoft.azurewebsites.net/${model}/count`)
-                .then(function(response) {
+                .then(function (response) {
 
                     commit('setCount', response.data);
 
