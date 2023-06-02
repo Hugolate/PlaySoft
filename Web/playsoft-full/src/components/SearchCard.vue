@@ -1,7 +1,8 @@
 <template>
     <div class="cont">
-        <v-card class="mx-auto"  max-width="400" min-width="400" border-radius="15" style="background-color: rgb(34, 31, 34);"
-            v-for="(track) in this.$store.state.searchTracks" :key="track.id" outlined>
+        <v-card class="mx-auto" max-width="400" min-width="400" border-radius="15"
+            style="background-color: rgb(34, 31, 34);" v-for="(track, index) in this.$store.state.searchTracks"
+            :key="track.id" outlined>
             <v-list-item three-line>
                 <v-list-item-content style=" margin-right: 20px; align-self:normal">
                     <v-list-item-title class="text-h5 mb-1 txt" style="text-align: start;">
@@ -17,10 +18,11 @@
             </v-list-item>
 
             <div class="save-btn">
-                <button @click="showModal = true">Add to... {{ track.name }}</button>
+                <button @click="showModal = true; getTrack(index)">Add to... {{ track.name }}</button>
             </div>
-            <ModalPlaylists v-show="showModal" @close-modal="showModal = false" :PlayListsList="PlayListsList" :track="track"/>
         </v-card>
+        <ModalPlaylists v-if="showModal" @close-modal="showModal = false" :PlayListsList="PlayListsList"
+            :track="$store.state.searchTracks[trackId]" :index="index" />
     </div>
 </template>
 <script>
@@ -29,26 +31,34 @@ import ModalPlaylists from '../components/ModalPlaylists.vue';
 
 export default {
     components: { ModalPlaylists },
-    props:["PlayListsList"], 
-    data: function() {
+    props: ["PlayListsList"],
+    data: function () {
         return {
             showModal: false,
+            trackId: 0
         }
     },
+    methods:{
+        getTrack(trackId){
+            this.trackId = trackId
+        }
+    }
 }
 
 </script>
 
 <style>
-.save-btn{
+.save-btn {
     background-color: rgba(128, 0, 128, 0.461);
     border-radius: 15px;
     padding: 5px;
     cursor: pointer;
 }
-.save-btn:hover{
+
+.save-btn:hover {
     background-color: rgb(128, 0, 128);
 }
+
 .cont {
     display: flex;
     flex-direction: column;
@@ -119,6 +129,5 @@ export default {
 
 .show {
     display: block;
-}
-</style>
+}</style>
 

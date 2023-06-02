@@ -130,7 +130,7 @@ export default new Vuex.Store({
                     commit("setUser", response.data.ukid)
                     commit("setToken", response.data.jwt);
                     commit("setLogged")
-                    router.push({ path: '/playlists' }).catch(()=>{});
+                    router.push({ path: '/playlists' }).catch(() => { });
                     return true;
                 })
                 .catch(e => {
@@ -184,7 +184,6 @@ export default new Vuex.Store({
         },
         postSong({ dispatch }, track) {
 
-            alert('id artist: ' + track.name)
             let artistInDTO = []
             for (let index = 0; index < track.artists.length; index++) {
                 let artistInDTOline = {
@@ -194,6 +193,10 @@ export default new Vuex.Store({
                 artistInDTO.push(artistInDTOline)
             }
 
+
+            if (track.album.releaseDate.length < 10) {
+                track.album.releaseDate = '2020-01-01'
+            }
 
             axios.post('https://tfgplaysoft.azurewebsites.net/Song/create-with-artist-album',
                 {
@@ -333,7 +336,7 @@ export default new Vuex.Store({
             axios
                 .get(`https://tfgplaysoft.azurewebsites.net/Search/${state.query}`)
                 .then(function (response) {
-                    console.log(response.data.tracks.items);
+                    //console.log(response.data.tracks.items);
                     commit("setTracks", response.data.tracks.items)
 
                 })

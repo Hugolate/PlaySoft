@@ -5,7 +5,7 @@
       <h6>Choose a playlist</h6>
       <h4 @click="add(track)" id="animated" v-for="playlist in PlayListsList" :key="playlist.playlistID">
         {{ playlist.playListName }}</h4>
-      <button>Go Home {{ track.name }}</button>
+      <button>Go Home {{ track.name }} {{ index }}</button>
     </div>
     <div class="close" @click="$emit('close-modal')">
     </div>
@@ -15,7 +15,7 @@
 <script>
 export default {
   name: 'ModalPlaylists',
-  props: ["PlayListsList", "track"],
+  props: ["PlayListsList", "track", "index"],
   data() {
     return {
 
