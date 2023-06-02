@@ -17,7 +17,7 @@
             </v-list-item>
 
             <div class="save-btn">
-                <button @click="showModal = true">Add to...</button>
+                <button @click="showModal = true">Add to... {{ track.name }}</button>
             </div>
             <ModalPlaylists v-show="showModal" @close-modal="showModal = false" :PlayListsList="PlayListsList" :track="track"/>
         </v-card>

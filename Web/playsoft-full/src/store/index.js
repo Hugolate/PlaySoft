@@ -178,6 +178,16 @@ export default new Vuex.Store({
         postSong({ dispatch }, track) {
 
             alert('id artist: ' + track.name)
+            let artistInDTO = []
+            for (let index = 0; index < track.artists.length; index++) {
+                let artistInDTOline = {
+                    'spotifyArtistID': track.artists[index].id,
+                    'artistName': track.artists[index].name
+                }
+                artistInDTO.push(artistInDTOline)
+            }
+
+
             axios.post('https://tfgplaysoft.azurewebsites.net/Song/create-with-artist-album',
                 {
                     songInDTO: {
@@ -195,14 +205,12 @@ export default new Vuex.Store({
                         image: track.album.images[0].url,
                         totalTracks: track.album.totalTracks,
                     },
-                    artistInDTO: {
-                        spotifyArtistID: track.artists[0].id,
-                        artistName: track.artists[0].name
-                    }
+                    artistInDTO
+
                 })
                 .then(function (response) {
                     console(response.data)
-                    dispatch('addSongLine', track.name)
+                    dispatch('addSongLine', response.data)
                     location.reload();
                 })
                 .catch(e => {
@@ -211,11 +219,11 @@ export default new Vuex.Store({
                     console.log(e);
                 });
         },
-        addSongLine({ commit }, songname) {
+        addSongLine({ commit }, songID) {
             commit;
             axios.post("https://tfgplaysoft.azurewebsites.net/Playlist/valuepid/songs", {
                 playlistID: 0,
-                songID: 0
+                songID: songID
             })
         },
         addPlaylist({ commit, dispatch, state }) {
