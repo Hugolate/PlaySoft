@@ -3,7 +3,7 @@
     <v-main class="pa-0">
       <BackGround></BackGround>
       <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center" v-motion-roll-left>
+        <v-row align="center" justify="center" >
           <v-col cols="12" sm="8" md="8">
             <v-card class="elevation-12">
               <v-window v-model="$store.state.step">

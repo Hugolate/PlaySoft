@@ -19,7 +19,7 @@
                 </v-container>
             </v-container>
             <v-container class="fill-height" fluid style="justify-content: space-around;">
-                <v-card class="elevation-12" v-motion-roll-visible-once-bottom>
+                <v-card class="elevation-12" >
                     <v-card-text class="mt-12">
                         <h1 style="color: #6c176d">Register to start hearing now</h1>
                         <router-link to="/about">

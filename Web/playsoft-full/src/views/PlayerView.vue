@@ -1,16 +1,21 @@
 <template>
     <div class="home">
-    <PlayerSongs></PlayerSongs>
+        <CabeceraPlaysoft></CabeceraPlaysoft>
+        <PlayerComponent></PlayerComponent>
+        <BackGround></BackGround>
+
     </div>
 </template>
   
 <script>
-import PlayerSongs from '../components/PlayerSongs.vue';
+import PlayerComponent from '../components/PlayerComponent.vue';
+import CabeceraPlaysoft from '../components/CabeceraPlaysoft.vue'
+import BackGround from '@/components/BackGround.vue';
 
 export default {
     name: 'HomeView',
     components: {
-        PlayerSongs
+        PlayerComponent, CabeceraPlaysoft, BackGround
     },
     data() {
         return {
@@ -23,5 +28,6 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+</style>
   

@@ -5,7 +5,8 @@
             :key="track.id" outlined>
             <v-list-item three-line>
                 <v-list-item-content style=" margin-right: 20px; align-self:normal">
-                    <v-list-item-title class="text-h5 mb-1 txt" style="text-align: start;">
+                    <v-list-item-title class="text-h5 mb-1 txt" style="text-align: start;"
+                        @click="getSpotifyId(track.id); showPlayer = true">
                         {{ track.name }}
                     </v-list-item-title>
                     <v-list-item-subtitle style="text-align: start; color: rgb(173, 173, 173);">{{ track.album.name
@@ -23,6 +24,16 @@
         </v-card>
         <ModalPlaylists v-if="showModal" @close-modal="showModal = false" :PlayListsList="PlayListsList"
             :track="$store.state.searchTracks[trackId]" :index="index" />
+        <iframe v-if="showPlayer" style="border-radius: 0px;
+    left: 0;
+    position: fixed;
+    z-index: 7;
+    bottom: 0px;
+    width: 100%;
+    height: 80px; " :src="'https://open.spotify.com/embed/track/' + spotifyId + '?utm_source=generator'" width="100%"
+            height="352" frameBorder="0" allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+        </iframe>
     </div>
 </template>
 <script>
@@ -35,12 +46,17 @@ export default {
     data: function () {
         return {
             showModal: false,
-            trackId: 0
+            showPlayer: false,
+            trackId: 0,
+            spotifyId: ''
         }
     },
-    methods:{
-        getTrack(trackId){
+    methods: {
+        getTrack(trackId) {
             this.trackId = trackId
+        },
+        getSpotifyId(spotifyId) {
+            this.spotifyId = spotifyId
         }
     }
 }
@@ -129,5 +145,6 @@ export default {
 
 .show {
     display: block;
-}</style>
+}
+</style>
 

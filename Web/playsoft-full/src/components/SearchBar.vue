@@ -25,7 +25,7 @@ export default {
         Search() {
             this.$store.commit('updateQuery', this.query)
             if (this.$route.name != 'search') {
-                router.push({ path: 'search' })
+                router.push({ path: 'search' }).catch(() => { });
             }
             this.$store.dispatch('Search');
             console.log(this.query)
