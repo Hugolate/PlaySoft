@@ -9,13 +9,15 @@ public class PlaylistServiceImpl : IPLaylistService
 {
     private readonly IPlaylistLinesRepository _playlistLinesRepository;
     private readonly IPLaylistRepository _pLaylistRepository;
+    private readonly ILibraryRepository _libraryRepository;
 
     private readonly ILogger<PlaylistServiceImpl> _logger;
 
-    public PlaylistServiceImpl(IPLaylistRepository pLaylistRepository, IPlaylistLinesRepository playlistLinesRepository, ILogger<PlaylistServiceImpl> logger)
+    public PlaylistServiceImpl(IPLaylistRepository pLaylistRepository, ILibraryRepository libraryRepository, IPlaylistLinesRepository playlistLinesRepository, ILogger<PlaylistServiceImpl> logger)
     {
         _playlistLinesRepository = playlistLinesRepository;
         _pLaylistRepository = pLaylistRepository;
+        _libraryRepository = libraryRepository;
         _logger = logger;
     }
 
@@ -23,8 +25,10 @@ public class PlaylistServiceImpl : IPLaylistService
     {
         try
         {
-            _pLaylistRepository.CreatePlaylist(playlist);
-            _pLaylistRepository.Save();
+            var platlistID = _pLaylistRepository.CreatePlaylist(playlist);
+            
+            _libraryRepository.NewLine(playlist.userUKID, platlistID);
+            _libraryRepository.Save();
             return true;
         }
         catch (Exception e)
@@ -77,8 +81,6 @@ public class PlaylistServiceImpl : IPLaylistService
     }
     public void AddSongToPlaylist(PlaylistLinesDTO playlistLinesDTO)
     {
-        //comprobar que la cancion no este ya en la playlist
-
         _playlistLinesRepository.AddSong(playlistLinesDTO);
         _playlistLinesRepository.Save();
     }

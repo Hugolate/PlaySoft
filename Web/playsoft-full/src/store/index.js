@@ -244,10 +244,17 @@ export default new Vuex.Store({
             if (state.playListName != "") {
                 var user = state.usuario.toString()
                 axios.post("https://tfgplaysoft.azurewebsites.net/Playlist", {
+<<<<<<< HEAD
+                        playListName: state.playListName,
+                        ownerID: user,
+                        playlistDescription: state.playlistDescription,
+                        privacity: state.privacity,
+=======
                     playListName: state.playListName,
                     userUKID: user,
                     playlistDescription: state.playlistDescription,
                     privacity: state.privacity,
+>>>>>>> 416651f3c9058717a9dad413feedfd26352da2ac
 
                 })
                     .then(function (response) {

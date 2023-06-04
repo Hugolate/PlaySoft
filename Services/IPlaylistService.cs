@@ -10,7 +10,5 @@ public interface IPLaylistService
     public bool DeletePlaylist(int playlistID);
     public bool EditPLaylist(EditPLaylistDTO editPLaylistDTO);
     public void AddSongToPlaylist(PlaylistLinesDTO playlistLinesDTO);
-
-
     public List<SongIDSongOutDTO> GetSongsId(int playlistID, string orderKey, string order);
 }

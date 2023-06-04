@@ -29,12 +29,14 @@ namespace PlaySoftBeta.Repository
         }
 
 
-        public UserDTO GetUser(int ukid)
+        public UserLibraryPlaylistsDTO GetUser(int ukid)
         {
             var user = _context.Users
-                .Include(user => user.Playlists)
-                .FirstOrDefault(user => user.UKID.Equals(ukid));
-            return _mapper.Map<UserDTO>(user);
+            .Include(user => user.Libraries.Where(lb => lb.userID == ukid))
+                .ThenInclude(lb => lb.Playlist)
+            .FirstOrDefault(u => u .UKID == ukid);
+
+            return _mapper.Map<UserLibraryPlaylistsDTO>(user);
         }
 
         public void Save()

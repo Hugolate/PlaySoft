@@ -9,7 +9,13 @@ public class PlaysoftProfile : Profile
         CreateMap<User, AuthLoginOutDTO>();
 
         CreateMap<User, UserDTO>();
+        CreateMap<User, UserLibraryPlaylistsDTO>();
+        CreateMap<UserLibraryPlaylistsDTO, User>();
 
+        CreateMap<LibraryDTO, Library>();
+        CreateMap<Library, LibraryDTO>();
+        CreateMap<LibraryOutDTO, Library>();
+        CreateMap<Library, LibraryOutDTO>();
         CreateMap<Playlist, PlaylistDTO>();
         CreateMap<PlaylistDTO, Playlist>();
         CreateMap<EditPLaylistDTO, Playlist>();

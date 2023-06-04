@@ -114,14 +114,14 @@ namespace PlaySoftBeta.Migrations
                     playListName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     playlistDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     privacity = table.Column<bool>(type: "bit", nullable: false),
-                    userUKID = table.Column<int>(type: "int", nullable: false)
+                    UserUKID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Playlists", x => x.playlistID);
                     table.ForeignKey(
-                        name: "FK_Playlists_Users_userUKID",
-                        column: x => x.userUKID,
+                        name: "FK_Playlists_Users_UserUKID",
+                        column: x => x.UserUKID,
                         principalTable: "Users",
                         principalColumn: "UKID",
                         onDelete: ReferentialAction.Cascade);
@@ -149,6 +149,30 @@ namespace PlaySoftBeta.Migrations
                         principalTable: "Songs",
                         principalColumn: "songID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Library",
+                columns: table => new
+                {
+                    userID = table.Column<int>(type: "int", nullable: false),
+                    playlistsID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Library", x => new { x.userID, x.playlistsID });
+                    table.ForeignKey(
+                        name: "FK_Library_Playlists_playlistsID",
+                        column: x => x.playlistsID,
+                        principalTable: "Playlists",
+                        principalColumn: "playlistID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Library_Users_userID",
+                        column: x => x.userID,
+                        principalTable: "Users",
+                        principalColumn: "UKID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -186,14 +210,19 @@ namespace PlaySoftBeta.Migrations
                 column: "artistID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Library_playlistsID",
+                table: "Library",
+                column: "playlistsID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlaylistLines_songID",
                 table: "PlaylistLines",
                 column: "songID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Playlists_userUKID",
+                name: "IX_Playlists_UserUKID",
                 table: "Playlists",
-                column: "userUKID");
+                column: "UserUKID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Songs_AlbumID",
@@ -209,6 +238,9 @@ namespace PlaySoftBeta.Migrations
 
             migrationBuilder.DropTable(
                 name: "ArtistSongs");
+
+            migrationBuilder.DropTable(
+                name: "Library");
 
             migrationBuilder.DropTable(
                 name: "PlaylistLines");

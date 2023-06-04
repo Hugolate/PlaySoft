@@ -16,9 +16,13 @@ namespace PlaySoftBeta.Repository
             _context = context;
             _mapper = mapper;
         }
-        public void CreatePlaylist(PlaylistDTO playlist)
+        public int CreatePlaylist(PlaylistDTO playlist)
         {
-            _context.Playlists.Add(_mapper.Map<Playlist>(playlist));
+            var model = _mapper.Map<Playlist>(playlist);
+            _context.Playlists.Add(model);
+            Save();
+            return model.playlistID;
+
         }
 
         public void EditPLaylist(EditPLaylistDTO editPLaylistDTO)
@@ -43,7 +47,7 @@ namespace PlaySoftBeta.Repository
 
         public List<PlaylistDTO> getOwnPlaylist(int userUKID)
         {
-            var playlistlist = _context.Playlists.Where(playlist => playlist.userUKID.Equals(userUKID)).ToList();
+            var playlistlist = _context.Playlists.Where(playlist => playlist.UserUKID.Equals(userUKID)).ToList();
             return _mapper.Map<List<PlaylistDTO>>(playlistlist);
         }
         public void Save()

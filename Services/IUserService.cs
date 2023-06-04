@@ -4,6 +4,8 @@ namespace PlaySoftBeta.Services;
 
 public interface IUserService
 {
-    UserDTO GetUser(int ukid);
-    bool DeleteUser(int playlistID);
+    public UserLibraryPlaylistsDTO GetUser(int ukid);
+    public bool DeleteUser(int playlistID);
+    
+    public void AddPlaylistToLibrary(LibraryDTO libraryDTO);
 }

@@ -37,15 +37,23 @@ public class UserController : ControllerBase
         }
         return BadRequest("User not found");
     }
-/*
-    [HttpGet("playlist/{ukid}")]
-    public ActionResult<User> getUserPlaylists(int ukid)
+
+    [HttpPost("{userID}/playlists"), Authorize]
+    public async Task<ActionResult> AddSongToPlaylist(int userID, [FromBody] LibraryDTO libraryDTO)
     {
-        var playlistList = _userService.getPlaylists(ukid);
-        if (playlistList.Any())
+        libraryDTO.userID = userID;
+        _userService.AddPlaylistToLibrary(libraryDTO);
+        return Ok();
+    }
+    /*
+        [HttpGet("playlist/{ukid}")]
+        public ActionResult<User> getUserPlaylists(int ukid)
         {
-            return Ok(playlistList);
-        }
-        return BadRequest("User not found");
-    }*/
+            var playlistList = _userService.getPlaylists(ukid);
+            if (playlistList.Any())
+            {
+                return Ok(playlistList);
+            }
+            return BadRequest("User not found");
+        }*/
 }
