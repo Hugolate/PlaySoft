@@ -10,6 +10,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         logo: require('../assets/images/Logo.png'),
+        buttonIcon: require('../assets/images/next-button.png'),
         comprobarUsuario: false,
         registerUsername: "",
         registerEmail: "",

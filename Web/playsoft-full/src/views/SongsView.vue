@@ -2,9 +2,9 @@
     <div>
         <CabeceraPlaysoft></CabeceraPlaysoft>
         <SongListado></SongListado>
-        <SearchBar></SearchBar>
+        <SearchBar style="position: absolute; top: 20%; left: 0%;"></SearchBar>
     </div>
-</template>
+</template> 
 
 <script>
 import CabeceraPlaysoft from '@/components/CabeceraPlaysoft.vue';

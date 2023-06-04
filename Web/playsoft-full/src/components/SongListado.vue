@@ -2,7 +2,6 @@
     <v-app id="inspire">
         <v-main class="pa-0">
             <BackGround></BackGround>
-
             <div v-if="isloading">a</div>
             <div v-else-if="songList !== undefined || songList.length > 0">
                 <div class="main-opt">
@@ -19,7 +18,6 @@
                     </svg> -->
                     </div>
                 </div>
-
                 <v-container class="fill-height canciones" fluid
                     style="justify-content: center; height: 0; margin-top: 400px;">
 
@@ -53,9 +51,10 @@
                             </svg>
                         </div>
                     </div>
-                    <div style="padding-top: 10px;" class="songs grid" v-for="song in songList" :key="song.songID">
+                    <div style="padding-top: 10px;" class="songs grid" v-for="(song, index) in songList" :key="song.songID">
                         <div class="head">
-                            <div style="margin-right: 40px;">
+                            <div style="margin-right: 40px; cursor: pointer;"
+                                @click="getSpotifyId(song.song.spotifySongID), getSongId(index), showPlayer = true">
 
                                 <svg height="40" fill="purple" id="Layer_1" style="enable-background:new 0 0 512 512;"
                                     version="1.1" viewBox="0 0 512 512" width="40" xml:space="preserve"
@@ -69,7 +68,7 @@
                             <p style="max-width: 20px;" class="songName">{{ song.song.songName }} </p>
                         </div>
                         <div>
-                            <p>{{ song.song.album.albumName }} </p>
+                            <p>{{ song.song.album.albumName }}</p>
                         </div>
                         <div style="display: flex; gap: 5px;">
                             <p class="artists" v-for="artistSongs in song.song.artistSongs"
@@ -85,7 +84,26 @@
             <div v-else>
                 <h1 class="no-song">You don't have songs in this playlist.</h1>
             </div>
-
+            <div class="iframeContainer" v-if="showPlayer">
+                <iframe
+                    style="border-radius: 0px; left: 0; position: fixed;z-index: 1;bottom: 0px;width: 100%;height: 80px; "
+                    :src="'https://open.spotify.com/embed/track/' + spotifyId + '?utm_source=generator'" width="100%"
+                    height="352" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+                </iframe>
+                <button style="border-radius: 0px;position: fixed; z-index: 2;bottom: 0px; bottom: 3%; left: 55%;"
+                    title="Next song" @click=" nextSong()">
+                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+                        <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
+                    </svg>
+                </button>
+                <button style="border-radius: 0px;position: fixed; z-index: 2;bottom: 0px; bottom: 3%; left: 45%;"
+                    title="Previous song"><svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                        clip-rule="evenodd" @click=" prevSong()">
+                        <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
+                    </svg>
+                </button>
+            </div>
         </v-main>
     </v-app>
 </template>
@@ -99,7 +117,11 @@ export default {
     name: 'SongsPage',
     data() {
         return {
+            button: require('../assets/images/next-button.png'),
             isloading: true,
+            showPlayer: false,
+            spotifyId: '',
+            songId: 0
         };
     },
     computed: {
@@ -120,10 +142,21 @@ export default {
             console.log(this.isloading)
         }
     },
-
-
-
     methods: {
+        getSpotifyId(spotifyId) {
+            this.spotifyId = spotifyId
+        },
+        getSongId(songId) {
+            this.songId = songId
+        },
+        nextSong() {
+            this.songId += 1;
+            this.spotifyId = this.$store.state.Songs[this.songId].song.spotifySongID
+        },
+        prevSong() {
+            this.songId -= 1;
+            this.spotifyId = this.$store.state.Songs[this.songId].song.spotifySongID
+        },
         toggleArrow(event) {
 
             const filters = document.getElementsByClassName("arrowDiv")
