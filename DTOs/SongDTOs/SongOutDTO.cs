@@ -7,6 +7,7 @@ namespace PlaySoftBeta.DTOs
         public string songName { get; set; }
         public string uri {get; set;}
         public int durationMs { get; set; }
+        public int spotifySongID { get; set; }
         public AlbumOutDTO Album {get; set;}
         public IEnumerable<ArtistOutDTO> ArtistSongs  {get; set;} 
     }

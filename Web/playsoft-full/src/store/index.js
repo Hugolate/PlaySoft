@@ -201,7 +201,7 @@ export default new Vuex.Store({
                 var user = state.usuario.toString()
                 axios.post("https://tfgplaysoft.azurewebsites.net/Playlist", {
                         playListName: state.playListName,
-                        userUKID: user,
+                        ownerID: user,
                         playlistDescription: state.playlistDescription,
                         privacity: state.privacity,
 

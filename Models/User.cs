@@ -13,6 +13,7 @@ namespace PlaySoftBeta.Models
         public string username { get; set; }
         public string password { get; set; }
 
+        public IList<Library> Libraries { get; set; }
         public IList<Playlist> Playlists { get; set; }
     }
 }

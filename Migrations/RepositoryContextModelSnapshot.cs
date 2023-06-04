@@ -103,6 +103,21 @@ namespace PlaySoftBeta.Migrations
                     b.ToTable("ArtistSongs");
                 });
 
+            modelBuilder.Entity("PlaySoftBeta.Models.Library", b =>
+                {
+                    b.Property<int>("userID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("playlistsID")
+                        .HasColumnType("int");
+
+                    b.HasKey("userID", "playlistsID");
+
+                    b.HasIndex("playlistsID");
+
+                    b.ToTable("Library");
+                });
+
             modelBuilder.Entity("PlaySoftBeta.Models.Playlist", b =>
                 {
                     b.Property<int>("playlistID")
@@ -110,6 +125,9 @@ namespace PlaySoftBeta.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("playlistID"));
+
+                    b.Property<int>("UserUKID")
+                        .HasColumnType("int");
 
                     b.Property<string>("playListName")
                         .IsRequired()
@@ -121,12 +139,9 @@ namespace PlaySoftBeta.Migrations
                     b.Property<bool>("privacity")
                         .HasColumnType("bit");
 
-                    b.Property<int>("userUKID")
-                        .HasColumnType("int");
-
                     b.HasKey("playlistID");
 
-                    b.HasIndex("userUKID");
+                    b.HasIndex("UserUKID");
 
                     b.ToTable("Playlists");
                 });
@@ -245,11 +260,30 @@ namespace PlaySoftBeta.Migrations
                     b.Navigation("Song");
                 });
 
+            modelBuilder.Entity("PlaySoftBeta.Models.Library", b =>
+                {
+                    b.HasOne("PlaySoftBeta.Models.Playlist", "Playlist")
+                        .WithMany("Libraries")
+                        .HasForeignKey("playlistsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PlaySoftBeta.Models.User", "User")
+                        .WithMany("Libraries")
+                        .HasForeignKey("userID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Playlist");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("PlaySoftBeta.Models.Playlist", b =>
                 {
                     b.HasOne("PlaySoftBeta.Models.User", "User")
                         .WithMany("Playlists")
-                        .HasForeignKey("userUKID")
+                        .HasForeignKey("UserUKID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -302,6 +336,8 @@ namespace PlaySoftBeta.Migrations
 
             modelBuilder.Entity("PlaySoftBeta.Models.Playlist", b =>
                 {
+                    b.Navigation("Libraries");
+
                     b.Navigation("PlaylistLines");
                 });
 
@@ -314,6 +350,8 @@ namespace PlaySoftBeta.Migrations
 
             modelBuilder.Entity("PlaySoftBeta.Models.User", b =>
                 {
+                    b.Navigation("Libraries");
+
                     b.Navigation("Playlists");
                 });
 #pragma warning restore 612, 618
