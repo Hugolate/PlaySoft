@@ -19,7 +19,7 @@ export default {
     props: ["productItem", "PlayListsList"],
     data: function () {
         return {
-            pito: 'holaasdas'
+            
         }
     },
     components: { CreatePlaylistForm, BackGround },
