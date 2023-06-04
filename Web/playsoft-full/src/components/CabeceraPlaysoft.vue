@@ -15,29 +15,29 @@
     <router-link to="/login" v-if="!this.$store.state.logged">
       <span class="mr-2" >Login</span>
     </router-link>
-    <router-link to="/" v-else-if="this.$store.state.logged">
+    <!-- <router-link to="/" v-else-if="this.$store.state.logged">
       <div @click="cerrarSesion()">
         <span class="mr-2" >LogOut</span>
       </div>
-    </router-link>
-    <div>
-      <span class="mr-2" ><img :src="$store.state.logo" alt="" width="50px" @click="displayMenu()"></span>
+    </router-link> -->
+    <div v-else-if="this.$store.state.logged">
+      <span class="mr-2" ><img :src="$store.state.logo" alt="" width="50px" @click="displayMenu()" style="cursor: pointer;"></span>
     </div>
     <div class="sub-menu-wrap" id="subMenu">
       <div class="sub-menu">
         <div class="user-info">
           <img :src="$store.state.logo" >
-          <h3>Nombre usuario</h3>
+          <h3>Welcome, {{ this.$store.state.loginEmail.split("@")[0] }}!</h3>
         </div>
         <hr>
 
-        <a href="#" class="sub-menu-link">
+        <!-- <a class="sub-menu-link" style="cursor: pointer;">
           <img :src="$store.state.settingPicture" alt="">
           <p>Settings</p>
           <span>></span>
-        </a>
+        </a> -->
 
-        <a href="#" class="sub-menu-link">
+        <a class="sub-menu-link" style="cursor: pointer;" @click="cerrarSesion()">
           <img :src="$store.state.logoutPicture" alt="">
           <p>Log Out</p>
           <span>></span>
@@ -68,8 +68,13 @@ export default {
   },
   methods: {
     cerrarSesion() {
+      this.$store.state.logged = false;
       localStorage.clear()
-      this.$router.push({ path: '/' }).catch(()=>{});
+      setTimeout(() => {
+        //this.$router.push({ path: '/' }).catch(()=>{});
+        location.reload();
+      }, 500);
+      
     },
     displayMenu() {
       let subMenu = document.getElementById("subMenu")

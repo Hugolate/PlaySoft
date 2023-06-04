@@ -16,14 +16,18 @@ import BackGround from '../components/BackGround.vue'
 import CreatePlaylistForm from './CreatePlaylistForm.vue';
 export default {
     name: 'PlayList',
-    props: ["productItem","PlayListsList"],
+    props: ["productItem", "PlayListsList"],
     data: function () {
         return {
             pito: 'holaasdas'
         }
     },
     components: { CreatePlaylistForm, BackGround },
-    mounted: function(){
+    mounted: function logged() {
+        if (!this.$store.state.logged) {
+            localStorage.clear()
+            this.$router.push({ path: '/' }).catch(() => { });
+        }
     },
     methods: {
         redirigir(nombrepl) {

@@ -31,12 +31,16 @@ export default {
   },
   mounted: function () {
     let vue = this;
-    this.$store.dispatch('getPlaylistsAction')
-    setTimeout(() => {
-      var PlayLists = JSON.parse(this.$store.state.PlayListsJSON);
-      vue.PlayListsList = PlayLists
-    }, 500);
-
+    if (!vue.$store.state.logged) {
+      localStorage.clear()
+      this.$router.push({ path: '/' }).catch(() => { });
+    } else {
+      this.$store.dispatch('getPlaylistsAction')
+      setTimeout(() => {
+        var PlayLists = JSON.parse(this.$store.state.PlayListsJSON);
+        vue.PlayListsList = PlayLists
+      }, 500);
+    }
 
   },
 }
