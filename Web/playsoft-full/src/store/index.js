@@ -182,8 +182,9 @@ export default new Vuex.Store({
                     console.log(e);
                 });
         },
-        postSong({ dispatch }, track) {
-
+        postSong({ state }, track) {
+            
+            
             let artistInDTO = []
             for (let index = 0; index < track.artists.length; index++) {
                 let artistInDTOline = {
@@ -219,9 +220,16 @@ export default new Vuex.Store({
 
                 })
                 .then(function (response) {
-                    console(response.data)
-                    dispatch('addSongLine', response.data)
-                    location.reload();
+                    alert('repsuesta: ' + response.data)
+                    alert('PLID: ' + state.playlistID)
+                    axios.post(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.playlistID}/songs`, {
+                        playlistID: state.playlistID,
+                        songID: response.data
+                    })
+                        .then(function (response) {
+                            alert(response);
+                            location.reload();
+                        })
                 })
                 .catch(e => {
                     this.alertMessage = "Playlist already have this song"
@@ -229,20 +237,8 @@ export default new Vuex.Store({
                     console.log(e);
                 });
 
+        },
 
-            axios.post("https://api.spotify.com/v1/playlists/1obYA5Soi1YE5ZgPPUZXfq/tracks", {
-                uris: [
-                    "spotify:track:5jcoBE1rsVI4N4cpHguMDy"
-                ]
-            })
-        },
-        addSongLine({ commit }, songID) {
-            commit;
-            axios.post("https://tfgplaysoft.azurewebsites.net/Playlist/valuepid/songs", {
-                playlistID: 0,
-                songID: songID
-            })
-        },
         addPlaylist({ commit, dispatch, state }) {
             if (state.playListName != "") {
                 var user = state.usuario.toString()

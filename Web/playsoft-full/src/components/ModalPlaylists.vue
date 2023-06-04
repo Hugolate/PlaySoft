@@ -3,9 +3,10 @@
     <div class="modal" @click.stop>
       <img class="check" alt="" />
       <h6>Choose a playlist</h6>
-      <h4 @click="add(track)" id="animated" v-for="playlist in PlayListsList" :key="playlist.playlistID">
+      <h4 @click="add(track, playlist.playlistID)" id="animated" v-for="playlist in PlayListsList"
+        :key="playlist.playlistID">
         {{ playlist.playListName }}</h4>
-      <button>Go Home {{ track.name }} {{ index }}</button>
+      <button>Go Home</button>
     </div>
     <div class="close" @click="$emit('close-modal')">
     </div>
@@ -18,19 +19,24 @@ export default {
   props: ["PlayListsList", "track", "index"],
   data() {
     return {
-
+      plId: 0
     };
   },
   methods: {
-    add(track) {
+    add(track, playlistID) {
+      this.getTrack(playlistID);
       console.log(track.name)
       let vue = this;
       //vue.$store.state.playlistID = nombrepl
-      
+      alert(playlistID)
       vue.$store.state.songID = vue.track.id
+      vue.$store.state.playlistID = playlistID
       this.$store.dispatch('postSong', vue.track)
       //this.$router.push({ path: '/songs' })
 
+    },
+    getTrack(plId) {
+      this.plId = plId
     }
   }
 }

@@ -5,7 +5,7 @@
             :key="track.id" outlined>
             <v-list-item three-line>
                 <v-list-item-content style=" margin-right: 20px; align-self:normal">
-                    <v-list-item-title class="text-h5 mb-1 txt" style="text-align: start;"
+                    <v-list-item-title class="text-h5 mb-1 txt" style="text-align: start; cursor: pointer;"
                         @click="getSpotifyId(track.id); showPlayer = true">
                         {{ track.name }}
                     </v-list-item-title>
@@ -17,9 +17,8 @@
                     <div class="txt">{{ track.artists[0].name }}</div>
                 </div>
             </v-list-item>
-
             <div class="save-btn">
-                <button @click="showModal = true; getTrack(index)">Add to... {{ track.name }}</button>
+                <button @click="showModal = true; getTrack(index)">Add to...</button>
             </div>
         </v-card>
         <ModalPlaylists v-if="showModal" @close-modal="showModal = false" :PlayListsList="PlayListsList"
