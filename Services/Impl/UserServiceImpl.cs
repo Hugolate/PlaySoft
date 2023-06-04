@@ -26,17 +26,6 @@ public class UserServiceImpl : IUserService
     {
         try
         {
-            var userPlaylists = _userRepository.GetUser(userID).playlists;
-
-            if (userPlaylists.Any() && userPlaylists != null)
-            {
-                foreach (var playlist in userPlaylists)
-                {
-                    _pLaylistRepository.DeletePlaylist(playlist.playlistID);
-                    _pLaylistRepository.Save();
-                }
-
-            }
             _userRepository.DeleteUser(userID);
             _userRepository.Save();
             return true;
@@ -47,11 +36,23 @@ public class UserServiceImpl : IUserService
             throw;
         }
     }
-    public UserDTO GetUser(int ukid)
+    public UserLibraryPlaylistsDTO GetUser(int ukid)
     {
         try
         {
-            return _userRepository.GetUser(ukid);
+            var user = _userRepository.GetUser(ukid);
+            foreach (var item in user.Libraries)
+            {
+                if (item.Playlist.userUKID == ukid)
+                {
+                    item.Playlist.owner = true;
+                }
+                else
+                {
+                    item.Playlist.owner = false;
+                }
+            }
+            return user;
         }
         catch (Exception e)
         {
