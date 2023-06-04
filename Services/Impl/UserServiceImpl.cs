@@ -10,14 +10,17 @@ public class UserServiceImpl : IUserService
     private readonly IUserRepository _userRepository;
     private readonly IPlaylistLinesRepository _playlistLinesRepository;
     private readonly IPLaylistRepository _pLaylistRepository;
+    private readonly ILibraryRepository _libraryRepository;
     private readonly ILogger<UserServiceImpl> _logger;
 
-    public UserServiceImpl(IUserRepository userRepository, ILogger<UserServiceImpl> logger, IPlaylistLinesRepository playlistLinesRepository, IPLaylistRepository playlistRepository)
+    public UserServiceImpl(IUserRepository userRepository, ILogger<UserServiceImpl> logger, IPlaylistLinesRepository playlistLinesRepository,
+                            IPLaylistRepository playlistRepository, ILibraryRepository libraryRepository)
     {
         _userRepository = userRepository;
         _logger = logger;
         _playlistLinesRepository = playlistLinesRepository;
         _pLaylistRepository = playlistRepository;
+        _libraryRepository = libraryRepository;
     }
     public bool DeleteUser(int userID)
     {
@@ -54,6 +57,16 @@ public class UserServiceImpl : IUserService
         {
             _logger.LogError(e, "Error get user");
             throw;
+        }
+    }
+
+    public void AddPlaylistToLibrary(LibraryDTO libraryDTO)
+    {
+        if (libraryDTO.playlistID != null)
+        {
+
+            _libraryRepository.NewLine(libraryDTO.userID, (int)libraryDTO.playlistID);
+            _libraryRepository.Save();
         }
     }
 }

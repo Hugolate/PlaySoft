@@ -66,7 +66,7 @@ builder.Services.AddScoped<IArtistSongRepository, ArtistSongRepository>();
 
 builder.Services.AddScoped<IAlbumService, AlbumServiceImpl>();
 builder.Services.AddScoped<IAlbumRepository, AlbumRepositoryImpl>();
-
+builder.Services.AddScoped<ILibraryRepository, LibraryRepositoryImpl>();
 
 builder.Services.AddAutoMapper(typeof(PlaysoftProfile));
 builder.Services.AddRazorPages();

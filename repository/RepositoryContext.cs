@@ -10,18 +10,23 @@ public class RepositoryContext : DbContext
     {
         modelBuilder.Entity<PlaylistLines>().HasKey(pl => new { pl.playlistID, pl.songID });
         modelBuilder.Entity<ArtistAlbums>().HasKey(a => new { a.albumID, a.artistID });
-        modelBuilder.Entity<ArtistSongs>().HasKey(a => new { a.songID, a.artistID });
+        modelBuilder.Entity<ArtistSongs>().HasKey(s => new { s.songID, s.artistID });
         modelBuilder.Entity<Library>().HasKey(l => new { l.userID, l.playlistsID });
         modelBuilder.Entity<User>()
             .HasMany(u => u.Libraries)
             .WithOne(l => l.User)
+            .HasPrincipalKey(u => u.UKID)
             .HasForeignKey(l => l.userID)
             .OnDelete(DeleteBehavior.Restrict);
         modelBuilder.Entity<Playlist>()
             .HasMany(p => p.Libraries)
             .WithOne(l => l.Playlist)
-            .HasForeignKey(l => l.playlistsID)
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasPrincipalKey(p => p.playlistID)
+            .HasForeignKey(l => l.playlistsID);
+
+    
+
+
     }
     public DbSet<User> Users { get; set; }
     public DbSet<Playlist> Playlists { get; set; }

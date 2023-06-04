@@ -16,9 +16,13 @@ namespace PlaySoftBeta.Repository
             _context = context;
             _mapper = mapper;
         }
-        public void CreatePlaylist(PlaylistDTO playlist)
+        public int CreatePlaylist(PlaylistDTO playlist)
         {
-            _context.Playlists.Add(_mapper.Map<Playlist>(playlist));
+            var model = _mapper.Map<Playlist>(playlist);
+            _context.Playlists.Add(model);
+            Save();
+            return model.playlistID;
+
         }
 
         public void EditPLaylist(EditPLaylistDTO editPLaylistDTO)
