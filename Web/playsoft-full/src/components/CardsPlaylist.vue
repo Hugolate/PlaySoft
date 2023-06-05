@@ -30,7 +30,7 @@
                     <v-btn color="blue-grey darken-1" @click="dialog = false"  style="color: white;">
                         Cancel
                     </v-btn>
-                    <v-btn color="red darken-1" style="color: white;">
+                    <v-btn  @click="deleteLibrary(), dialog = false" color="red darken-1" style="color: white;">
                         Delete
                     </v-btn>
                 </v-card-actions>
@@ -53,7 +53,7 @@ export default {
     },
     components: { CreatePlaylistForm, BackGround },
     mounted: function logged() {
-
+        console.log(this.$store.state.PlayListsJSON, "ESTA");
         if (!this.$store.state.logged) {
             localStorage.clear()
             this.$router.push({ path: '/' }).catch(() => { });
@@ -78,9 +78,11 @@ export default {
 
             console.log(this.removePl)
         },
-        delete(){
+        deleteLibrary(){
            if(this.removePl.owner){
-            console.log("a")
+            this.$store.dispatch('deleteRow', { model: "playlist", id: this.removePl.playlistID });
+           }else{
+            this.$store.dispatch('deleteLibrary', this.removePl.playlistID)
            }
         }
     }

@@ -111,6 +111,12 @@ export default new Vuex.Store({
         setCount(state, count) {
             state.totalPages = count / 10
         },
+        /*updatePlaylists(state, id) {
+            console.log("Before:", state.PlayLists)
+                //state.PlayLists.filter(item => item.filter(pl => pl.playlistID !== id))
+
+            console.log("Before:", state.PlayLists)
+        },*/
     },
     actions: {
 
@@ -305,27 +311,20 @@ export default new Vuex.Store({
                 });
         },
 
-        deleteRow(context, payload) {
+        deleteRow({ commit }, payload) {
             this.state.adminList
             const model = payload.model;
             const id = payload.id;
             console.log(id)
-            let modelID = "";
-            if (model == "song") {
-                modelID = "songID";
-            } else if (model == "Artist") {
-                modelID = "artistID";
-            } else if (model == "Album") {
-                modelID = "albumID"
-            }
             axios
-                .delete(`https://tfgplaysoft.azurewebsites.net/${model}?${modelID}=${id}`)
-
-
-            .catch(e => {
-                console.log(e);
-            });
-
+                .delete(`https://tfgplaysoft.azurewebsites.net/${model}/${id}`).then(() => {
+                    if (model == "playlist") {
+                        commit('updatePlaylists', id);
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
         },
 
         getAll({ commit }, payload) {
@@ -371,13 +370,27 @@ export default new Vuex.Store({
         },
 
         addToLibrary({ state }, playlist) {
-            console.log(playlist, "add");
-            state.adminList;
+
+            console.log(state.usuario, playlist.playlistID, "AAA")
             axios
-                .post(`https://tfgplaysoft.azurewebsites.net/User/${state.usuario}/playlists`, {
-                    playlistID: playlist.playlistID,
+                .post('https://tfgplaysoft.azurewebsites.net/Library/playlists', {
+                    userID: state.usuario,
+                    playlistID: playlist.playlistID
+
                 }).then(function(response) {
                     console.log(response)
+                })
+                .catch(e => {
+
+                    console.log(e);
+                });
+        },
+        deleteLibrary({ state }, playlistID) {
+            state.adminList;
+            axios
+                .delete(`https://tfgplaysoft.azurewebsites.net/Library/playlists/${playlistID}`).then(function(response) {
+                    console.log(response)
+
                 })
                 .catch(e => {
 
