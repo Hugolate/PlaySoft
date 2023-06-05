@@ -3,9 +3,9 @@
     <div class="modal" @click.stop>
       <img class="check" alt="" />
       <h6>Choose a playlist</h6>
-      <h4 @click="add(track, playlist.playlistID)" id="animated" v-for="playlist in PlayListsList"
-        :key="playlist.playlistID">
-        {{ playlist.playListName }}</h4>
+      <h4 @click="add(track, playlist.playlist.playlistID)" id="animated" v-for="playlist in PlayListsList"
+        :key="playlist.playlist.playlistID">
+        {{ playlist.playlist.playListName }}</h4>
       <button>Go Home</button>
     </div>
     <div class="close" @click="$emit('close-modal')">

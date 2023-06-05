@@ -4,8 +4,8 @@
             <BackGround></BackGround>
             <CreatePlaylistForm></CreatePlaylistForm>
             <v-container style="flex-direction: column;" class="fill-height secciones pl-cont">
-                <p @click="redirigir(playlist.playListName)" id="animated" class="playlists wavy"
-                    v-for="playlist in PlayListsList" :key="playlist.playlistID">{{ playlist.playListName }}</p>
+                <p @click="redirigir(playlist.playlist.playListName)" id="animated" class="playlists wavy"
+                    v-for="playlist in PlayListsList" :key="playlist.playlist.playlistID">{{ playlist.playlist.playListName }}</p>
             </v-container>
         </v-main>
     </v-app>
@@ -24,6 +24,7 @@ export default {
     },
     components: { CreatePlaylistForm, BackGround },
     mounted: function logged() {
+
         if (!this.$store.state.logged) {
             localStorage.clear()
             this.$router.push({ path: '/' }).catch(() => { });
@@ -31,11 +32,13 @@ export default {
     },
     methods: {
         redirigir(nombrepl) {
-            console.log(nombrepl)
+            
             let vue = this;
+            console.log(vue.PlayListsList[0].playlist)
             for (let index = 0; index < vue.PlayListsList.length; index++) {
-                if (vue.PlayListsList[index].playListName == nombrepl) {
-                    this.$store.dispatch('getPlaylistID', vue.PlayListsList[index].playlistID)
+                if (vue.PlayListsList[index].playlist.playListName == nombrepl) {
+                    console.log(vue.PlayListsList[index].playlist.playlistID)
+                    this.$store.dispatch('getPlaylistID', vue.PlayListsList[index].playlist.playlistID)
                     this.$router.push({ path: '/songs' })
                 }
             }

@@ -29,12 +29,12 @@
                     <div>{{ item.uri }}</div>
                     <div>{{ item.durationMs }}ms</div>
                 </div>
-                <div class="parent hv" v-else-if="item.albumID">
+                <div v-on:click.right.prevent="deleteItem(item.albumID)" class="parent hv" v-else-if="item.albumID">
                     <div>{{ item.albumID }}</div>
                     <div>{{ item.albumName }}</div>
                     <div>{{ item.releaseDate }}</div>
                 </div>
-                <div class="parent hv" v-else-if="item.artistID">
+                <div v-on:click.right.prevent="deleteItem(item.artistID)" class="parent hv" v-else-if="item.artistID">
                     <div>{{ item.artistID }}</div>
                     <div>{{ item.artistName }}</div>
 
@@ -79,12 +79,11 @@ export default {
                 this.page = 1;
                 this.model = event.target.id;
             }
-            console.log(this.model, "AAA")
+            console.log(this.model)
             this.$store.dispatch('getAll', { model: this.model, pageNumber: this.page });
         },
         deleteItem(id) {
-
-            this.$store.dispatch('deleteRow', { model: this.model, id: id })
+            this.$store.dispatch('deleteRow', { model: this.model, id: id });
             this.getAll(null)
         },
         previousPage() {
@@ -94,6 +93,7 @@ export default {
                 this.getAll(null)
             }
         },
+
         nextPage() {
             console.log("next")
             if (this.page < this.$store.state.totalPages) {
@@ -143,6 +143,7 @@ button {
 .hv:hover {
     background-color: rgb(253, 65, 65);
 }
+
 .btn-cont {
     display: flex;
     gap: 20px;
