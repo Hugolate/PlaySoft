@@ -1,6 +1,7 @@
 using PlaySoftBeta.Models;
 using PlaySoftBeta.DTOs;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace PlaySoftBeta.Repository
 {
@@ -23,6 +24,12 @@ namespace PlaySoftBeta.Repository
             Save();
             return model.playlistID;
 
+        }
+
+        public List<PlaylistDTO> GetPLaylistList(string name)
+        {
+            var userList = _context.Playlists.Include(pl => pl.User).Where(user => user.playListName.Contains(name) || user.User.username.Contains(name)).ToList();
+            return _mapper.Map<List<PlaylistDTO>>(userList);
         }
 
         public void EditPLaylist(EditPLaylistDTO editPLaylistDTO)

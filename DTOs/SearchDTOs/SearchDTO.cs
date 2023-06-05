@@ -1,10 +1,14 @@
+using PlaySoftBeta.DTOs;
+using SpotifyAPI.Web;
+
 namespace PlaySoftBeta.DTOs
+
 {
     public class SearchDTO
     {
 
-        public List<SearchSongOutDTO> songs{ get; set; }
-        public List<SearchUserDTO> users { get; set; }
+        public Task<SearchResponse> spotifyResponse{ get; set; }
+        public List<PlaylistDTO> playlist { get; set; }
         
     }
 }

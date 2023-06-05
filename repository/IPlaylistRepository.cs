@@ -10,5 +10,6 @@ public interface IPLaylistRepository
     
     void EditPLaylist(EditPLaylistDTO editPLaylistDTO);
     List<PlaylistDTO> getOwnPlaylist(int userUKID);
+    List<PlaylistDTO> GetPLaylistList(string name);
     void Save();
 }
