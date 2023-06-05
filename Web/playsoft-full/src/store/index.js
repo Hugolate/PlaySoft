@@ -261,7 +261,7 @@ export default new Vuex.Store({
                         userUKID: user,
                         playlistDescription: state.playlistDescription,
                         privacity: state.privacity,
-
+                        
                     })
                     .then(function(response) {
                         response.data
@@ -278,15 +278,7 @@ export default new Vuex.Store({
                         console.log(e);
                     });
 
-                axios.post("https://api.spotify.com/v1/users/ytmm70rumumd5y3afug6uot9k/playlists", {
-                    name: state.playListName,
-                    description: state.playlistDescription,
-                    public: state.privacity
-                }, {
-                    headers: {
-                        'Authorization': 'BQCDHyBoju0dsA-wqSYM5JHRnUDxkhfo7d6tGw3MDS4VZQUwsGBvG-M8nLQkpAToUg5YR0gee0c7Pq9YTu-cWm_HthtnTjXI5vveuGHHHWzqImE6xcoWAZkfJzW7oTXxnMKkqE17MzXYe2imlXEIvc_kts90YdN1LRJkw61r3C2Sjb9H2BFogHAJrQKBu6VlykmAlmeWXxiB-DeO9IaiXYM8op_Q'
-                    }
-                })
+                
             } else {
                 this.$store.state.error = true
             }
