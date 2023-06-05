@@ -55,6 +55,7 @@ export default new Vuex.Store({
         query: "",
         token: "",
         searchTracks: [],
+        searchPlaylists: [],
         adminList: [],
         totalPages: 0,
     },
@@ -94,6 +95,9 @@ export default new Vuex.Store({
         },
         setTracks(state, tracks) {
             state.searchTracks = tracks;
+        },
+        setSearchPlaylists(state, playlists) {
+            state.searchPlaylists = playlists;
         },
         setToken(state, token) {
             state.token = token;
@@ -156,7 +160,7 @@ export default new Vuex.Store({
             state.Songs = []
             axios.get(url)
                 .then(function(response) {
-                    console.log(response.data, "AA")
+                    console.log(response.data)
                     commit('setSongs', response.data)
                 })
 
@@ -356,9 +360,24 @@ export default new Vuex.Store({
             axios
                 .get(`https://tfgplaysoft.azurewebsites.net/Search/${state.query}`)
                 .then(function(response) {
-                    //console.log(response.data.tracks.items);
-                    commit("setTracks", response.data.tracks.items)
+                    console.log(response.data.playlist);
+                    commit("setTracks", response.data.spotifyResponse.result.tracks.items)
+                    commit("setSearchPlaylists", response.data.playlist)
+                })
+                .catch(e => {
 
+                    console.log(e);
+                });
+        },
+
+        addToLibrary({ state }, playlist) {
+            console.log(playlist, "add");
+            state.adminList;
+            axios
+                .post(`https://tfgplaysoft.azurewebsites.net/User/${state.usuario}/playlists`, {
+                    playlistID: playlist.playlistID,
+                }).then(function(response) {
+                    console.log(response)
                 })
                 .catch(e => {
 

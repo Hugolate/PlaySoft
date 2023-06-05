@@ -2,8 +2,8 @@
     <v-app id="inspire">
         <v-main class="pa-0">
             <BackGround></BackGround>
-            <div v-if="isloading">a</div>
-            <div v-else-if="songList !== undefined || songList.length > 0">
+            <div v-if="isloading"></div>
+            <div v-else-if="songList.length > 0 ">
                 <div class="main-opt">
                     <p class="pl-name">{{ songList[0].playlist.playListName }}</p>
                     <div style="display: flex;">
@@ -82,7 +82,7 @@
                 </v-container>
             </div>
             <div v-else>
-                <h1 class="no-song">You don't have songs in this playlist.</h1>
+                <h1 class="no-song">This playlist don't have any song.</h1>
             </div>
             <div class="iframeContainer" v-if="showPlayer">
                 <iframe
@@ -159,7 +159,7 @@ export default {
             this.spotifyId = this.$store.state.Songs[this.songId].song.spotifySongID
         },
         toggleArrow(event) {
-
+            
             const filters = document.getElementsByClassName("arrowDiv")
             const clickedDivId = event.target.id;
             const divElement = document.getElementById(clickedDivId);

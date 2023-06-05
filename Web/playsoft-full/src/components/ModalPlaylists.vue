@@ -3,7 +3,7 @@
     <div class="modal" @click.stop>
       <img class="check" alt="" />
       <h6>Choose a playlist</h6>
-      <h4 @click="add(track, playlist.playlist.playlistID)" id="animated" v-for="playlist in PlayListsList"
+      <h4 @click="add(track, playlist.playlist.playlistID)" id="animated" v-for="playlist in filteredPlaylists"
         :key="playlist.playlist.playlistID">
         {{ playlist.playlist.playListName }}</h4>
       <button>Go Home</button>
@@ -21,6 +21,11 @@ export default {
     return {
       plId: 0
     };
+  },
+  computed: {
+    filteredPlaylists() {
+      return this.PlayListsList.filter(playlist => playlist.playlist.owner == true);
+    }
   },
   methods: {
     add(track, playlistID) {
