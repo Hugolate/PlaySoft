@@ -41,7 +41,7 @@ export default {
     width: 100%;
     margin-left: 40px;
     gap: 15px;
-    align-items: center;
+    align-items: flex-start;
 }
 .form {
     height: 20vh;

@@ -4,10 +4,38 @@
             <BackGround></BackGround>
             <CreatePlaylistForm></CreatePlaylistForm>
             <v-container style="flex-direction: column;" class="fill-height secciones pl-cont">
-                <p @click="redirigir(playlist.playlist.playListName)" id="animated" class="playlists wavy"
-                    v-for="playlist in PlayListsList" :key="playlist.playlist.playlistID">{{ playlist.playlist.playListName }}</p>
+                <p @click="redirigir(playlist.playlist.playListName)"
+                    v-on:click.right.prevent="deleteAlert(playlist.playlist)" id="animated" class="playlists wavy"
+                    v-for="playlist in PlayListsList" :key="playlist.playlist.playlistID">{{ playlist.playlist.playListName
+                    }}</p>
             </v-container>
         </v-main>
+        <v-dialog v-model="dialog" width="500">
+            <v-card>
+                <v-card-title class="headline grey lighten-2" primary-title>
+                    Delete/Remove list?
+                </v-card-title>
+
+                <v-card-text
+                    style="display: flex; flex-direction: column;justify-content: center;align-items: center;margin-top: 15px">
+                    <h2>{{ removePl.playListName }}</h2>
+                    <p>{{ removePl.playlistDescription }}</p>
+                </v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn color="blue-grey darken-1" @click="dialog = false"  style="color: white;">
+                        Cancel
+                    </v-btn>
+                    <v-btn color="red darken-1" style="color: white;">
+                        Delete
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-app>
 </template>
 
@@ -19,7 +47,8 @@ export default {
     props: ["productItem", "PlayListsList"],
     data: function () {
         return {
-            
+            dialog: false,
+            removePl: "",
         }
     },
     components: { CreatePlaylistForm, BackGround },
@@ -32,7 +61,7 @@ export default {
     },
     methods: {
         redirigir(nombrepl) {
-            
+
             let vue = this;
             console.log(vue.PlayListsList[0].playlist)
             for (let index = 0; index < vue.PlayListsList.length; index++) {
@@ -42,6 +71,17 @@ export default {
                     this.$router.push({ path: '/songs' })
                 }
             }
+        },
+        deleteAlert(playlist) {
+            this.dialog = true;
+            this.removePl = playlist;
+
+            console.log(this.removePl)
+        },
+        delete(){
+           if(this.removePl.owner){
+            console.log("a")
+           }
         }
     }
 

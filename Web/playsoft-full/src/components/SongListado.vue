@@ -3,7 +3,7 @@
         <v-main class="pa-0">
             <BackGround></BackGround>
             <div v-if="isloading"></div>
-            <div v-else-if="songList.length > 0 ">
+            <div v-else-if="songList.length > 0 || arrow">
                 <div class="main-opt">
                     <p class="pl-name">{{ songList[0].playlist.playListName }}</p>
                     <div style="display: flex;">
@@ -119,6 +119,7 @@ export default {
         return {
             button: require('../assets/images/next-button.png'),
             isloading: true,
+            arrow : false,
             showPlayer: false,
             spotifyId: '',
             songId: 0
@@ -159,7 +160,7 @@ export default {
             this.spotifyId = this.$store.state.Songs[this.songId].song.spotifySongID
         },
         toggleArrow(event) {
-            
+            this.arrow = true;
             const filters = document.getElementsByClassName("arrowDiv")
             const clickedDivId = event.target.id;
             const divElement = document.getElementById(clickedDivId);
