@@ -15,6 +15,7 @@ using Azure.Identity;
 using Microsoft.Extensions.Logging;
 using Serilog.Extensions.Logging.File;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 var client = new SecretClient(new Uri("https://PlaysoftVault.vault.azure.net/"), new DefaultAzureCredential());
@@ -101,12 +102,18 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
+var filePath = Path.Combine(Directory.GetCurrentDirectory(), "logFile.log");
+if (!Directory.Exists(Path.GetDirectoryName(filePath)))
+{
+    Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+}
 
 ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
 {
     builder.AddConsole();
     builder.AddDebug();
     builder.AddFile("logFile.log");
+
 });
 
 builder.Services.AddMvc();

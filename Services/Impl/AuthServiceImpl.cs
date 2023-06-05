@@ -19,6 +19,7 @@ public class AuthServiceImpl : IAuthService
     {
         try
         {
+            _logger.LogError("log");
             var authLoginOutDTO = _authRepository.GetUserByEmail(authLoginInDTO.email);
             if (authLoginOutDTO != null)
             {
