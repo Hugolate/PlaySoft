@@ -40,7 +40,7 @@ public class SongController : ControllerBase
 
     }
 
-    [HttpDelete(), Authorize]
+    [HttpDelete("{songID}"), Authorize]
     public async Task<ActionResult> DeleteSong(int songID)
     {
         if (_songService.DeleteSong(songID))

@@ -27,7 +27,7 @@ public class ArtistController : ControllerBase
 
     }
 
-    [HttpDelete(), Authorize]
+    [HttpDelete("{artistID}"), Authorize]
     public async Task<ActionResult> DeleteArtist(int artistID)
     {
         if (_artistService.DeleteArtist(artistID))

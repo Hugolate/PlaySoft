@@ -17,7 +17,7 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
-    [HttpDelete(), Authorize]
+    [HttpDelete("{userID}"), Authorize]
     public async Task<ActionResult> DeleteUser(int userID)
     {
         if (_userService.DeleteUser(userID))
@@ -38,13 +38,6 @@ public class UserController : ControllerBase
         return BadRequest("User not found");
     }
 
-    [HttpPost("{userID}/playlists"), Authorize]
-    public async Task<ActionResult> AddSongToPlaylist(int userID, [FromBody] LibraryDTO libraryDTO)
-    {
-        libraryDTO.userID = userID;
-        _userService.AddPlaylistToLibrary(libraryDTO);
-        return Ok();
-    }
     /*
         [HttpGet("playlist/{ukid}")]
         public ActionResult<User> getUserPlaylists(int ukid)

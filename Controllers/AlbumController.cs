@@ -27,7 +27,7 @@ public class AlbumController : ControllerBase
 
     }
 
-    [HttpDelete(), Authorize]
+    [HttpDelete("{albumID}"), Authorize]
     public async Task<ActionResult> DeleteAlbum(int albumID)
     {
         if (_albumService.DeleteAlbum(albumID))

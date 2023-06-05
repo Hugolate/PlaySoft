@@ -26,7 +26,7 @@ public class PlaylistController : ControllerBase
         return BadRequest("Create playlist error");
     }
 
-    [HttpDelete(), Authorize]
+    [HttpDelete("{playlistID}"), Authorize]
     public async Task<ActionResult> DeletePlaylist(int pLaylistID)
     {
         if (_pLaylistService.DeletePlaylist(pLaylistID))

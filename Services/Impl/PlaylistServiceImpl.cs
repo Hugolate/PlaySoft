@@ -26,7 +26,7 @@ public class PlaylistServiceImpl : IPLaylistService
         try
         {
             var platlistID = _pLaylistRepository.CreatePlaylist(playlist);
-            
+
             _libraryRepository.NewLine(playlist.userUKID, platlistID);
             _libraryRepository.Save();
             return true;
@@ -83,5 +83,16 @@ public class PlaylistServiceImpl : IPLaylistService
     {
         _playlistLinesRepository.AddSong(playlistLinesDTO);
         _playlistLinesRepository.Save();
+    }
+
+
+    public void AddPlaylistToLibrary(LibraryDTO libraryDTO)
+    {
+        if (libraryDTO.playlistID != null)
+        {
+
+            _libraryRepository.NewLine(libraryDTO.userID, (int)libraryDTO.playlistID);
+            _libraryRepository.Save();
+        }
     }
 }

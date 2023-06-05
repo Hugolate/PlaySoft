@@ -61,13 +61,4 @@ public class UserServiceImpl : IUserService
         }
     }
 
-    public void AddPlaylistToLibrary(LibraryDTO libraryDTO)
-    {
-        if (libraryDTO.playlistID != null)
-        {
-
-            _libraryRepository.NewLine(libraryDTO.userID, (int)libraryDTO.playlistID);
-            _libraryRepository.Save();
-        }
-    }
 }

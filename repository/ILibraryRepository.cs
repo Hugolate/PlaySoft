@@ -6,6 +6,7 @@ namespace PlaySoftBeta.Repository;
 public interface ILibraryRepository
 {
     void NewLine(int userID, int playlistID);
+    void Deleteline(int playlistID);
     void Save();
 
 }

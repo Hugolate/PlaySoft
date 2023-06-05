@@ -28,7 +28,7 @@ namespace PlaySoftBeta.Repository
 
         public List<PlaylistDTO> GetPLaylistList(string name)
         {
-            var userList = _context.Playlists.Include(pl => pl.User).Where(user => user.playListName.Contains(name) || user.User.username.Contains(name)).Where(pl => pl.privacity == true).ToList();
+            var userList = _context.Playlists.Include(pl => pl.User).Where(user => user.playListName.Contains(name) || user.User.username.Contains(name)).Where(pl => pl.privacity == false).ToList();
             return _mapper.Map<List<PlaylistDTO>>(userList);
         }
 

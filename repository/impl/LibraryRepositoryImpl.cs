@@ -15,6 +15,11 @@ namespace PlaySoftBeta.Repository
             _mapper = mapper;
         }
 
+        public void Deleteline(int playlistID)
+        {
+            _context.Library.RemoveRange(_context.Library.Where(lb => lb.playlistsID == playlistID));
+        }
+
         public void NewLine(int userID, int playlistID)
         {
             var line = new Library

@@ -7,5 +7,5 @@ public interface IUserService
     public UserLibraryPlaylistsDTO GetUser(int ukid);
     public bool DeleteUser(int playlistID);
     
-    public void AddPlaylistToLibrary(LibraryDTO libraryDTO);
+
 }
