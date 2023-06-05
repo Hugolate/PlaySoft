@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using SpotifyAPI.Web;
 using Azure.Security.KeyVault.Secrets;
 using Azure.Identity;
+using Microsoft.Extensions.Logging;
+using Serilog.Extensions.Logging.File;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +30,7 @@ builder.Services.AddSingleton<ISpotifyClient>(spotify);
 
 builder.Services.AddDbContext<RepositoryContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("RepositoryContext")));
-        
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(
@@ -98,6 +100,13 @@ builder.Services.AddSwaggerGen(option =>
             new string[]{}
         }
     });
+});
+
+ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
+{
+    builder.AddConsole();
+    builder.AddDebug();
+    builder.AddFile("logFile.log");
 });
 
 builder.Services.AddMvc();
