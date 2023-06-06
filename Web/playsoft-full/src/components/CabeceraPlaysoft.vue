@@ -10,10 +10,10 @@
 
     <v-spacer></v-spacer>
     <router-link to="/">
-      <span class="mr-2" >Home</span>
+      <span class="mr-2">Home</span>
     </router-link>
     <router-link to="/login" v-if="!this.$store.state.logged">
-      <span class="mr-2" >Login</span>
+      <span class="mr-2">Login</span>
     </router-link>
     <!-- <router-link to="/" v-else-if="this.$store.state.logged">
       <div @click="cerrarSesion()">
@@ -21,12 +21,13 @@
       </div>
     </router-link> -->
     <div v-else-if="this.$store.state.logged">
-      <span class="mr-2" ><img :src="$store.state.logo" alt="" width="50px" @click="displayMenu()" style="cursor: pointer;"></span>
+      <span class="mr-2"><img :src="$store.state.logo" alt="" width="50px" @click="displayMenu()"
+          style="cursor: pointer;"></span>
     </div>
     <div class="sub-menu-wrap" id="subMenu">
       <div class="sub-menu">
         <div class="user-info">
-          <img :src="$store.state.logo" >
+          <img :src="$store.state.logo">
           <h3>Welcome, {{ this.$store.state.loginEmail.split("@")[0] }}!</h3>
         </div>
         <hr>
@@ -71,10 +72,10 @@ export default {
       this.$store.state.logged = false;
       localStorage.clear()
       setTimeout(() => {
-        //this.$router.push({ path: '/' }).catch(()=>{});
+        this.$router.push('/').catch(() => { });
         location.reload();
       }, 500);
-      
+
     },
     displayMenu() {
       let subMenu = document.getElementById("subMenu")
@@ -95,7 +96,7 @@ export default {
   transition: max-height 0.5s;
 }
 
-.sub-menu-wrap.open-menu{
+.sub-menu-wrap.open-menu {
   max-height: 400px;
 }
 
@@ -119,7 +120,7 @@ export default {
   margin: 15px 0 10px;
 }
 
-.sub-menu-link{
+.sub-menu-link {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -127,24 +128,24 @@ export default {
   margin: 12px 0;
 }
 
-.sub-menu-link p{
+.sub-menu-link p {
   width: 100%;
 }
 
-.sub-menu-link span{
+.sub-menu-link span {
   font-size: 22px;
   transition: transform 0.5s;
 }
 
-.sub-menu-link:hover span{
+.sub-menu-link:hover span {
   transform: translateX(5px);
 }
 
-.sub-menu-link:hover p{
+.sub-menu-link:hover p {
   font-weight: 600;
 }
 
-.sub-menu-link img{
+.sub-menu-link img {
   width: 40px;
   background: #e5e5e5;
   border-radius: 50%;
@@ -188,4 +189,5 @@ span {
     display: flex;
     justify-content: center;
   }
-}</style>
+}
+</style>

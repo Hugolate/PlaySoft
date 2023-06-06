@@ -87,6 +87,7 @@ export default {
                 this.playLists.splice(this.index1, 1);
                 this.$store.dispatch('deleteRow', { model: "playlist", id: this.removePl.playlistID });
             } else {
+                this.playLists.splice(this.index1, 1);
                 this.$store.dispatch('deleteLibrary', this.removePl.playlistID)
             }
         }

@@ -42,6 +42,8 @@
     </div>
 </template>
 <script>
+import Swal from 'sweetalert2'
+
 export default {
     data() {
         return {
@@ -62,6 +64,7 @@ export default {
             this.$store.state.dialogCompose = false
         },
         nuevaPl() {
+            Swal.fire('Playlist ' + this.$store.state.playListName + ' created!')
             this.$store.dispatch('addPlaylist')
         },
     }

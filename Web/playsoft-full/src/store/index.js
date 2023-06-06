@@ -168,7 +168,7 @@ export default new Vuex.Store({
                 .then(function(response) {
                     console.log(response.data)
                     commit('setSongs', response.data)
-                })
+                }).catch(() => { });
 
         },
 
