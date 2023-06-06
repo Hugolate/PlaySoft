@@ -11,6 +11,7 @@ export default new Vuex.Store({
     state: {
         logo: require('../assets/images/Logo.png'),
         buttonIcon: require('../assets/images/next-button.png'),
+        logoutPicture: require('../assets/images/logout.png'),
         comprobarUsuario: false,
         registerUsername: "",
         registerEmail: "",

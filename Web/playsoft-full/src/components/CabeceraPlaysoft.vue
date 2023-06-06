@@ -1,8 +1,10 @@
 <template>
   <v-app-bar app>
-    <div>
-      <img :src="$store.state.logo" class="logo">
-    </div>
+    <router-link to="/">
+      <div>
+        <img :src="$store.state.logo" class="logo">
+      </div>
+    </router-link>
 
     <div class="d-flex align-center">
       <h1 class="title"> PLAYSOFT </h1>
@@ -10,10 +12,10 @@
 
     <v-spacer></v-spacer>
     <router-link to="/">
-      <span class="mr-2">Home</span>
+      <span class="mr-2 homeIcon">Home</span>
     </router-link>
     <router-link to="/login" v-if="!this.$store.state.logged">
-      <span class="mr-2">Login</span>
+      <span class="mr-2 loginIcon">Login</span>
     </router-link>
     <!-- <router-link to="/" v-else-if="this.$store.state.logged">
       <div @click="cerrarSesion()">
@@ -181,7 +183,7 @@ span {
 }
 
 @media(max-width: 400px) {
-  .mr-2 {
+  .homeIcon {
     display: none;
   }
 
