@@ -1,7 +1,10 @@
 <template>
-    <div class="home">
+    <div class="home" v-if="this.$store.state.usuario == 1">
         <CabeceraPlaysoft></CabeceraPlaysoft>
         <AdminTable></AdminTable>
+    </div>
+    <div v-else>
+        <h1>FORBIDDEN</h1>
     </div>
 </template>
   

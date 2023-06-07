@@ -45,7 +45,11 @@
           <p>Log Out</p>
           <span>></span>
         </a>
-
+        <a v-if="$store.state.usuario == 1 && this.$route.name != 'admin'" class="sub-menu-link" style="cursor: pointer;" @click="adminPageRedirect()">
+          <img :src="$store.state.adminIcon" alt="">
+          <p>Admin Page</p>
+          <span>></span>
+        </a>
       </div>
     </div>
 
@@ -61,6 +65,8 @@ export default {
     }
   },
   mounted: function comprobarUsuario() {
+    console.log(this.$store.state.usuario)
+    console.log(this.$route.name, "A")
     //Comprobar si hay usuario
     // alert(this.$store.state.logged)
     // if (this.$store.state.logged) {
@@ -79,6 +85,10 @@ export default {
       }, 500);
 
     },
+    adminPageRedirect() {
+      this.$router.push({ path: '/admin' })
+    },
+
     displayMenu() {
       let subMenu = document.getElementById("subMenu")
       subMenu.classList.toggle("open-menu")
