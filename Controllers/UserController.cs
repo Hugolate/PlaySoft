@@ -22,9 +22,9 @@ public class UserController : ControllerBase
     {
         if (_userService.DeleteUser(userID))
         {
-            return Ok("Deleted");
+            return Accepted("Deleted");
         }
-        return BadRequest("Playlist not found");
+        return BadRequest("Error on user delete");
     }
 
     [HttpGet("{ukid}"), Authorize]
@@ -37,16 +37,4 @@ public class UserController : ControllerBase
         }
         return BadRequest("User not found");
     }
-
-    /*
-        [HttpGet("playlist/{ukid}")]
-        public ActionResult<User> getUserPlaylists(int ukid)
-        {
-            var playlistList = _userService.getPlaylists(ukid);
-            if (playlistList.Any())
-            {
-                return Ok(playlistList);
-            }
-            return BadRequest("User not found");
-        }*/
 }

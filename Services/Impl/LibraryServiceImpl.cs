@@ -25,17 +25,24 @@ public class LibraryServiceImpl : IlibraryService
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error deleting playlist");
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error on delete");
+            return false;
         }
     }
-    
-    public void AddPlaylistToLibrary(LibraryDTO libraryDTO)
+
+    public bool AddPlaylistToLibrary(LibraryDTO libraryDTO)
     {
-        if (libraryDTO.playlistID != null)
+        try
         {
             _libraryRepository.NewLine(libraryDTO.userID, libraryDTO.playlistID);
             _libraryRepository.Save();
+            return true;
         }
+        catch (Exception e)
+        {
+            _logger.LogError(this.GetType().Name, e, "Error adding playlist to library");
+            return false;
+        }
+
     }
 }

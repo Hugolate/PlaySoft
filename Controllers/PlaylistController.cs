@@ -31,7 +31,7 @@ public class PlaylistController : ControllerBase
     {
         if (_pLaylistService.DeletePlaylist(pLaylistID))
         {
-            return Ok("Deleted");
+            return Accepted("Deleted");
         }
         return BadRequest("Playlist not found");
     }
@@ -41,7 +41,7 @@ public class PlaylistController : ControllerBase
     {
         if (_pLaylistService.EditPLaylist(editPLaylistDTO))
         {
-            return Ok("Playlist Updated");
+            return Content("Playlist Updated");
         }
         return BadRequest("Error updating playlist");
     }
@@ -51,14 +51,15 @@ public class PlaylistController : ControllerBase
     {
         var songsID = _pLaylistService.GetSongsId(playlistID, orderKey, order);
 
-        if (songsID != null && songsID.Any())
+        if (songsID.Any())
         {
             return Ok(songsID);
         }
-        else
+        else if (songsID == null)
         {
-            return BadRequest("You don't have songs yet");
+            return BadRequest("Error get playlist");
         }
+        return BadRequest("You don't have songs yet");
     }
 
 
@@ -66,7 +67,10 @@ public class PlaylistController : ControllerBase
     public async Task<ActionResult> AddSongToPlaylist(int playlistID, [FromBody] PlaylistLinesDTO playlistLinesDTO)
     {
         playlistLinesDTO.playlistID = playlistID;
-        _pLaylistService.AddSongToPlaylist(playlistLinesDTO);
-        return Ok();
+        if (_pLaylistService.AddSongToPlaylist(playlistLinesDTO))
+        {
+            return Ok("Added");
+        }
+        return BadRequest("error adding song to playlist");
     }
 }

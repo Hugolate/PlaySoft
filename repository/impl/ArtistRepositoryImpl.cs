@@ -21,16 +21,9 @@ namespace PlaySoftBeta.Repository
         }
         public void DeleteArtist(int artistID)
         {
-            try
-            {
+  
                 _context.Artist.Remove(_context.Artist.FirstOrDefault(artist => artist.artistID.Equals(artistID)));
-            }
-            catch (System.Exception)
-            {
-
-                throw;
-            }
-
+ 
         }
 
         public ArtistOutDTO GetArtistBySpotifyID(string spotifyArtistID)

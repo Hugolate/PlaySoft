@@ -22,7 +22,16 @@ public class ArtistServiceImpl : IArtistService
 
     public int CountArtists()
     {
-        return _artistRepository.CountArtists();
+        try
+        {
+            return _artistRepository.CountArtists();
+
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(this.GetType().Name, e, "Error count");
+            return -1;
+        }
     }
 
     public bool DeleteArtist(int artistID)
@@ -45,17 +54,12 @@ public class ArtistServiceImpl : IArtistService
             _albumRepository.Save();
             return true;
         }
-        catch (System.Exception)
+        catch (Exception e)
         {
-
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error getAll");
+            return false;
         }
 
-    }
-
-    public override bool Equals(object? obj)
-    {
-        return base.Equals(obj);
     }
 
     public List<ArtistOutDTO> GetAllArtists(int pageNumber)
@@ -64,17 +68,15 @@ public class ArtistServiceImpl : IArtistService
         {
             return _artistRepository.GetAllArtists(pageNumber);
         }
-        catch (System.Exception)
+        catch (Exception e)
         {
 
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error getAll");
+            return null;
         }
     }
 
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
+
 
     public override string? ToString()
     {

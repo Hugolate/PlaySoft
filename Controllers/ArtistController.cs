@@ -22,9 +22,11 @@ public class ArtistController : ControllerBase
     public async Task<ActionResult> GetAll(int pageNumber)
     {
         var artists = _artistService.GetAllArtists(pageNumber);
-
-        return Ok(artists);
-
+        if (artists != null)
+        {
+            return Ok(artists);
+        }
+        return BadRequest("Error getAll");
     }
 
     [HttpDelete("{artistID}"), Authorize]
@@ -32,16 +34,19 @@ public class ArtistController : ControllerBase
     {
         if (_artistService.DeleteArtist(artistID))
         {
-            return Ok("Deleted");
+            return Accepted("Deleted");
         }
-        return BadRequest("Playlist not found");
+        return BadRequest("Error on artist delete");
     }
 
     [HttpGet("count"), Authorize]
     public async Task<ActionResult> Count()
     {
         var artistsNumber = _artistService.CountArtists();
-
+        if (artistsNumber == -1)
+        {
+            return BadRequest("Error count");
+        }
         return Ok(artistsNumber);
 
     }

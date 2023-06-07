@@ -32,10 +32,11 @@ public class UserServiceImpl : IUserService
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error deleting playlist");
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error login");
+            return false;
         }
     }
+
     public UserLibraryPlaylistsDTO GetUser(int ukid)
     {
         try
@@ -57,7 +58,7 @@ public class UserServiceImpl : IUserService
         catch (Exception e)
         {
             _logger.LogError(e, "Error get user");
-            throw;
+            return null;
         }
     }
 

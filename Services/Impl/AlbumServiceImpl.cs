@@ -21,7 +21,15 @@ public class AlbumServiceImpl : IAlbumService
 
     public int CountAlbums()
     {
-        return _albumRepository.CountAlbums();
+        try
+        {
+            return _albumRepository.CountAlbums();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(this.GetType().Name, e, "Count error");
+            return -1;
+        }
     }
     public bool DeleteAlbum(int albumID)
     {
@@ -31,10 +39,10 @@ public class AlbumServiceImpl : IAlbumService
             _artistAlbumRepository.Save();
             return true;
         }
-        catch (System.Exception)
+        catch (Exception e)
         {
-
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error on delete");
+            return false;
         }
     }
 
@@ -44,10 +52,10 @@ public class AlbumServiceImpl : IAlbumService
         {
             return _albumRepository.GetAllAlbums(pageNumber);
         }
-        catch (System.Exception)
+        catch (Exception e)
         {
-
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error getAll");
+            return null;
         }
     }
 }

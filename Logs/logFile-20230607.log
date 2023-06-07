@@ -1,0 +1,91 @@
+2023-06-07T12:12:23.2595106+02:00  [INF] User profile is available. Using '"C:\Users\hugo\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2023-06-07T12:12:23.4223228+02:00  [INF] Now listening on: "https://localhost:7279" (d826f4b8)
+2023-06-07T12:12:23.4224521+02:00  [INF] Now listening on: "http://localhost:5077" (d826f4b8)
+2023-06-07T12:12:23.4326203+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2023-06-07T12:12:23.4332925+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2023-06-07T12:12:23.4339773+02:00  [INF] Content root path: "C:\Users\hugo\Desktop\PlaySoft\" (b5d60022)
+2023-06-07T12:12:48.7963250+02:00 0HMR77UVF9AF7:00000001 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/index.html - - (ca22a1cb)
+2023-06-07T12:12:48.9682613+02:00 0HMR77UVF9AF7:00000001 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/index.html - - - 200 - text/html;charset=utf-8 175.6234ms (791a596a)
+2023-06-07T12:12:49.0101294+02:00 0HMR77UVF9AF7:00000003 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/swagger-ui.css - - (ca22a1cb)
+2023-06-07T12:12:49.0299518+02:00 0HMR77UVF9AF7:00000003 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"' (27b0a520)
+2023-06-07T12:12:49.0302865+02:00 0HMR77UVF9AF7:00000003 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/swagger-ui.css - - - 200 143632 text/css 20.2001ms (791a596a)
+2023-06-07T12:12:49.1472317+02:00 0HMR77UVF9AF7:00000005 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/v1/swagger.json - - (ca22a1cb)
+2023-06-07T12:12:49.1514296+02:00 0HMR77UVF9AF7:00000007 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/favicon-32x32.png - - (ca22a1cb)
+2023-06-07T12:12:49.1560584+02:00 0HMR77UVF9AF7:00000007 [INF] Sending file. Request path: '"/favicon-32x32.png"'. Physical path: '"N/A"' (27b0a520)
+2023-06-07T12:12:49.1562188+02:00 0HMR77UVF9AF7:00000007 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/favicon-32x32.png - - - 200 628 image/png 4.8121ms (791a596a)
+2023-06-07T12:12:49.2570629+02:00 0HMR77UVF9AF7:00000005 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 109.8374ms (791a596a)
+2023-06-07T12:12:56.7003818+02:00 0HMR77UVF9AF7:00000009 [INF] Request starting HTTP/2 DELETE https://localhost:7279/Album/23232 - - (ca22a1cb)
+2023-06-07T12:12:56.7055542+02:00 0HMR77UVF9AF7:00000009 [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T12:12:56.9190536+02:00 0HMR77UVF9AF7:00000009 [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T12:12:56.9201075+02:00 0HMR77UVF9AF7:00000009 [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T12:12:56.9243623+02:00 0HMR77UVF9AF7:00000009 [INF] Executing endpoint '"PlaySoftBeta.Controllers.AlbumController.DeleteAlbum (PlaySoftBeta)"' (500cc934)
+2023-06-07T12:12:56.9679779+02:00 0HMR77UVF9AF7:00000009 [INF] Route matched with "{action = \"DeleteAlbum\", controller = \"Album\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] DeleteAlbum(Int32)" on controller "PlaySoftBeta.Controllers.AlbumController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T12:12:58.8750985+02:00 0HMR77UVF9AF7:00000009 [INF] Executed DbCommand ("79"ms) [Parameters=["@__albumID_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [a].[albumID], [a].[albumName], [a].[image], [a].[releaseDate], [a].[spotifyAlbumID], [a].[totalTracks]
+FROM [Album] AS [a]
+WHERE [a].[albumID] = @__albumID_0" (0723d8ff)
+2023-06-07T12:12:58.8982922+02:00 0HMR77UVF9AF7:00000009 [ERR] AlbumServiceImpl (13e597f6)
+2023-06-07T12:12:58.9001396+02:00 0HMR77UVF9AF7:00000009 [INF] Executing "BadRequestObjectResult", writing value of type '"System.String"'. (605b4265)
+2023-06-07T12:12:58.9089002+02:00 0HMR77UVF9AF7:00000009 [INF] Executed action "PlaySoftBeta.Controllers.AlbumController.DeleteAlbum (PlaySoftBeta)" in 1932.9924ms (afa2e885)
+2023-06-07T12:12:58.9089676+02:00 0HMR77UVF9AF7:00000009 [INF] Executed endpoint '"PlaySoftBeta.Controllers.AlbumController.DeleteAlbum (PlaySoftBeta)"' (99874f2b)
+2023-06-07T12:12:58.9152887+02:00 0HMR77UVF9AF7:00000009 [INF] Request finished HTTP/2 DELETE https://localhost:7279/Album/23232 - - - 400 - text/plain;+charset=utf-8 2214.8637ms (791a596a)
+2023-06-07T12:13:11.2518958+02:00  [INF] Application is shutting down... (90f52c38)
+2023-06-07T12:25:06.7906651+02:00  [INF] User profile is available. Using '"C:\Users\hugo\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2023-06-07T12:25:06.9413510+02:00  [INF] Now listening on: "https://localhost:7279" (d826f4b8)
+2023-06-07T12:25:06.9415019+02:00  [INF] Now listening on: "http://localhost:5077" (d826f4b8)
+2023-06-07T12:25:06.9487525+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2023-06-07T12:25:06.9494342+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2023-06-07T12:25:06.9495162+02:00  [INF] Content root path: "C:\Users\hugo\Desktop\PlaySoft\" (b5d60022)
+2023-06-07T12:25:15.2160145+02:00 0HMR785TTN4T7:00000001 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/index.html - - (ca22a1cb)
+2023-06-07T12:25:15.3723286+02:00 0HMR785TTN4T7:00000001 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/index.html - - - 200 - text/html;charset=utf-8 159.5035ms (791a596a)
+2023-06-07T12:25:15.3909261+02:00 0HMR785TTN4T7:00000003 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/swagger-ui.css - - (ca22a1cb)
+2023-06-07T12:25:15.4063022+02:00 0HMR785TTN4T7:00000003 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"' (27b0a520)
+2023-06-07T12:25:15.4066214+02:00 0HMR785TTN4T7:00000003 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/swagger-ui.css - - - 200 143632 text/css 15.7859ms (791a596a)
+2023-06-07T12:25:15.5906461+02:00 0HMR785TTN4T7:00000005 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/v1/swagger.json - - (ca22a1cb)
+2023-06-07T12:25:15.6183585+02:00 0HMR785TTN4T7:00000007 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/favicon-32x32.png - - (ca22a1cb)
+2023-06-07T12:25:15.6197157+02:00 0HMR785TTN4T7:00000007 [INF] Sending file. Request path: '"/favicon-32x32.png"'. Physical path: '"N/A"' (27b0a520)
+2023-06-07T12:25:15.6199882+02:00 0HMR785TTN4T7:00000007 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/favicon-32x32.png - - - 200 628 image/png 1.5218ms (791a596a)
+2023-06-07T12:25:15.6857675+02:00 0HMR785TTN4T7:00000005 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 95.2345ms (791a596a)
+2023-06-07T12:25:37.8311314+02:00 0HMR785TTN4T7:00000009 [INF] Request starting HTTP/2 POST https://localhost:7279/Playlist application/json 139 (ca22a1cb)
+2023-06-07T12:25:37.8373905+02:00 0HMR785TTN4T7:00000009 [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T12:25:38.0305708+02:00 0HMR785TTN4T7:00000009 [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T12:25:38.0307308+02:00 0HMR785TTN4T7:00000009 [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T12:25:38.0325016+02:00 0HMR785TTN4T7:00000009 [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.CreatePlaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T12:25:38.0634984+02:00 0HMR785TTN4T7:00000009 [INF] Route matched with "{action = \"CreatePlaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] CreatePlaylist(PlaySoftBeta.DTOs.PlaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T12:25:40.1305698+02:00 0HMR785TTN4T7:00000009 [INF] Executed DbCommand ("169"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (DbType = Boolean)"], CommandType='Text', CommandTimeout='30']"
+""SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Playlists] ([UserUKID], [playListName], [playlistDescription], [privacity])
+OUTPUT INSERTED.[playlistID]
+VALUES (@p0, @p1, @p2, @p3);" (0723d8ff)
+2023-06-07T12:25:40.3241966+02:00 0HMR785TTN4T7:00000009 [INF] Executed DbCommand ("114"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Library] ([playlistsID], [userID])
+VALUES (@p0, @p1);" (0723d8ff)
+2023-06-07T12:25:40.3265978+02:00 0HMR785TTN4T7:00000009 [INF] Executing "OkObjectResult", writing value of type '"System.String"'. (605b4265)
+2023-06-07T12:25:40.3339854+02:00 0HMR785TTN4T7:00000009 [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.CreatePlaylist (PlaySoftBeta)" in 2264.7595ms (afa2e885)
+2023-06-07T12:25:40.3340690+02:00 0HMR785TTN4T7:00000009 [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.CreatePlaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T12:25:40.3400352+02:00 0HMR785TTN4T7:00000009 [INF] Request finished HTTP/2 POST https://localhost:7279/Playlist application/json 139 - 200 - text/plain;+charset=utf-8 2508.8712ms (791a596a)
+2023-06-07T12:25:45.1800525+02:00 0HMR785TTN4T7:0000000B [INF] Request starting HTTP/2 POST https://localhost:7279/Playlist application/json 140 (ca22a1cb)
+2023-06-07T12:25:45.1802737+02:00 0HMR785TTN4T7:0000000B [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T12:25:45.1827149+02:00 0HMR785TTN4T7:0000000B [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T12:25:45.1827831+02:00 0HMR785TTN4T7:0000000B [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T12:25:45.1828415+02:00 0HMR785TTN4T7:0000000B [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.CreatePlaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T12:25:45.1834765+02:00 0HMR785TTN4T7:0000000B [INF] Route matched with "{action = \"CreatePlaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] CreatePlaylist(PlaySoftBeta.DTOs.PlaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T12:25:45.2749003+02:00 0HMR785TTN4T7:0000000B [INF] Executed DbCommand ("45"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (DbType = Boolean)"], CommandType='Text', CommandTimeout='30']"
+""SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Playlists] ([UserUKID], [playListName], [playlistDescription], [privacity])
+OUTPUT INSERTED.[playlistID]
+VALUES (@p0, @p1, @p2, @p3);" (0723d8ff)
+2023-06-07T12:25:45.3212917+02:00 0HMR785TTN4T7:0000000B [INF] Executed DbCommand ("45"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Library] ([playlistsID], [userID])
+VALUES (@p0, @p1);" (0723d8ff)
+2023-06-07T12:25:45.3221192+02:00 0HMR785TTN4T7:0000000B [INF] Executing "OkObjectResult", writing value of type '"System.String"'. (605b4265)
+2023-06-07T12:25:45.3225941+02:00 0HMR785TTN4T7:0000000B [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.CreatePlaylist (PlaySoftBeta)" in 139.002ms (afa2e885)
+2023-06-07T12:25:45.3226704+02:00 0HMR785TTN4T7:0000000B [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.CreatePlaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T12:25:45.3229910+02:00 0HMR785TTN4T7:0000000B [INF] Request finished HTTP/2 POST https://localhost:7279/Playlist application/json 140 - 200 - text/plain;+charset=utf-8 142.8970ms (791a596a)
+2023-06-07T12:33:19.0504593+02:00  [INF] Application is shutting down... (90f52c38)

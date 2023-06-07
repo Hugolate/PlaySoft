@@ -33,8 +33,8 @@ public class PlaylistServiceImpl : IPLaylistService
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error creating playlist");
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error on playlist post");
+            return false;
         }
     }
 
@@ -48,8 +48,8 @@ public class PlaylistServiceImpl : IPLaylistService
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error deleting playlist");
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error on delete");
+            return false;
         }
     }
 
@@ -62,8 +62,8 @@ public class PlaylistServiceImpl : IPLaylistService
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error editing playlist");
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error on playlist edit");
+            return false;
         }
     }
 
@@ -75,24 +75,23 @@ public class PlaylistServiceImpl : IPLaylistService
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error get playlist songs");
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error get plylist songs");
+            return null;
         }
     }
-    public void AddSongToPlaylist(PlaylistLinesDTO playlistLinesDTO)
+    public bool AddSongToPlaylist(PlaylistLinesDTO playlistLinesDTO)
     {
-        _playlistLinesRepository.AddSong(playlistLinesDTO);
-        _playlistLinesRepository.Save();
-    }
-
-
-    public void AddPlaylistToLibrary(LibraryDTO libraryDTO)
-    {
-        if (libraryDTO.playlistID != null)
+        try
         {
-
-            _libraryRepository.NewLine(libraryDTO.userID, (int)libraryDTO.playlistID);
-            _libraryRepository.Save();
+            _playlistLinesRepository.AddSong(playlistLinesDTO);
+            _playlistLinesRepository.Save();
+            return true;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(this.GetType().Name, e, "Error add song to playlist");
+            return false;
         }
     }
+
 }

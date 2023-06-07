@@ -33,10 +33,11 @@ public class SongServiceImpl : ISongService
         {
             return _songRepository.GetAllSongs(pageNumber);
         }
-        catch (System.Exception)
+        catch (Exception e)
         {
 
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error getAll");
+            return null;
         }
 
     }
@@ -49,7 +50,7 @@ public class SongServiceImpl : ISongService
         catch (Exception e)
         {
             _logger.LogError(e, "Error get song");
-            throw;
+            return null;
         }
     }
 
@@ -61,10 +62,10 @@ public class SongServiceImpl : ISongService
             _songRepository.Save();
             return true;
         }
-        catch (System.Exception)
+        catch (Exception e)
         {
-
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error on delete");
+            return false;
         }
 
     }
@@ -124,14 +125,23 @@ public class SongServiceImpl : ISongService
 
             return song.songID;
         }
-        catch (System.Exception)
+        catch (Exception e) 
         {
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error getAll");
+            return -1;
         }
     }
 
     public int CountSongs()
     {
-        return _songRepository.CountSongs();
+        try
+        {
+            return _songRepository.CountSongs();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(this.GetType().Name, e, "Error getAll");
+            return -1;
+        }
     }
 }

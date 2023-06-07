@@ -21,7 +21,7 @@ public class LibraryController : ControllerBase
     {
         if (_libraryService.DeleteFromLibrary(playlistID))
         {
-            return Ok("Deleted");
+            return Accepted("Deleted");
         }
         return BadRequest("Playlist not found");
     }

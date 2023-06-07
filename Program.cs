@@ -14,7 +14,7 @@ using Azure.Security.KeyVault.Secrets;
 using Azure.Identity;
 using Microsoft.Extensions.Logging;
 using Serilog.Extensions.Logging.File;
-
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -102,19 +102,16 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-var filePath = Path.Combine(Directory.GetCurrentDirectory(), "logFile.log");
-if (!Directory.Exists(Path.GetDirectoryName(filePath)))
-{
-    Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-}
 
-ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
-{
-    builder.AddConsole();
-    builder.AddDebug();
-    builder.AddFile("logFile.log");
 
-});
+
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+builder.Logging.AddFile("Logs/logFile.log");
+
+
+
+
 
 builder.Services.AddMvc();
 

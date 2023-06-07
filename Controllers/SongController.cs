@@ -24,20 +24,18 @@ public class SongController : ControllerBase
         {
             return Ok(song);
         }
-        else
-        {
-            return BadRequest("Not found");
-        }
-
+        return BadRequest("Song not found");
     }
 
     [HttpGet(), Authorize]
     public async Task<ActionResult> GetAll(int pageNumber)
     {
         var songs = _songService.GetAllSongs(pageNumber);
-
-        return Ok(songs);
-
+        if (songs != null)
+        {
+            return Ok(songs);
+        }
+        return BadRequest("Error getAll");
     }
 
     [HttpDelete("{songID}"), Authorize]
@@ -45,29 +43,31 @@ public class SongController : ControllerBase
     {
         if (_songService.DeleteSong(songID))
         {
-            return Ok("Deleted");
+            return Accepted("Deleted");
         }
-        return BadRequest("Playlist not found");
+        return BadRequest("Error on song delete");
     }
 
     [HttpPost("create-with-artist-album"), Authorize]
     public async Task<ActionResult> AddSong(SongArtistAlbumDTO SongArtistAlbumDTO)
     {
         var songID = _songService.NewSong(SongArtistAlbumDTO.songInDTO, SongArtistAlbumDTO.artistInDTO, SongArtistAlbumDTO.albumInDTO);
-        if (songID != null)
+        if (songID != -1)
         {
             return Ok(songID);
         }
 
-        return BadRequest("Not found");
+        return BadRequest("Post error");
     }
 
     [HttpGet("count"), Authorize]
     public async Task<ActionResult> Count()
     {
         var songsNumber = _songService.CountSongs();
-
-        return Ok(songsNumber);
-
+        if (songsNumber != -1)
+        {
+            return Ok(songsNumber);
+        }
+        return BadRequest("Count error;");
     }
 }

@@ -19,7 +19,6 @@ public class AuthServiceImpl : IAuthService
     {
         try
         {
-            _logger.LogError("log");
             var authLoginOutDTO = _authRepository.GetUserByEmail(authLoginInDTO.email);
             if (authLoginOutDTO != null)
             {
@@ -32,8 +31,8 @@ public class AuthServiceImpl : IAuthService
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error login");
-            throw;
+            _logger.LogError(this.GetType().Name, e, "Error login");
+            return -1;
         }
 
     }
@@ -52,7 +51,7 @@ public class AuthServiceImpl : IAuthService
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error register");
+            _logger.LogError(this.GetType().Name, e, "Error register");
             throw;
         }
 

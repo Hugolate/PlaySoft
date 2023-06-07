@@ -35,13 +35,11 @@ namespace PlaySoftBeta.Repository
         public void EditPLaylist(EditPLaylistDTO editPLaylistDTO)
         {
             var playlist = _context.Playlists.SingleOrDefault(playlist => playlist.playlistID == editPLaylistDTO.playlistID);
-            if (playlist != null)
-            {
-                playlist.playListName = editPLaylistDTO.playListName;
-                playlist.playlistDescription = editPLaylistDTO.playlistDescription;
-                playlist.privacity = editPLaylistDTO.privacity;
-            }
-            //playlist = _mapper.Map<Playlist>(editPLaylistDTO);
+
+            playlist.playListName = editPLaylistDTO.playListName;
+            playlist.playlistDescription = editPLaylistDTO.playlistDescription;
+            playlist.privacity = editPLaylistDTO.privacity;
+
             Save();
         }
 

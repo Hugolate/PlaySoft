@@ -26,11 +26,12 @@ public class AuthController : ControllerBase
             jwt = JwtManager.GenerateToken(user.email),
             ukid = _authService.Login(user),
         };
-        if (AuthTokenDTO.ukid != 0)
+        if (AuthTokenDTO.ukid == 0)
         {
-            return Ok(AuthTokenDTO);
+
+            return BadRequest("User not found");
         }
-        return BadRequest("this user doesn't exist");
+        return Ok(AuthTokenDTO);
     }
 
     [HttpPost("register")]
@@ -40,6 +41,6 @@ public class AuthController : ControllerBase
         {
             return Ok("User registred");
         }
-        return BadRequest("Bad register");
+         return BadRequest("Email in used");
     }
 }
