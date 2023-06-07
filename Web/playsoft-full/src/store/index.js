@@ -110,7 +110,7 @@ export default new Vuex.Store({
         },
 
         setCount(state, count) {
-            state.totalPages = count / 10
+            state.totalPages = Math.round(count / 10)
         },
         /*updatePlaylists(state, id) {
             console.log("Before:", state.PlayLists)
@@ -169,7 +169,7 @@ export default new Vuex.Store({
                 .then(function(response) {
                     console.log(response.data)
                     commit('setSongs', response.data)
-                }).catch(() => { });
+                }).catch(() => {});
 
         },
 
@@ -262,7 +262,7 @@ export default new Vuex.Store({
                         userUKID: user,
                         playlistDescription: state.playlistDescription,
                         privacity: state.privacity,
-                        
+
                     })
                     .then(function(response) {
                         response.data
@@ -279,7 +279,7 @@ export default new Vuex.Store({
                         console.log(e);
                     });
 
-                
+
             } else {
                 this.$store.state.error = true
             }
@@ -304,17 +304,13 @@ export default new Vuex.Store({
                 });
         },
 
-        deleteRow({ commit }, payload) {
-            this.state.adminList
+        deleteRow({ state }, payload) {
+            state.adminList;
             const model = payload.model;
             const id = payload.id;
             console.log(id)
             axios
-                .delete(`https://tfgplaysoft.azurewebsites.net/${model}/${id}`).then(() => {
-                    if (model == "playlist") {
-                        commit('updatePlaylists', id);
-                    }
-                })
+                .delete(`https://tfgplaysoft.azurewebsites.net/${model}/${id}`)
                 .catch(e => {
                     console.log(e);
                 });
@@ -334,6 +330,7 @@ export default new Vuex.Store({
         },
 
         getCount({ commit }, { model }) {
+            console.log(model)
             axios
                 .get(`https://tfgplaysoft.azurewebsites.net/${model}/count`)
                 .then(function(response) {
@@ -381,10 +378,7 @@ export default new Vuex.Store({
         deleteLibrary({ state }, playlistID) {
             state.adminList;
             axios
-                .delete(`https://tfgplaysoft.azurewebsites.net/Library/playlists/${playlistID}`).then(function(response) {
-                    console.log(response)
-
-                })
+                .delete(`https://tfgplaysoft.azurewebsites.net/Library/playlists/${playlistID}`)
                 .catch(e => {
 
                     console.log(e);

@@ -23,18 +23,21 @@
             </div>
 
             <div v-for="(item, index) in adminList" :key="index">
-                <div v-on:click.right.prevent="deleteItem(item.songID)" class="parent hv" v-if="item.songID">
+                <div v-on:click.right.prevent="deleteItem(item.songID), index1 = index" class="parent hv"
+                    v-if="item.songID">
                     <div>{{ item.songID }}</div>
                     <div>{{ item.songName }}</div>
                     <div>{{ item.uri }}</div>
                     <div>{{ item.durationMs }}ms</div>
                 </div>
-                <div v-on:click.right.prevent="deleteItem(item.albumID)" class="parent hv" v-else-if="item.albumID">
+                <div v-on:click.right.prevent="deleteItem(item.albumID), index1 = index" class="parent hv"
+                    v-else-if="item.albumID">
                     <div>{{ item.albumID }}</div>
                     <div>{{ item.albumName }}</div>
                     <div>{{ item.releaseDate }}</div>
                 </div>
-                <div v-on:click.right.prevent="deleteItem(item.artistID)" class="parent hv" v-else-if="item.artistID">
+                <div v-on:click.right.prevent="deleteItem(item.artistID), index1 = index" class="parent hv"
+                    v-else-if="item.artistID">
                     <div>{{ item.artistID }}</div>
                     <div>{{ item.artistName }}</div>
 
@@ -54,10 +57,11 @@
 
 export default {
     name: "adminPage",
-    data() {
+    data: function () {
         return {
             model: "",
-            page: 1
+            page: 1,
+            index1: 0
         }
     },
     computed: {
@@ -75,6 +79,9 @@ export default {
             if (this.page > this.$store.state.totalPages) {
                 this.page = this.$store.state.totalPages
             }
+            if (this.page < 0) {
+                this.page = 0
+            }
             if (event != null) {
                 this.page = 1;
                 this.model = event.target.id;
@@ -83,8 +90,9 @@ export default {
             this.$store.dispatch('getAll', { model: this.model, pageNumber: this.page });
         },
         deleteItem(id) {
+            //this.playLists.splice(this.index1, 1);
             this.$store.dispatch('deleteRow', { model: this.model, id: id });
-            this.getAll(null)
+
         },
         previousPage() {
             console.log("previous")
@@ -162,5 +170,4 @@ input[type=number] {
     text-align: center;
     width: 40px;
     border: black 1px solid;
-}
-</style>
+}</style>

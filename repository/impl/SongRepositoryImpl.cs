@@ -57,7 +57,7 @@ namespace PlaySoftBeta.Repository
 
         public int CountSongs()
         {
-            return _context.Artist.Count();
+            return _context.Songs.Count();
         }
         public void Save()
         {

@@ -5,8 +5,8 @@
             <CreatePlaylistForm></CreatePlaylistForm>
             <v-container style="flex-direction: column;" class="fill-height secciones pl-cont">
                 <p @click="redirigir(playlist.playlist.playListName)"
-                    v-on:click.right.prevent="deleteAlert(playlist.playlist); index1 = index" id="animated" class="playlists wavy"
-                    v-for="(playlist, index) in PlayListsList" :key="playlist.playlist.playlistID">{{
+                    v-on:click.right.prevent="deleteAlert(playlist.playlist); index1 = index" id="animated"
+                    class="playlists wavy" v-for="(playlist, index) in PlayListsList" :key="playlist.playlist.playlistID">{{
                         playlist.playlist.playListName
                     }} {{ index }}
 
@@ -56,7 +56,6 @@ export default {
     },
     components: { CreatePlaylistForm, BackGround },
     mounted: function logged() {
-        console.log(this.$store.state.PlayListsJSON, "ESTA");
         if (!this.$store.state.logged) {
             localStorage.clear()
             this.$router.push({ path: '/' }).catch(() => { });
@@ -78,12 +77,11 @@ export default {
         deleteAlert(playlist) {
             this.dialog = true;
             this.removePl = playlist;
-            console.log(this.removePl)
         },
+        
         deleteLibrary(PlayListsList) {
             this.playLists = PlayListsList;
             if (this.removePl.owner) {
-                alert(this.index1)
                 this.playLists.splice(this.index1, 1);
                 this.$store.dispatch('deleteRow', { model: "playlist", id: this.removePl.playlistID });
             } else {
