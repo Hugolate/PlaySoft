@@ -5,37 +5,38 @@
             <CreatePlaylistForm></CreatePlaylistForm>
             <v-container style="flex-direction: column;" class="fill-height secciones pl-cont">
                 <p @click="redirigir(playlist.playlist.playListName)"
-                    v-on:click.right.prevent="deleteAlert(playlist.playlist)" id="animated" class="playlists wavy"
-                    v-for="playlist in PlayListsList" :key="playlist.playlist.playlistID">{{ playlist.playlist.playListName
-                    }}</p>
+                    v-on:click.right.prevent="deleteAlert(playlist.playlist); index1 = index" id="animated" class="playlists wavy"
+                    v-for="(playlist, index) in PlayListsList" :key="playlist.playlist.playlistID">{{
+                        playlist.playlist.playListName
+                    }} {{ index }}
+
+                    <v-dialog v-model="dialog" width="500">
+                        <v-card>
+                            <v-card-title class="headline grey lighten-2" primary-title>
+                                Delete/Remove list?
+                            </v-card-title>
+
+                            <v-card-text
+                                style="display: flex; flex-direction: column;justify-content: center;align-items: center;margin-top: 15px">
+                                <h2>{{ removePl.playListName }}</h2>
+                                <p>{{ removePl.playlistDescription }}</p>
+                            </v-card-text>
+                            <v-divider></v-divider>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue-grey darken-1" @click="dialog = false" style="color: white;">
+                                    Cancel
+                                </v-btn>
+                                <v-btn @click="deleteLibrary(PlayListsList); dialog = false;" color="red darken-1"
+                                    style="color: white;">
+                                    Delete
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </p>
             </v-container>
         </v-main>
-        <v-dialog v-model="dialog" width="500">
-            <v-card>
-                <v-card-title class="headline grey lighten-2" primary-title>
-                    Delete/Remove list?
-                </v-card-title>
-
-                <v-card-text
-                    style="display: flex; flex-direction: column;justify-content: center;align-items: center;margin-top: 15px">
-                    <h2>{{ removePl.playListName }}</h2>
-                    <p>{{ removePl.playlistDescription }}</p>
-                </v-card-text>
-
-                <v-divider></v-divider>
-
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-
-                    <v-btn color="blue-grey darken-1" @click="dialog = false"  style="color: white;">
-                        Cancel
-                    </v-btn>
-                    <v-btn  @click="deleteLibrary(), dialog = false" color="red darken-1" style="color: white;">
-                        Delete
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
     </v-app>
 </template>
 
@@ -47,8 +48,10 @@ export default {
     props: ["productItem", "PlayListsList"],
     data: function () {
         return {
+            playLists: [],
             dialog: false,
             removePl: "",
+            index1: 0
         }
     },
     components: { CreatePlaylistForm, BackGround },
@@ -75,15 +78,18 @@ export default {
         deleteAlert(playlist) {
             this.dialog = true;
             this.removePl = playlist;
-
             console.log(this.removePl)
         },
-        deleteLibrary(){
-           if(this.removePl.owner){
-            this.$store.dispatch('deleteRow', { model: "playlist", id: this.removePl.playlistID });
-           }else{
-            this.$store.dispatch('deleteLibrary', this.removePl.playlistID)
-           }
+        deleteLibrary(PlayListsList) {
+            this.playLists = PlayListsList;
+            if (this.removePl.owner) {
+                alert(this.index1)
+                this.playLists.splice(this.index1, 1);
+                this.$store.dispatch('deleteRow', { model: "playlist", id: this.removePl.playlistID });
+            } else {
+                this.playLists.splice(this.index1, 1);
+                this.$store.dispatch('deleteLibrary', this.removePl.playlistID)
+            }
         }
     }
 

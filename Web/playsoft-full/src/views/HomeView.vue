@@ -33,7 +33,7 @@ export default {
 
 <style>
 .fondoextra{
-  height: 300vh;
+  height: 345vh;
   z-index: 1;
 }
 </style>

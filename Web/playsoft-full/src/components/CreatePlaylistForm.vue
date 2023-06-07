@@ -2,7 +2,7 @@
     <div id="app" v-cloak style="min-height: 0px;">
         <v-app style="max-height: 0px;">
 
-            <v-layout style="align-items: center; justify-content: flex-end; margin: 10rem;">
+            <v-layout style="position: fixed; bottom: 6%; right: 0%;" class="btnContainer">
                 <v-btn class="btn" @click="compose({})">New Playlist</v-btn>
             </v-layout>
 
@@ -42,6 +42,8 @@
     </div>
 </template>
 <script>
+import Swal from 'sweetalert2'
+
 export default {
     data() {
         return {
@@ -62,6 +64,7 @@ export default {
             this.$store.state.dialogCompose = false
         },
         nuevaPl() {
+            Swal.fire('Playlist ' + this.$store.state.playListName + ' created!')
             this.$store.dispatch('addPlaylist')
         },
     }
@@ -76,5 +79,16 @@ export default {
 .btn {
     margin-top: 150px;
     margin-left: 50px;
+}
+
+.layout {
+    width: 60% !important;
+
+}
+
+.btn:hover {
+    background-color: rgb(189, 15, 180) !important;
+    height: 40px !important;
+    width: 190px;
 }
 </style>

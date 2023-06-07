@@ -127,7 +127,6 @@ export default {
     },
     computed: {
         songList() {
-
             return this.$store.state.Songs;
         },
     },

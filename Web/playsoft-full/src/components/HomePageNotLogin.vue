@@ -45,9 +45,9 @@ export default {
 
         if (this.$store.state.logged) {
             this.$router.push({ path: '/playlists' }).catch(() => { });
-        } else if (!this.$store.state.logged) {
+        }/* else if (!this.$store.state.logged) {
             this.$router.push({ path: '/' }).catch(() => { });
-        }
+        }*/
 
 
     },
