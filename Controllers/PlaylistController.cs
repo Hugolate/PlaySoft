@@ -40,6 +40,7 @@ public class PlaylistController : ControllerBase
     public async Task<ActionResult> EditPLaylist(int playlistID, EditPLaylistDTO editPLaylistDTO)
     {
         editPLaylistDTO.playlistID = playlistID;
+     
         if (_pLaylistService.EditPLaylist(editPLaylistDTO))
         {
             return Content("Playlist Updated");

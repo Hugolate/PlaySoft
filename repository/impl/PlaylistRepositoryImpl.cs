@@ -34,12 +34,15 @@ namespace PlaySoftBeta.Repository
 
         public void EditPLaylist(EditPLaylistDTO editPLaylistDTO)
         {
-            var playlist = _context.Playlists.SingleOrDefault(playlist => playlist.playlistID == editPLaylistDTO.playlistID);
+            int id= editPLaylistDTO.playlistID.GetValueOrDefault();
+          
+            var playlist = _context.Playlists.SingleOrDefault(playlist => playlist.playlistID == id);
+            Console.WriteLine(playlist);
             if (editPLaylistDTO.playListName != null)
             {
                 playlist.playListName = editPLaylistDTO.playListName;
             }
-            if (playlist.playlistDescription != null)
+            if (editPLaylistDTO.playlistDescription != null)
             {
                 playlist.playlistDescription = editPLaylistDTO.playlistDescription;
             }
@@ -48,7 +51,7 @@ namespace PlaySoftBeta.Repository
 
                 playlist.privacity = editPLaylistDTO.privacity;
             }
-//
+            Console.WriteLine(playlist.playlistDescription, playlist.playListName, playlist.privacity);
             Save();
         }
 

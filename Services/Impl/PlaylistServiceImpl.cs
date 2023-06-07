@@ -56,7 +56,8 @@ public class PlaylistServiceImpl : IPLaylistService
     public bool EditPLaylist(EditPLaylistDTO editPLaylistDTO)
     {
         try
-        {
+        {   
+            _logger.LogInformation(editPLaylistDTO.playlistDescription, editPLaylistDTO.playListName, editPLaylistDTO.privacity, editPLaylistDTO.playlistID);
             _pLaylistRepository.EditPLaylist(editPLaylistDTO);
             return true;
         }

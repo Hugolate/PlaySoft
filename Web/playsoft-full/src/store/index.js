@@ -383,12 +383,16 @@ export default new Vuex.Store({
         },
 
         editPlaylist({ commit, state }) {
-
-            axios.put(`https://tfgplaysoft.azurewebsites.net/Playlist${state.PlayListsID}`, {
+            console.log(state.playListName, state.playlistDescription, state.privacity, )
+            axios.put(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}`, {
                 plaListName: state.playListName,
                 playlistDescription: state.playlistDescription,
                 privacity: state.privacity,
-            }).catch(e => {
+            }).then(() => {
+                location.reload()
+            })
+
+            .catch(e => {
                 console.log(e)
             })
             commit('clearForm');
