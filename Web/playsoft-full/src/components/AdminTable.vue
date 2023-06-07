@@ -6,37 +6,37 @@
             <button id="Album" @click="getAll($event)">Album</button>
         </div>
         <div>
-            <div class="parent" v-if="adminList[0].songID">
+            <div class="parent" v-if="list[0].songID">
                 <div>SongID</div>
                 <div>Song Name</div>
                 <div>Song Uri</div>
                 <div>Duration Ms</div>
             </div>
-            <div class="parent" v-else-if="adminList[0].albumID">
+            <div class="parent" v-else-if="list[0].albumID">
                 <div>AlbumId</div>
                 <div>Album Name</div>
                 <div>Release Date</div>
             </div>
-            <div class="parent" v-else-if="adminList[0].artistID">
+            <div class="parent" v-else-if="list[0].artistID">
                 <div>ArtistID</div>
                 <div>Artist Name</div>
             </div>
 
-            <div v-for="(item, index) in adminList" :key="index">
-                <div v-on:click.right.prevent="deleteItem(item.songID), index1 = index" class="parent hv"
-                    v-if="item.songID">
+            <div v-for="(item, index) in list" :key="index">
+                <div v-on:click.right.prevent="deleteItem(item.songID, index)" class="parent hv" v-if="item.songID"
+                    :id="index">
                     <div>{{ item.songID }}</div>
                     <div>{{ item.songName }}</div>
                     <div>{{ item.uri }}</div>
                     <div>{{ item.durationMs }}ms</div>
                 </div>
-                <div v-on:click.right.prevent="deleteItem(item.albumID), index1 = index" class="parent hv"
+                <div :id="index" v-on:click.right.prevent="deleteItem(item.albumID, index)" class="parent hv"
                     v-else-if="item.albumID">
                     <div>{{ item.albumID }}</div>
                     <div>{{ item.albumName }}</div>
                     <div>{{ item.releaseDate }}</div>
                 </div>
-                <div v-on:click.right.prevent="deleteItem(item.artistID), index1 = index" class="parent hv"
+                <div :id="index" v-on:click.right.prevent="deleteItem(item.artistID, index)" class="parent hv"
                     v-else-if="item.artistID">
                     <div>{{ item.artistID }}</div>
                     <div>{{ item.artistName }}</div>
@@ -61,11 +61,13 @@ export default {
         return {
             model: "",
             page: 1,
-            index1: 0
+            index1: 0,
+            adminList: [],
+
         }
     },
     computed: {
-        adminList() {
+        list() {
             return this.$store.state.adminList;
         },
     },
@@ -75,25 +77,30 @@ export default {
     },
     methods: {
         getAll(event) {
-            this.$store.dispatch('getCount', { model: this.model });
-            if (this.page > this.$store.state.totalPages) {
-                this.page = this.$store.state.totalPages
-            }
-            if (this.page < 0) {
-                this.page = 0
-            }
+
             if (event != null) {
                 this.page = 1;
                 this.model = event.target.id;
             }
-            console.log(this.model)
+            this.$store.dispatch('getCount', { model: this.model });
+            console.log("pages:", this.$store.state.totalPages)
+            if (this.page > this.$store.state.totalPages) {
+                this.page = this.$store.state.totalPages
+            }
+            if (this.page < 1) {
+                this.page = 1
+            }
+
             this.$store.dispatch('getAll', { model: this.model, pageNumber: this.page });
         },
-        deleteItem(id) {
-            //this.playLists.splice(this.index1, 1);
+        deleteItem(id, index) {
+
+            this.adminList = this.list;
+            this.adminList.splice(index, 1);
             this.$store.dispatch('deleteRow', { model: this.model, id: id });
 
         },
+        
         previousPage() {
             console.log("previous")
             if (this.page > 1) {
@@ -148,7 +155,7 @@ button {
     gap: 12px;
 }
 
-.hv:hover {
+.hv div:hover {
     background-color: rgb(253, 65, 65);
 }
 
@@ -170,4 +177,5 @@ input[type=number] {
     text-align: center;
     width: 40px;
     border: black 1px solid;
-}</style>
+}
+</style>

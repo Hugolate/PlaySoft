@@ -12,6 +12,7 @@ export default new Vuex.Store({
         logo: require('../assets/images/Logo.png'),
         buttonIcon: require('../assets/images/next-button.png'),
         logoutPicture: require('../assets/images/logout.png'),
+        adminIcon: require('../assets/images/adminIcon.png'),
         comprobarUsuario: false,
         registerUsername: "",
         registerEmail: "",
@@ -110,14 +111,9 @@ export default new Vuex.Store({
         },
 
         setCount(state, count) {
-            state.totalPages = Math.round(count / 10)
+            state.totalPages = Math.ceil(count / 10)
         },
-        /*updatePlaylists(state, id) {
-            console.log("Before:", state.PlayLists)
-                //state.PlayLists.filter(item => item.filter(pl => pl.playlistID !== id))
 
-            console.log("Before:", state.PlayLists)
-        },*/
     },
     actions: {
 
@@ -334,7 +330,7 @@ export default new Vuex.Store({
             axios
                 .get(`https://tfgplaysoft.azurewebsites.net/${model}/count`)
                 .then(function(response) {
-
+                    console.log("records:", response.data)
                     commit('setCount', response.data);
 
                 })

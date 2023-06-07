@@ -27,7 +27,7 @@
                                 <v-btn color="blue-grey darken-1" @click="dialog = false" style="color: white;">
                                     Cancel
                                 </v-btn>
-                                <v-btn @click="deleteLibrary(PlayListsList); dialog = false;" color="red darken-1"
+                                <v-btn @click="deleteLibrary(PlayListsList), dialog = false;" color="red darken-1"
                                     style="color: white;">
                                     Delete
                                 </v-btn>
@@ -75,10 +75,11 @@ export default {
             }
         },
         deleteAlert(playlist) {
+            console.log(playlist)
             this.dialog = true;
             this.removePl = playlist;
         },
-        
+
         deleteLibrary(PlayListsList) {
             this.playLists = PlayListsList;
             if (this.removePl.owner) {
