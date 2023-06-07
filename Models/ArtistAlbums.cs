@@ -11,4 +11,4 @@ namespace PlaySoftBeta.Models
         public int artistID { get; set; }
         public Artist Artist { get; set; }
     }
-}
+}//
