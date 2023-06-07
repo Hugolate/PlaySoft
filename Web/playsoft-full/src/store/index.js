@@ -383,9 +383,9 @@ export default new Vuex.Store({
         },
 
         editPlaylist({ commit, state }) {
-            console.log(state.playListName, state.playlistDescription, state.privacity, )
+            console.log(state.playListName)
             axios.put(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}`, {
-                plaListName: state.playListName,
+                playListName: state.playListName,
                 playlistDescription: state.playlistDescription,
                 privacity: state.privacity,
             }).then(() => {
