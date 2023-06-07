@@ -48,7 +48,7 @@ namespace PlaySoftBeta.Repository
 
                 playlist.privacity = editPLaylistDTO.privacity;
             }
-
+//
             Save();
         }
 
