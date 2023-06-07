@@ -36,9 +36,10 @@ public class PlaylistController : ControllerBase
         return BadRequest("Playlist not found");
     }
 
-    [HttpPut(), Authorize]
-    public async Task<ActionResult> EditPLaylist(EditPLaylistDTO editPLaylistDTO)
+    [HttpPut("{playlistID}"), Authorize]
+    public async Task<ActionResult> EditPLaylist(int playlistID, EditPLaylistDTO editPLaylistDTO)
     {
+        editPLaylistDTO.playlistID = playlistID;
         if (_pLaylistService.EditPLaylist(editPLaylistDTO))
         {
             return Content("Playlist Updated");

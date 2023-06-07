@@ -3,13 +3,17 @@
         <v-app style="max-height: 0px;">
 
             <v-layout style="position: fixed; bottom: 6%; right: 0%;" class="btnContainer">
-                <v-btn class="btn" @click="compose({})">New Playlist</v-btn>
+                <v-btn v-if="this.$route.name == 'playlists'" class="btn" @click="compose({})">New Playlist</v-btn>
+                <v-btn v-else class="btn-edit" @click="compose({})">Edit Playlist</v-btn>
             </v-layout>
 
             <v-dialog v-model="$store.state.dialogCompose" width="500">
                 <v-card>
-                    <v-card-title class="headline purple" primary-title>
+                    <v-card-title v-if="this.$route.name == 'playlists'" class="headline purple" primary-title>
                         New PLaylist
+                    </v-card-title>
+                    <v-card-title v-else class="headline purple" primary-title>
+                        Edit PLaylist
                     </v-card-title>
                     <v-alert v-show="error" style="margin: 20px; color: white" color="error" icon="$error"
                         id="alert">Playlist must have a name</v-alert>
@@ -34,7 +38,8 @@
                     </v-card-text>
                     <v-card-actions class="pa-5">
                         <v-btn class="ml-auto" @click="saveDraft()" outlined color="primary">Cancel</v-btn>
-                        <v-btn @click="nuevaPl()" outlined color="primary">Save</v-btn>
+                        <v-btn v-if="this.$route.name == 'playlits'" @click="nuevaPl()" outlined color="primary">Save</v-btn>
+                        <v-btn v-else @click="editPl()" outlined color="primary">Save</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -67,6 +72,10 @@ export default {
             Swal.fire('Playlist ' + this.$store.state.playListName + ' created!')
             this.$store.dispatch('addPlaylist')
         },
+        editPl(){
+            Swal.fire('Playlist edited')
+            this.$store.dispatch('editPlaylist')
+        }
     }
 }
 </script>
@@ -78,6 +87,10 @@ export default {
 
 .btn {
     margin-top: 150px;
+    margin-left: 50px;
+}
+
+.btn-edit{
     margin-left: 50px;
 }
 

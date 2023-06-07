@@ -2,6 +2,7 @@
     <v-app id="inspire">
         <v-main class="pa-0">
             <BackGround></BackGround>
+            <CreatePlaylistForm class="form-edit"></CreatePlaylistForm>
             <div v-if="isloading"></div>
             <div v-else-if="songList.length > 0 || arrow">
                 <div class="main-opt">
@@ -111,6 +112,7 @@
 <script>
 
 import BackGround from '../components/BackGround.vue'
+import CreatePlaylistForm from './CreatePlaylistForm.vue';
 
 
 export default {
@@ -131,7 +133,8 @@ export default {
         },
     },
     components: {
-        BackGround
+        BackGround,
+        CreatePlaylistForm
     },
     async mounted() {
         try {
@@ -396,6 +399,7 @@ section::before {
         transform: translateY(100%);
     }
 }
+
 
 section span {
     position: relative;

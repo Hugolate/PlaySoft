@@ -65,8 +65,6 @@ export default {
     }
   },
   mounted: function comprobarUsuario() {
-    console.log(this.$store.state.usuario)
-    console.log(this.$route.name, "A")
     //Comprobar si hay usuario
     // alert(this.$store.state.logged)
     // if (this.$store.state.logged) {

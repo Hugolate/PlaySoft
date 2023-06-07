@@ -89,3 +89,362 @@ VALUES (@p0, @p1);" (0723d8ff)
 2023-06-07T12:25:45.3226704+02:00 0HMR785TTN4T7:0000000B [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.CreatePlaylist (PlaySoftBeta)"' (99874f2b)
 2023-06-07T12:25:45.3229910+02:00 0HMR785TTN4T7:0000000B [INF] Request finished HTTP/2 POST https://localhost:7279/Playlist application/json 140 - 200 - text/plain;+charset=utf-8 142.8970ms (791a596a)
 2023-06-07T12:33:19.0504593+02:00  [INF] Application is shutting down... (90f52c38)
+2023-06-07T20:00:20.8780057+02:00  [INF] User profile is available. Using '"C:\Users\hugo\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2023-06-07T20:00:21.0855477+02:00  [INF] Now listening on: "https://localhost:7279" (d826f4b8)
+2023-06-07T20:00:21.0856591+02:00  [INF] Now listening on: "http://localhost:5077" (d826f4b8)
+2023-06-07T20:00:21.0913438+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2023-06-07T20:00:21.0922028+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2023-06-07T20:00:21.0922712+02:00  [INF] Content root path: "C:\Users\hugo\Desktop\PlaySoft\" (b5d60022)
+2023-06-07T20:00:26.1544267+02:00 0HMR7G497159I:00000001 [INF] Request starting HTTP/2 GET https://localhost:7279/ - - (ca22a1cb)
+2023-06-07T20:00:26.2543628+02:00 0HMR7G497159I:00000001 [INF] Request finished HTTP/2 GET https://localhost:7279/ - - - 404 0 - 103.6754ms (791a596a)
+2023-06-07T20:00:31.2218828+02:00 0HMR7G497159I:00000003 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/index.html - - (ca22a1cb)
+2023-06-07T20:00:31.3662536+02:00 0HMR7G497159I:00000003 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/index.html - - - 200 - text/html;charset=utf-8 144.3457ms (791a596a)
+2023-06-07T20:00:31.3965488+02:00 0HMR7G497159I:00000005 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/swagger-ui.css - - (ca22a1cb)
+2023-06-07T20:00:31.3973171+02:00 0HMR7G497159I:00000007 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/swagger-ui-bundle.js - - (ca22a1cb)
+2023-06-07T20:00:31.3983520+02:00 0HMR7G497159I:00000009 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/swagger-ui-standalone-preset.js - - (ca22a1cb)
+2023-06-07T20:00:31.4384964+02:00 0HMR7G497159I:00000005 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"' (27b0a520)
+2023-06-07T20:00:31.4392861+02:00 0HMR7G497159I:00000009 [INF] Sending file. Request path: '"/swagger-ui-standalone-preset.js"'. Physical path: '"N/A"' (27b0a520)
+2023-06-07T20:00:31.4414239+02:00 0HMR7G497159I:00000009 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/swagger-ui-standalone-preset.js - - - 200 337162 application/javascript 43.0364ms (791a596a)
+2023-06-07T20:00:31.4414239+02:00 0HMR7G497159I:00000005 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/swagger-ui.css - - - 200 143632 text/css 45.0862ms (791a596a)
+2023-06-07T20:00:31.4657416+02:00 0HMR7G497159I:00000007 [INF] Sending file. Request path: '"/swagger-ui-bundle.js"'. Physical path: '"N/A"' (27b0a520)
+2023-06-07T20:00:31.4660554+02:00 0HMR7G497159I:00000007 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/swagger-ui-bundle.js - - - 200 1092889 application/javascript 68.6123ms (791a596a)
+2023-06-07T20:00:31.6446517+02:00 0HMR7G497159I:0000000B [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/v1/swagger.json - - (ca22a1cb)
+2023-06-07T20:00:31.7392638+02:00 0HMR7G497159I:0000000B [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 94.6470ms (791a596a)
+2023-06-07T20:00:35.2726504+02:00 0HMR7G497159I:0000000D [INF] Request starting HTTP/2 POST https://localhost:7279/Auth/login application/json 47 (ca22a1cb)
+2023-06-07T20:00:35.2779490+02:00 0HMR7G497159I:0000000D [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T20:00:35.2803711+02:00 0HMR7G497159I:0000000D [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T20:00:35.2806837+02:00 0HMR7G497159I:0000000D [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T20:00:35.2835457+02:00 0HMR7G497159I:0000000D [INF] Executing endpoint '"PlaySoftBeta.Controllers.AuthController.GetUser (PlaySoftBeta)"' (500cc934)
+2023-06-07T20:00:35.3174774+02:00 0HMR7G497159I:0000000D [INF] Route matched with "{action = \"GetUser\", controller = \"Auth\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[PlaySoftBeta.DTOs.AuthTokenDTO]] GetUser(PlaySoftBeta.DTOs.AuthLoginInDTO)" on controller "PlaySoftBeta.Controllers.AuthController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T20:00:37.6612912+02:00 0HMR7G497159I:0000000D [INF] Executed DbCommand ("105"ms) [Parameters=["@__userEmail_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [u].[UKID], [u].[email], [u].[password], [u].[username]
+FROM [Users] AS [u]
+WHERE [u].[email] = @__userEmail_0" (0723d8ff)
+2023-06-07T20:00:37.7446555+02:00 0HMR7G497159I:0000000D [INF] Executing "OkObjectResult", writing value of type '"PlaySoftBeta.DTOs.AuthTokenDTO"'. (605b4265)
+2023-06-07T20:00:37.7575461+02:00 0HMR7G497159I:0000000D [INF] Executed action "PlaySoftBeta.Controllers.AuthController.GetUser (PlaySoftBeta)" in 2434.5795ms (afa2e885)
+2023-06-07T20:00:37.7576601+02:00 0HMR7G497159I:0000000D [INF] Executed endpoint '"PlaySoftBeta.Controllers.AuthController.GetUser (PlaySoftBeta)"' (99874f2b)
+2023-06-07T20:00:37.7645563+02:00 0HMR7G497159I:0000000D [INF] Request finished HTTP/2 POST https://localhost:7279/Auth/login application/json 47 - 200 - application/json;+charset=utf-8 2491.8965ms (791a596a)
+2023-06-07T20:01:04.3729080+02:00 0HMR7G497159I:0000000F [INF] Request starting HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 86 (ca22a1cb)
+2023-06-07T20:01:04.3730728+02:00 0HMR7G497159I:0000000F [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T20:01:04.4458204+02:00 0HMR7G497159I:0000000F [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T20:01:04.4458685+02:00 0HMR7G497159I:0000000F [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T20:01:04.4459393+02:00 0HMR7G497159I:0000000F [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T20:01:04.4488248+02:00 0HMR7G497159I:0000000F [INF] Route matched with "{action = \"EditPLaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] EditPLaylist(Int32, PlaySoftBeta.DTOs.EditPLaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T20:01:04.5061861+02:00 0HMR7G497159I:0000000F [INF] Executed DbCommand ("38"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [p].[playlistID], [p].[UserUKID], [p].[playListName], [p].[playlistDescription], [p].[privacity]
+FROM [Playlists] AS [p]
+WHERE 0 = 1" (0723d8ff)
+2023-06-07T20:01:04.5187111+02:00 0HMR7G497159I:0000000F [ERR] PlaylistServiceImpl (35c5a88a)
+2023-06-07T20:01:04.5195903+02:00 0HMR7G497159I:0000000F [INF] Executing "BadRequestObjectResult", writing value of type '"System.String"'. (605b4265)
+2023-06-07T20:01:04.5199018+02:00 0HMR7G497159I:0000000F [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)" in 71.0079ms (afa2e885)
+2023-06-07T20:01:04.5199367+02:00 0HMR7G497159I:0000000F [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T20:01:04.5200949+02:00 0HMR7G497159I:0000000F [INF] Request finished HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 86 - 400 - text/plain;+charset=utf-8 147.2097ms (791a596a)
+2023-06-07T20:01:42.2000329+02:00  [INF] Application is shutting down... (90f52c38)
+2023-06-07T20:01:53.6693766+02:00  [INF] User profile is available. Using '"C:\Users\hugo\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2023-06-07T20:01:53.8516682+02:00  [INF] Now listening on: "https://localhost:7279" (d826f4b8)
+2023-06-07T20:01:53.8517649+02:00  [INF] Now listening on: "http://localhost:5077" (d826f4b8)
+2023-06-07T20:01:53.8573812+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2023-06-07T20:01:53.8617890+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2023-06-07T20:01:53.8620109+02:00  [INF] Content root path: "C:\Users\hugo\Desktop\PlaySoft\" (b5d60022)
+2023-06-07T20:01:59.7827428+02:00 0HMR7G5540BSB:00000001 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/index.html - - (ca22a1cb)
+2023-06-07T20:01:59.9874571+02:00 0HMR7G5540BSB:00000001 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/index.html - - - 200 - text/html;charset=utf-8 208.3964ms (791a596a)
+2023-06-07T20:02:00.0236605+02:00 0HMR7G5540BSB:00000003 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/swagger-ui.css - - (ca22a1cb)
+2023-06-07T20:02:00.0402861+02:00 0HMR7G5540BSB:00000003 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"' (27b0a520)
+2023-06-07T20:02:00.0407795+02:00 0HMR7G5540BSB:00000003 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/swagger-ui.css - - - 200 143632 text/css 17.1255ms (791a596a)
+2023-06-07T20:02:00.1970579+02:00 0HMR7G5540BSB:00000005 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/v1/swagger.json - - (ca22a1cb)
+2023-06-07T20:02:00.1992894+02:00 0HMR7G5540BSB:00000007 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/favicon-32x32.png - - (ca22a1cb)
+2023-06-07T20:02:00.1998718+02:00 0HMR7G5540BSB:00000007 [INF] Sending file. Request path: '"/favicon-32x32.png"'. Physical path: '"N/A"' (27b0a520)
+2023-06-07T20:02:00.2001310+02:00 0HMR7G5540BSB:00000007 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/favicon-32x32.png - - - 200 628 image/png 0.8117ms (791a596a)
+2023-06-07T20:02:00.3119137+02:00 0HMR7G5540BSB:00000005 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 114.7729ms (791a596a)
+2023-06-07T20:02:11.1132970+02:00 0HMR7G5540BSB:00000009 [INF] Request starting HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 86 (ca22a1cb)
+2023-06-07T20:02:11.1213168+02:00 0HMR7G5540BSB:00000009 [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T20:02:11.3733627+02:00 0HMR7G5540BSB:00000009 [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T20:02:11.3735301+02:00 0HMR7G5540BSB:00000009 [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T20:02:11.3774382+02:00 0HMR7G5540BSB:00000009 [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T20:02:11.4170518+02:00 0HMR7G5540BSB:00000009 [INF] Route matched with "{action = \"EditPLaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] EditPLaylist(Int32, PlaySoftBeta.DTOs.EditPLaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T20:02:13.4316625+02:00 0HMR7G5540BSB:00000009 [INF] Executed DbCommand ("75"ms) [Parameters=["@__editPLaylistDTO_playlistID_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [p].[playlistID], [p].[UserUKID], [p].[playListName], [p].[playlistDescription], [p].[privacity]
+FROM [Playlists] AS [p]
+WHERE [p].[playlistID] = @__editPLaylistDTO_playlistID_0" (0723d8ff)
+2023-06-07T20:02:13.6698470+02:00 0HMR7G5540BSB:00000009 [INF] Executed DbCommand ("72"ms) [Parameters=["@p2='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Playlists] SET [playListName] = @p0, [playlistDescription] = @p1
+OUTPUT 1
+WHERE [playlistID] = @p2;" (0723d8ff)
+2023-06-07T20:02:13.6827886+02:00 0HMR7G5540BSB:00000009 [INF] Executing ContentResult with HTTP Response ContentType of "text/plain; charset=utf-8" (7ec2a4e9)
+2023-06-07T20:02:13.6910961+02:00 0HMR7G5540BSB:00000009 [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)" in 2268.5653ms (afa2e885)
+2023-06-07T20:02:13.6911795+02:00 0HMR7G5540BSB:00000009 [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T20:02:13.6979497+02:00 0HMR7G5540BSB:00000009 [INF] Request finished HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 86 - 200 16 text/plain;+charset=utf-8 2584.6228ms (791a596a)
+2023-06-07T20:02:16.1892365+02:00 0HMR7G5540BSB:0000000B [INF] Request starting HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 86 (ca22a1cb)
+2023-06-07T20:02:16.1894860+02:00 0HMR7G5540BSB:0000000B [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T20:02:16.1925495+02:00 0HMR7G5540BSB:0000000B [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T20:02:16.1929865+02:00 0HMR7G5540BSB:0000000B [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T20:02:16.1931383+02:00 0HMR7G5540BSB:0000000B [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T20:02:16.1936000+02:00 0HMR7G5540BSB:0000000B [INF] Route matched with "{action = \"EditPLaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] EditPLaylist(Int32, PlaySoftBeta.DTOs.EditPLaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T20:02:16.2363383+02:00 0HMR7G5540BSB:0000000B [INF] Executed DbCommand ("37"ms) [Parameters=["@__editPLaylistDTO_playlistID_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [p].[playlistID], [p].[UserUKID], [p].[playListName], [p].[playlistDescription], [p].[privacity]
+FROM [Playlists] AS [p]
+WHERE [p].[playlistID] = @__editPLaylistDTO_playlistID_0" (0723d8ff)
+2023-06-07T20:02:16.2370143+02:00 0HMR7G5540BSB:0000000B [INF] Executing ContentResult with HTTP Response ContentType of "text/plain; charset=utf-8" (7ec2a4e9)
+2023-06-07T20:02:16.2372722+02:00 0HMR7G5540BSB:0000000B [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)" in 43.5799ms (afa2e885)
+2023-06-07T20:02:16.2373027+02:00 0HMR7G5540BSB:0000000B [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T20:02:16.2374499+02:00 0HMR7G5540BSB:0000000B [INF] Request finished HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 86 - 200 16 text/plain;+charset=utf-8 48.2319ms (791a596a)
+2023-06-07T20:02:26.0165286+02:00 0HMR7G5540BSB:0000000D [INF] Request starting HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 58 (ca22a1cb)
+2023-06-07T20:02:26.0166901+02:00 0HMR7G5540BSB:0000000D [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T20:02:26.0220459+02:00 0HMR7G5540BSB:0000000D [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T20:02:26.0220949+02:00 0HMR7G5540BSB:0000000D [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T20:02:26.0221350+02:00 0HMR7G5540BSB:0000000D [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T20:02:26.0222101+02:00 0HMR7G5540BSB:0000000D [INF] Route matched with "{action = \"EditPLaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] EditPLaylist(Int32, PlaySoftBeta.DTOs.EditPLaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T20:02:26.1179525+02:00 0HMR7G5540BSB:0000000D [INF] Executed DbCommand ("37"ms) [Parameters=["@__editPLaylistDTO_playlistID_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [p].[playlistID], [p].[UserUKID], [p].[playListName], [p].[playlistDescription], [p].[privacity]
+FROM [Playlists] AS [p]
+WHERE [p].[playlistID] = @__editPLaylistDTO_playlistID_0" (0723d8ff)
+2023-06-07T20:02:26.1578914+02:00 0HMR7G5540BSB:0000000D [INF] Executed DbCommand ("39"ms) [Parameters=["@p1='?' (DbType = Int32), @p0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Playlists] SET [playListName] = @p0
+OUTPUT 1
+WHERE [playlistID] = @p1;" (0723d8ff)
+2023-06-07T20:02:26.1940747+02:00 0HMR7G5540BSB:0000000D [ERR] An exception occurred in the database while saving changes for context type '"RepositoryContext"'."
+""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'playListName', table 'playsoft-bbdd.dbo.Playlists'; column does not allow nulls. UPDATE fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnly(Int32 commandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:268929be-400e-49f4-9381-f0ac0347b2b4
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__107_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)" (170f029e)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'playListName', table 'playsoft-bbdd.dbo.Playlists'; column does not allow nulls. UPDATE fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnly(Int32 commandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:268929be-400e-49f4-9381-f0ac0347b2b4
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__107_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at PlaySoftBeta.Repository.PlaylistRepository.Save() in C:\Users\hugo\Desktop\PlaySoft\repository\impl\PlaylistRepositoryImpl.cs:line 60
+   at PlaySoftBeta.Repository.PlaylistRepository.EditPLaylist(EditPLaylistDTO editPLaylistDTO) in C:\Users\hugo\Desktop\PlaySoft\repository\impl\PlaylistRepositoryImpl.cs:line 43
+   at PlaySoftBeta.Services.PlaylistServiceImpl.EditPLaylist(EditPLaylistDTO editPLaylistDTO) in C:\Users\hugo\Desktop\PlaySoft\Services\Impl\PlaylistServiceImpl.cs:line 60
+2023-06-07T20:02:26.1958689+02:00 0HMR7G5540BSB:0000000D [ERR] PlaylistServiceImpl (35c5a88a)
+2023-06-07T20:02:26.1977409+02:00 0HMR7G5540BSB:0000000D [INF] Executing "BadRequestObjectResult", writing value of type '"System.String"'. (605b4265)
+2023-06-07T20:02:26.1984672+02:00 0HMR7G5540BSB:0000000D [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)" in 176.2021ms (afa2e885)
+2023-06-07T20:02:26.1985043+02:00 0HMR7G5540BSB:0000000D [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T20:02:26.1988920+02:00 0HMR7G5540BSB:0000000D [INF] Request finished HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 58 - 400 - text/plain;+charset=utf-8 182.1261ms (791a596a)
+2023-06-07T20:02:35.0782492+02:00 0HMR7G5540BSB:0000000F [INF] Request starting HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 51 (ca22a1cb)
+2023-06-07T20:02:35.0783097+02:00 0HMR7G5540BSB:0000000F [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T20:02:35.0785867+02:00 0HMR7G5540BSB:0000000F [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T20:02:35.0786197+02:00 0HMR7G5540BSB:0000000F [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T20:02:35.0786483+02:00 0HMR7G5540BSB:0000000F [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T20:02:35.0787144+02:00 0HMR7G5540BSB:0000000F [INF] Route matched with "{action = \"EditPLaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] EditPLaylist(Int32, PlaySoftBeta.DTOs.EditPLaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T20:02:35.1162910+02:00 0HMR7G5540BSB:0000000F [INF] Executed DbCommand ("37"ms) [Parameters=["@__editPLaylistDTO_playlistID_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [p].[playlistID], [p].[UserUKID], [p].[playListName], [p].[playlistDescription], [p].[privacity]
+FROM [Playlists] AS [p]
+WHERE [p].[playlistID] = @__editPLaylistDTO_playlistID_0" (0723d8ff)
+2023-06-07T20:02:35.1624362+02:00 0HMR7G5540BSB:0000000F [INF] Executed DbCommand ("46"ms) [Parameters=["@p1='?' (DbType = Int32), @p0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Playlists] SET [playlistDescription] = @p0
+OUTPUT 1
+WHERE [playlistID] = @p1;" (0723d8ff)
+2023-06-07T20:02:35.1626516+02:00 0HMR7G5540BSB:0000000F [INF] Executing ContentResult with HTTP Response ContentType of "text/plain; charset=utf-8" (7ec2a4e9)
+2023-06-07T20:02:35.1630631+02:00 0HMR7G5540BSB:0000000F [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)" in 84.3033ms (afa2e885)
+2023-06-07T20:02:35.1630962+02:00 0HMR7G5540BSB:0000000F [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T20:02:35.1632629+02:00 0HMR7G5540BSB:0000000F [INF] Request finished HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 51 - 200 16 text/plain;+charset=utf-8 85.0120ms (791a596a)
+2023-06-07T20:02:45.2442603+02:00 0HMR7G5540BSB:00000011 [INF] Request starting HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 58 (ca22a1cb)
+2023-06-07T20:02:45.2443862+02:00 0HMR7G5540BSB:00000011 [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T20:02:45.2447235+02:00 0HMR7G5540BSB:00000011 [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T20:02:45.2447535+02:00 0HMR7G5540BSB:00000011 [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T20:02:45.2447873+02:00 0HMR7G5540BSB:00000011 [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T20:02:45.2448502+02:00 0HMR7G5540BSB:00000011 [INF] Route matched with "{action = \"EditPLaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] EditPLaylist(Int32, PlaySoftBeta.DTOs.EditPLaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T20:02:45.2829540+02:00 0HMR7G5540BSB:00000011 [INF] Executed DbCommand ("37"ms) [Parameters=["@__editPLaylistDTO_playlistID_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [p].[playlistID], [p].[UserUKID], [p].[playListName], [p].[playlistDescription], [p].[privacity]
+FROM [Playlists] AS [p]
+WHERE [p].[playlistID] = @__editPLaylistDTO_playlistID_0" (0723d8ff)
+2023-06-07T20:02:45.3222488+02:00 0HMR7G5540BSB:00000011 [INF] Executed DbCommand ("37"ms) [Parameters=["@p2='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Playlists] SET [playListName] = @p0, [playlistDescription] = @p1
+OUTPUT 1
+WHERE [playlistID] = @p2;" (0723d8ff)
+2023-06-07T20:02:45.3243036+02:00 0HMR7G5540BSB:00000011 [ERR] An exception occurred in the database while saving changes for context type '"RepositoryContext"'."
+""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'playListName', table 'playsoft-bbdd.dbo.Playlists'; column does not allow nulls. UPDATE fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnly(Int32 commandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:268929be-400e-49f4-9381-f0ac0347b2b4
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__107_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)" (170f029e)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'playListName', table 'playsoft-bbdd.dbo.Playlists'; column does not allow nulls. UPDATE fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnly(Int32 commandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:268929be-400e-49f4-9381-f0ac0347b2b4
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__107_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at PlaySoftBeta.Repository.PlaylistRepository.Save() in C:\Users\hugo\Desktop\PlaySoft\repository\impl\PlaylistRepositoryImpl.cs:line 60
+   at PlaySoftBeta.Repository.PlaylistRepository.EditPLaylist(EditPLaylistDTO editPLaylistDTO) in C:\Users\hugo\Desktop\PlaySoft\repository\impl\PlaylistRepositoryImpl.cs:line 43
+   at PlaySoftBeta.Services.PlaylistServiceImpl.EditPLaylist(EditPLaylistDTO editPLaylistDTO) in C:\Users\hugo\Desktop\PlaySoft\Services\Impl\PlaylistServiceImpl.cs:line 60
+2023-06-07T20:02:45.3246541+02:00 0HMR7G5540BSB:00000011 [ERR] PlaylistServiceImpl (35c5a88a)
+2023-06-07T20:02:45.3249570+02:00 0HMR7G5540BSB:00000011 [INF] Executing "BadRequestObjectResult", writing value of type '"System.String"'. (605b4265)
+2023-06-07T20:02:45.3251317+02:00 0HMR7G5540BSB:00000011 [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)" in 80.243ms (afa2e885)
+2023-06-07T20:02:45.3251591+02:00 0HMR7G5540BSB:00000011 [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T20:02:45.3255214+02:00 0HMR7G5540BSB:00000011 [INF] Request finished HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 58 - 400 - text/plain;+charset=utf-8 81.3025ms (791a596a)
+2023-06-07T20:05:21.3493576+02:00  [INF] Application is shutting down... (90f52c38)
+2023-06-07T20:05:33.0814704+02:00  [INF] User profile is available. Using '"C:\Users\hugo\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2023-06-07T20:05:33.2182155+02:00  [INF] Now listening on: "https://localhost:7279" (d826f4b8)
+2023-06-07T20:05:33.2183370+02:00  [INF] Now listening on: "http://localhost:5077" (d826f4b8)
+2023-06-07T20:05:33.2254677+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2023-06-07T20:05:33.2260950+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2023-06-07T20:05:33.2261418+02:00  [INF] Content root path: "C:\Users\hugo\Desktop\PlaySoft\" (b5d60022)
+2023-06-07T20:06:58.9479844+02:00  [INF] Application is shutting down... (90f52c38)
+2023-06-07T20:07:11.9954142+02:00  [INF] User profile is available. Using '"C:\Users\hugo\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2023-06-07T20:07:12.1318699+02:00  [INF] Now listening on: "https://localhost:7279" (d826f4b8)
+2023-06-07T20:07:12.1320281+02:00  [INF] Now listening on: "http://localhost:5077" (d826f4b8)
+2023-06-07T20:07:12.1385524+02:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2023-06-07T20:07:12.1392922+02:00  [INF] Hosting environment: "Development" (c3307c92)
+2023-06-07T20:07:12.1396323+02:00  [INF] Content root path: "C:\Users\hugo\Desktop\PlaySoft\" (b5d60022)
+2023-06-07T20:07:16.0985590+02:00 0HMR7G83CLI71:00000001 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/index.html - - (ca22a1cb)
+2023-06-07T20:07:16.2824395+02:00 0HMR7G83CLI71:00000001 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/index.html - - - 200 - text/html;charset=utf-8 188.0440ms (791a596a)
+2023-06-07T20:07:16.3399128+02:00 0HMR7G83CLI71:00000003 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/swagger-ui.css - - (ca22a1cb)
+2023-06-07T20:07:16.3559576+02:00 0HMR7G83CLI71:00000003 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"' (27b0a520)
+2023-06-07T20:07:16.3562581+02:00 0HMR7G83CLI71:00000003 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/swagger-ui.css - - - 200 143632 text/css 16.4026ms (791a596a)
+2023-06-07T20:07:16.4539187+02:00 0HMR7G83CLI71:00000005 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/v1/swagger.json - - (ca22a1cb)
+2023-06-07T20:07:16.4582648+02:00 0HMR7G83CLI71:00000007 [INF] Request starting HTTP/2 GET https://localhost:7279/swagger/favicon-32x32.png - - (ca22a1cb)
+2023-06-07T20:07:16.4586384+02:00 0HMR7G83CLI71:00000007 [INF] Sending file. Request path: '"/favicon-32x32.png"'. Physical path: '"N/A"' (27b0a520)
+2023-06-07T20:07:16.4587373+02:00 0HMR7G83CLI71:00000007 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/favicon-32x32.png - - - 200 628 image/png 0.4797ms (791a596a)
+2023-06-07T20:07:16.5591048+02:00 0HMR7G83CLI71:00000005 [INF] Request finished HTTP/2 GET https://localhost:7279/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 105.1781ms (791a596a)
+2023-06-07T20:07:32.6249844+02:00 0HMR7G83CLI71:00000009 [INF] Request starting HTTP/2 PUT https://localhost:7279/Playlist/1 application/json 86 (ca22a1cb)
+2023-06-07T20:07:32.6315973+02:00 0HMR7G83CLI71:00000009 [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T20:07:32.8504540+02:00 0HMR7G83CLI71:00000009 [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T20:07:32.8507992+02:00 0HMR7G83CLI71:00000009 [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T20:07:32.8538934+02:00 0HMR7G83CLI71:00000009 [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T20:07:32.8974074+02:00 0HMR7G83CLI71:00000009 [INF] Route matched with "{action = \"EditPLaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] EditPLaylist(Int32, PlaySoftBeta.DTOs.EditPLaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T20:07:34.9755083+02:00 0HMR7G83CLI71:00000009 [INF] Executed DbCommand ("73"ms) [Parameters=["@__editPLaylistDTO_playlistID_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [p].[playlistID], [p].[UserUKID], [p].[playListName], [p].[playlistDescription], [p].[privacity]
+FROM [Playlists] AS [p]
+WHERE [p].[playlistID] = @__editPLaylistDTO_playlistID_0" (0723d8ff)
+2023-06-07T20:07:34.9994962+02:00 0HMR7G83CLI71:00000009 [ERR] PlaylistServiceImpl (35c5a88a)
+2023-06-07T20:07:35.0015820+02:00 0HMR7G83CLI71:00000009 [INF] Executing "BadRequestObjectResult", writing value of type '"System.String"'. (605b4265)
+2023-06-07T20:07:35.0077533+02:00 0HMR7G83CLI71:00000009 [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)" in 2104.3757ms (afa2e885)
+2023-06-07T20:07:35.0078282+02:00 0HMR7G83CLI71:00000009 [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T20:07:35.0170837+02:00 0HMR7G83CLI71:00000009 [INF] Request finished HTTP/2 PUT https://localhost:7279/Playlist/1 application/json 86 - 400 - text/plain;+charset=utf-8 2392.0693ms (791a596a)
+2023-06-07T20:07:37.9529579+02:00 0HMR7G83CLI71:0000000B [INF] Request starting HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 86 (ca22a1cb)
+2023-06-07T20:07:37.9530902+02:00 0HMR7G83CLI71:0000000B [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T20:07:37.9552209+02:00 0HMR7G83CLI71:0000000B [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T20:07:37.9552978+02:00 0HMR7G83CLI71:0000000B [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T20:07:37.9554552+02:00 0HMR7G83CLI71:0000000B [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T20:07:37.9557033+02:00 0HMR7G83CLI71:0000000B [INF] Route matched with "{action = \"EditPLaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] EditPLaylist(Int32, PlaySoftBeta.DTOs.EditPLaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T20:07:38.0023750+02:00 0HMR7G83CLI71:0000000B [INF] Executed DbCommand ("39"ms) [Parameters=["@__editPLaylistDTO_playlistID_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [p].[playlistID], [p].[UserUKID], [p].[playListName], [p].[playlistDescription], [p].[privacity]
+FROM [Playlists] AS [p]
+WHERE [p].[playlistID] = @__editPLaylistDTO_playlistID_0" (0723d8ff)
+2023-06-07T20:07:38.0819395+02:00 0HMR7G83CLI71:0000000B [INF] Executing ContentResult with HTTP Response ContentType of "text/plain; charset=utf-8" (7ec2a4e9)
+2023-06-07T20:07:38.0830048+02:00 0HMR7G83CLI71:0000000B [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)" in 126.9987ms (afa2e885)
+2023-06-07T20:07:38.0830748+02:00 0HMR7G83CLI71:0000000B [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T20:07:38.0834815+02:00 0HMR7G83CLI71:0000000B [INF] Request finished HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 86 - 200 16 text/plain;+charset=utf-8 130.5180ms (791a596a)
+2023-06-07T20:07:44.7490051+02:00 0HMR7G83CLI71:0000000D [INF] Request starting HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 58 (ca22a1cb)
+2023-06-07T20:07:44.7491123+02:00 0HMR7G83CLI71:0000000D [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T20:07:44.7513644+02:00 0HMR7G83CLI71:0000000D [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T20:07:44.7515015+02:00 0HMR7G83CLI71:0000000D [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T20:07:44.7515491+02:00 0HMR7G83CLI71:0000000D [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T20:07:44.7516422+02:00 0HMR7G83CLI71:0000000D [INF] Route matched with "{action = \"EditPLaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] EditPLaylist(Int32, PlaySoftBeta.DTOs.EditPLaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T20:07:44.8488397+02:00 0HMR7G83CLI71:0000000D [INF] Executed DbCommand ("37"ms) [Parameters=["@__editPLaylistDTO_playlistID_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [p].[playlistID], [p].[UserUKID], [p].[playListName], [p].[playlistDescription], [p].[privacity]
+FROM [Playlists] AS [p]
+WHERE [p].[playlistID] = @__editPLaylistDTO_playlistID_0" (0723d8ff)
+2023-06-07T20:07:44.8495239+02:00 0HMR7G83CLI71:0000000D [INF] Executing ContentResult with HTTP Response ContentType of "text/plain; charset=utf-8" (7ec2a4e9)
+2023-06-07T20:07:44.8497307+02:00 0HMR7G83CLI71:0000000D [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)" in 97.9158ms (afa2e885)
+2023-06-07T20:07:44.8497657+02:00 0HMR7G83CLI71:0000000D [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T20:07:44.8499089+02:00 0HMR7G83CLI71:0000000D [INF] Request finished HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 58 - 200 16 text/plain;+charset=utf-8 100.9037ms (791a596a)
+2023-06-07T20:07:49.0591125+02:00 0HMR7G83CLI71:0000000F [INF] Request starting HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 23 (ca22a1cb)
+2023-06-07T20:07:49.0592543+02:00 0HMR7G83CLI71:0000000F [INF] CORS policy execution successful. (5409d6ef)
+2023-06-07T20:07:49.0600862+02:00 0HMR7G83CLI71:0000000F [INF] CORS policy execution failed. (09b6f179)
+2023-06-07T20:07:49.0601300+02:00 0HMR7G83CLI71:0000000F [INF] Request origin "https://localhost:7279" does not have permission to access the resource. (a03d560b)
+2023-06-07T20:07:49.0601715+02:00 0HMR7G83CLI71:0000000F [INF] Executing endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (500cc934)
+2023-06-07T20:07:49.0602486+02:00 0HMR7G83CLI71:0000000F [INF] Route matched with "{action = \"EditPLaylist\", controller = \"Playlist\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] EditPLaylist(Int32, PlaySoftBeta.DTOs.EditPLaylistDTO)" on controller "PlaySoftBeta.Controllers.PlaylistController" ("PlaySoftBeta"). (122b2fdf)
+2023-06-07T20:07:49.0982872+02:00 0HMR7G83CLI71:0000000F [INF] Executed DbCommand ("37"ms) [Parameters=["@__editPLaylistDTO_playlistID_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(2) [p].[playlistID], [p].[UserUKID], [p].[playListName], [p].[playlistDescription], [p].[privacity]
+FROM [Playlists] AS [p]
+WHERE [p].[playlistID] = @__editPLaylistDTO_playlistID_0" (0723d8ff)
+2023-06-07T20:07:49.0985825+02:00 0HMR7G83CLI71:0000000F [INF] Executing ContentResult with HTTP Response ContentType of "text/plain; charset=utf-8" (7ec2a4e9)
+2023-06-07T20:07:49.0987921+02:00 0HMR7G83CLI71:0000000F [INF] Executed action "PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)" in 38.4905ms (afa2e885)
+2023-06-07T20:07:49.0988293+02:00 0HMR7G83CLI71:0000000F [INF] Executed endpoint '"PlaySoftBeta.Controllers.PlaylistController.EditPLaylist (PlaySoftBeta)"' (99874f2b)
+2023-06-07T20:07:49.0989762+02:00 0HMR7G83CLI71:0000000F [INF] Request finished HTTP/2 PUT https://localhost:7279/Playlist/131 application/json 23 - 200 16 text/plain;+charset=utf-8 39.8610ms (791a596a)
+2023-06-07T20:08:08.7380426+02:00  [INF] Application is shutting down... (90f52c38)

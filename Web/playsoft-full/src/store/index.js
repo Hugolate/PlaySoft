@@ -155,7 +155,7 @@ export default new Vuex.Store({
         },
 
         getSongs({ commit, state }, { order, orderKey }) {
-
+            console.log(state.PlayListsID)
             let url = (`https://tfgplaysoft.azurewebsites.net/Playlist/${state.PlayListsID}`);
             if (order != undefined && order != null && orderKey != undefined && orderKey != null) {
                 url += `?orderKey=${orderKey}&order=${order}`
@@ -281,6 +281,7 @@ export default new Vuex.Store({
             }
 
         },
+
         doRegister({ state }) {
             axios
                 .post("https://tfgplaysoft.azurewebsites.net/Auth/register", {
@@ -379,6 +380,18 @@ export default new Vuex.Store({
 
                     console.log(e);
                 });
+        },
+
+        editPlaylist({ commit, state }) {
+
+            axios.put(`https://tfgplaysoft.azurewebsites.net/Playlist${state.PlayListsID}`, {
+                plaListName: state.playListName,
+                playlistDescription: state.playlistDescription,
+                privacity: state.privacity,
+            }).catch(e => {
+                console.log(e)
+            })
+            commit('clearForm');
         }
     },
     plugins: [createPersistedState()]
