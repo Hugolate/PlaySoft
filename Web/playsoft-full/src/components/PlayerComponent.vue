@@ -1,23 +1,37 @@
 <template>
-    <div class="home">
-        <iframe
-            style="border-radius:50px; position: absolute; z-index: 1; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 40%;"
-            :src="'https://open.spotify.com/embed/track/' + id + '?utm_source=generator'" width="100%" height="352"
-            frameBorder="0" allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <div>
 
     </div>
 </template>
   
 <script>
-
+import { SecretClient } from '@azure/keyvault-secrets'
+import { DefaultAzureCredential } from '@azure/identity';
 export default {
     name: 'PlayerComponent',
     data() {
         return {
-            id: '2f0Ft2XdvNSMSY5TUlZgEz'
+
         };
     },
+    mounted: async function () {
+        // Create a secret client using the DefaultAzureCredential
+        const credential = new DefaultAzureCredential();
+
+        const url = `https://playsoftvault.vault.azure.net/`;
+        const client = new SecretClient(url, credential);
+
+        // Get a secret by name
+        const secretName = "your-secret-name";
+        const secret = await client.getSecret(secretName);
+
+        // Use the secret value
+        console.log(secret.value);
+
+    },
+    methods: {
+
+    }
 }
 </script>
   
