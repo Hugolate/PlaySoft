@@ -40,7 +40,7 @@ public class PlaylistController : ControllerBase
     public async Task<ActionResult> EditPLaylist(int playlistID, EditPLaylistDTO editPLaylistDTO)
     {
         editPLaylistDTO.playlistID = playlistID;
-     
+
         if (_pLaylistService.EditPLaylist(editPLaylistDTO))
         {
             return Content("Playlist Updated");
@@ -74,5 +74,16 @@ public class PlaylistController : ControllerBase
             return Ok("Added");
         }
         return BadRequest("error adding song to playlist");
+    }
+
+    [HttpDelete("{playlistID}/songs"), Authorize]
+    public async Task<ActionResult> DeletePlaylist(int playlistID, [FromBody] PlaylistLinesDTO playlistLinesDTO)
+    {
+        playlistLinesDTO.playlistID = playlistID;
+        if (_pLaylistService.DeleteSongFromPlaylist(playlistLinesDTO))
+        {
+            return Accepted("Deleted");
+        }
+        return BadRequest("Playlist not found");
     }
 }

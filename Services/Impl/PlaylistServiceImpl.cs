@@ -56,7 +56,7 @@ public class PlaylistServiceImpl : IPLaylistService
     public bool EditPLaylist(EditPLaylistDTO editPLaylistDTO)
     {
         try
-        {   
+        {
             _logger.LogInformation(editPLaylistDTO.playlistDescription, editPLaylistDTO.playListName, editPLaylistDTO.privacity, editPLaylistDTO.playlistID);
             _pLaylistRepository.EditPLaylist(editPLaylistDTO);
             return true;
@@ -95,4 +95,18 @@ public class PlaylistServiceImpl : IPLaylistService
         }
     }
 
+    public bool DeleteSongFromPlaylist(PlaylistLinesDTO line)
+    {
+        try
+        {
+            _playlistLinesRepository.DeleteLine(line);
+            _playlistLinesRepository.Save();
+            return true;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(this.GetType().Name, e, "Error on delete");
+            return false;
+        }
+    }
 }

@@ -7,6 +7,7 @@ public interface IPLaylistService
 {
     public bool CreatePlaylist(PlaylistDTO playlist);
 
+    public bool DeleteSongFromPlaylist(PlaylistLinesDTO line);
     public bool DeletePlaylist(int playlistID);
     public bool EditPLaylist(EditPLaylistDTO editPLaylistDTO);
     public bool AddSongToPlaylist(PlaylistLinesDTO playlistLinesDTO);
