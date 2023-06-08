@@ -18,6 +18,9 @@
     "homepage": "https://github.com/Hugolate/PlaySoft#readme",
     "dependencies": {
         "@azure/identity": "^3.2.2",
-        "@azure/keyvault-secrets": "^4.7.0"
+        "@azure/keyvault-secrets": "^4.7.0",
+        "spotify-web-api-js": "^1.5.2",
+        "spotify-web-sdk": "^0.7.2",
+        "vue-head": "^2.2.0"
     }
 }

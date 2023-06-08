@@ -56,6 +56,11 @@ export default {
     },
     components: { CreatePlaylistForm, BackGround },
     mounted: function logged() {
+        let uri = window.location.hash.substring(1);
+        let params = new URLSearchParams(uri);
+        let token = params.get("access_token");
+
+        this.$store.state.spotifyToken = token;
         if (!this.$store.state.logged) {
             localStorage.clear()
             this.$router.push({ path: '/' }).catch(() => { });

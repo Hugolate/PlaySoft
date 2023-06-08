@@ -6,6 +6,7 @@ import vuetify from './plugins/vuetify'
 import VueCompositionAPI from '@vue/composition-api'
 import axiosSetUp from "./axiosSetUp";
 
+
 axiosSetUp();
 Vue.config.productionTip = false
 

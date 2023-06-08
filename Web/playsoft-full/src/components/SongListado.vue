@@ -55,7 +55,7 @@
                     <div style="padding-top: 10px;" class="songs grid" v-for="(song, index) in songList" :key="song.songID">
                         <div class="head">
                             <div style="margin-right: 40px; cursor: pointer;"
-                                @click="getSpotifyId(song.song.spotifySongID), getSongId(index), showPlayer = true">
+                                @click="getSpotifyId(song.song.spotifySongID), getSongId(index), auth(index), showPlayer = true">
 
                                 <svg height="40" fill="purple" id="Layer_1" style="enable-background:new 0 0 512 512;"
                                     version="1.1" viewBox="0 0 512 512" width="40" xml:space="preserve"
@@ -64,8 +64,7 @@
                                         d="M405.2,232.9L126.8,67.2c-3.4-2-6.9-3.2-10.9-3.2c-10.9,0-19.8,9-19.8,20H96v344h0.1c0,11,8.9,20,19.8,20  c4.1,0,7.5-1.4,11.2-3.4l278.1-165.5c6.6-5.5,10.8-13.8,10.8-23.1C416,246.7,411.8,238.5,405.2,232.9z" />
                                 </svg>
                             </div>
-                            <img :src="song.song.album.image"
-                                style="width: 40px;height: 40px;" alt="">
+                            <img :src="song.song.album.image" style="width: 40px;height: 40px;" alt="">
                             <p style="max-width: 20px;" class="songName">{{ song.song.songName }} </p>
                         </div>
                         <div>
@@ -81,6 +80,7 @@
                         </div>
                     </div>
                 </v-container>
+                <div style="position: absolute; top: 200px; z-index: 99; color: white;" @click="a()">AAA</div>
             </div>
             <div v-else>
                 <h1 class="no-song">This playlist don't have any song.</h1>
@@ -111,6 +111,7 @@
 
 <script>
 
+import axios from 'axios';
 import BackGround from '../components/BackGround.vue'
 import CreatePlaylistForm from './CreatePlaylistForm.vue';
 
@@ -121,7 +122,7 @@ export default {
         return {
             button: require('../assets/images/next-button.png'),
             isloading: true,
-            arrow : false,
+            arrow: false,
             showPlayer: false,
             spotifyId: '',
             songId: 0
@@ -137,16 +138,87 @@ export default {
         CreatePlaylistForm
     },
     async mounted() {
+
+        var query = window.location.hash.substring(1);
+        var params = new URLSearchParams(query);
+        var accessToken = params.get("access_token");
+        this.$store.state.spotifyToken = accessToken;
+        console.log(accessToken)
+        //this.$store.state.spotifyToken = accessToken;
         try {
             this.$store.dispatch('getSongs', { undefined, orderKey: undefined });
         } catch (error) {
             console.error('Error fetching song list:', error);
         } finally {
             this.isloading = false;
-            console.log(this.isloading)
         }
     },
     methods: {
+        async a() {
+            var data = {
+                context_uri: "spotify:track:1FrrTw07gsREPEiS3WOiu3",
+                position_ms: 0
+            }
+            const response = await fetch('https://api.spotify.com/v1/me/player/play', {
+                method: 'PUT',
+                mode: 'cors',
+                headers: {
+                    Authorization: `Bearer ${this.$store.state.spotifyToken}`,
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify(data)
+            })
+            console.log(response)
+
+            console.log(`Bearer ${this.$store.state.spotifyToken}`)
+            axios.get('https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy', {
+                headers: {
+
+                }
+            }).catch(e => console.log(e))
+        },
+        auth(index) {
+            let token = this.$store.state.spotifyToken
+            console.log(token)
+            if (token == null) {
+
+                this.$store.dispatch('getSpotifyToken')
+            } else {
+                let list = this.$store.state.Songs;
+                console.log(list.length, "  - ", index)
+                const queue = []
+                for (let i = index; i < list.length; i++) {
+                    queue.push(`spotify:track:${list[i].song.spotifySongID}`);
+                    console.log(list[i].song.songName)
+                }
+                for (let i = 0; i < index; i++) {
+                    queue.push(`spotify:track:${list[i].song.spotifySongID}`);
+                    console.log(list[i].song.songName)
+                }
+
+                const body = {
+                    uris: queue,
+                    "position_ms": 0,
+                }
+                console.log(JSON.stringify(body));
+                console.log(queue)
+                fetch("https://api.spotify.com/v1/me/player/shuffle?state=false", {
+                    method: "PUT",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                },)
+                fetch("https://api.spotify.com/v1/me/player/play", {
+                    method: "PUT",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify(body)
+                }).catch(e => console.log(e))
+            }
+
+
+        },
         getSpotifyId(spotifyId) {
             this.spotifyId = spotifyId
         },

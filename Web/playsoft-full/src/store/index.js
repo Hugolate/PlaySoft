@@ -5,6 +5,7 @@ import createPersistedState from 'vuex-persistedstate'
 import router from '@/router';
 
 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -396,6 +397,19 @@ export default new Vuex.Store({
                 console.log(e)
             })
             commit('clearForm');
+        },
+        getSpotifyToken() {
+            const clientId = 'ab06cb9da71b4009bd3623e37baf825d';
+            const redirectUri = 'http://localhost:8080/songs';
+            const scope = 'user-read-private     user-read-email user-read-playback-state user-modify-playback-state  user-read-currently-playing app-remote-control';
+
+            const authorizeUrl = new URL('https://accounts.spotify.com/authorize');
+            authorizeUrl.searchParams.append('response_type', 'token');
+            authorizeUrl.searchParams.append('client_id', clientId);
+            authorizeUrl.searchParams.append('scope', scope);
+            authorizeUrl.searchParams.append('redirect_uri', redirectUri);
+            console.log(authorizeUrl.toString());
+            window.location.href = authorizeUrl.toString()
         }
     },
     plugins: [createPersistedState()]

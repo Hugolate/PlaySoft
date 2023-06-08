@@ -25,7 +25,7 @@ var clientSecret = await client.GetSecretAsync("clientSecret");
 var config = SpotifyClientConfig
   .CreateDefault()
   .WithAuthenticator(new ClientCredentialsAuthenticator(clientId.Value.Value, clientSecret.Value.Value));
-
+Console.WriteLine(config);
 var spotify = new SpotifyClient(config);
 builder.Services.AddSingleton<ISpotifyClient>(spotify);
 
