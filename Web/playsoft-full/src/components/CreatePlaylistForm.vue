@@ -38,7 +38,7 @@
                     </v-card-text>
                     <v-card-actions class="pa-5">
                         <v-btn class="ml-auto" @click="saveDraft()" outlined color="primary">Cancel</v-btn>
-                        <v-btn v-if="this.$route.name == 'playlits'" @click="nuevaPl()" outlined color="primary">Save</v-btn>
+                        <v-btn v-if="this.$route.name == 'playlists'" @click="nuevaPl()" outlined color="primary">Save</v-btn>
                         <v-btn v-else @click="editPl()" outlined color="primary">Save</v-btn>
                     </v-card-actions>
                 </v-card>
