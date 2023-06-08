@@ -34,7 +34,7 @@
                     </v-card-text>
                     <v-card-actions class="pa-5">
                         <v-btn class="ml-auto" @click="saveDraft()" outlined color="primary">Cancel</v-btn>
-                        <v-btn @click="nuevaPl()" outlined color="primary">Save</v-btn>
+                        <v-btn @click="nuevaPl(), saveDraft()" outlined color="primary">Save</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -64,7 +64,14 @@ export default {
             this.$store.state.dialogCompose = false
         },
         nuevaPl() {
-            Swal.fire('Playlist ' + this.$store.state.playListName + ' created!')
+            
+            Swal.fire({
+                
+                icon: 'success',
+                title: 'Playlist ' + this.$store.state.playListName + ' created!',
+                showConfirmButton: false,
+                timer: 1500
+            })
             this.$store.dispatch('addPlaylist')
         },
     }
