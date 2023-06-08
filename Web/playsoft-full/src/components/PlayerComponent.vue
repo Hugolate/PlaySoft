@@ -6,7 +6,7 @@
   
 <script>
 import { SecretClient } from '@azure/keyvault-secrets'
-import { DefaultAzureCredential } from '@azure/identity';
+import { InteractiveBrowserCredential } from '@azure/identity';
 export default {
     name: 'PlayerComponent',
     data() {
@@ -15,18 +15,20 @@ export default {
         };
     },
     mounted: async function () {
+        
         // Create a secret client using the DefaultAzureCredential
-        const credential = new DefaultAzureCredential();
-
+        const credential = new InteractiveBrowserCredential({
+            clientId: "d949fc9c-ef24-4fae-b04c-caa2493d9ad7",
+        });
         const url = `https://playsoftvault.vault.azure.net/`;
         const client = new SecretClient(url, credential);
 
         // Get a secret by name
-        const secretName = "your-secret-name";
+        const secretName = "client-id";
         const secret = await client.getSecret(secretName);
 
         // Use the secret value
-        console.log(secret.value);
+        console.log("AA", secret.value);
 
     },
     methods: {

@@ -2,6 +2,7 @@
     <div>
         <CabeceraPlaysoft></CabeceraPlaysoft>
         <SongListado></SongListado>
+        <PlayerComponent></PlayerComponent>
         <SearchBar style="position: absolute; top: 20%; left: 0%;"></SearchBar>
     </div>
 </template> 
@@ -10,12 +11,16 @@
 import CabeceraPlaysoft from '@/components/CabeceraPlaysoft.vue';
 import SongListado from '@/components/SongListado.vue';
 import SearchBar from '@/components/SearchBar.vue';
+import PlayerComponent from '../components/PlayerComponent.vue';
 
 export default {
     name: 'HomeView',
     components: {
-        CabeceraPlaysoft, SongListado, SearchBar
-    },
+    CabeceraPlaysoft,
+    SongListado,
+    SearchBar,
+    PlayerComponent
+},
     data() {
         return {
             languages: [
