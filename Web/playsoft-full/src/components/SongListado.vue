@@ -84,7 +84,7 @@
             <div v-else>
                 <h1 class="no-song">This playlist don't have any song.</h1>
             </div>
- 
+
         </v-main>
     </v-app>
 </template>
@@ -118,12 +118,16 @@ export default {
         CreatePlaylistForm
     },
     async mounted() {
+
+        setTimeout(() => {
+            console.log("XX")
+            this.$store.dispatch('getPlaybackStatus');
+        }, 2000);
         var query = window.location.hash.substring(1);
         var params = new URLSearchParams(query);
         var accessToken = params.get("access_token");
 
         if (accessToken != null) {
-            console.log("token changed")
             this.$store.state.spotifyToken = accessToken;
             this.$store.dispatch('setSpotifyToken', accessToken)
         }
@@ -133,7 +137,6 @@ export default {
             this.$store.dispatch('getSpotifyToken')
         }
 
-        console.log(this.$store.state.spotifyToken)
 
         try {
             this.$store.dispatch('getSongs', { undefined, orderKey: undefined });
@@ -144,10 +147,12 @@ export default {
         }
     },
     methods: {
-        play(index) {
-          //  this.$store.dispatch('getPlaybackStatus')
+        async play(index) {
+
+            this.$store.dispatch('getPlaybackStatus');
+
             let token = this.$store.state.spotifyToken
-            console.log(token)
+
 
             let list = this.$store.state.Songs;
 
@@ -164,26 +169,24 @@ export default {
             const body = {
                 uris: queue,
                 "position_ms": 0,
+                device_id: this.$store.state.device_id
             }
 
-            console.log("queue:", queue)
-            fetch("https://api.spotify.com/v1/me/player/shuffle?state=false", {
-                method: "PUT",
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            },)
+
             fetch("https://api.spotify.com/v1/me/player/play", {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify(body)
+
             }).catch(e => console.log(e))
 
 
 
         },
+
+
         getSpotifyId(spotifyId) {
             this.spotifyId = spotifyId
         },

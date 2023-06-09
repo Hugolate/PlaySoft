@@ -2,8 +2,8 @@
     <div>
         <div class="player">
             <div @click="previousSong()">Previous</div>
-            <div  @click="togglePlay()">Play/Pause</div>
-            <div @click="previousSong()">Next</div>
+            <div @click="togglePlay()">Play/Pause</div>
+            <div @click="nextSong()">Next</div>
         </div>
     </div>
 </template>
@@ -25,39 +25,62 @@ export default {
                 "src",
                 "https://sdk.scdn.co/spotify-player.js"
             );
+
             document.head.appendChild(sdk);
         }
-        window.onSpotifyWebPlaybackSDKReady = () => {
-            const token = this.$store.state.spotifyToken;
-            this.player = new window.Spotify.Player({
-                name: 'Playsoft Web',
-                getOAuthToken: cb => { cb(token); },
-                volume: 0.5
+       
 
-            });
-            console.log(this.player)
-            this.player.addListener('ready', ({ device_id }) => {
-                this.$store.state.device_id = device_id;
-                console.log('Ready with Device ID', device_id);
-            });
 
-            // Not Ready
-            this.player.addListener('not_ready', ({ device_id }) => {
-                console.log('Device ID has gone offline', device_id);
-            });
+            window.onSpotifyWebPlaybackSDKReady = async () => {
+                const token = this.$store.state.spotifyToken;
+                this.player = await new window.Spotify.Player({
+                    name: 'Playsoft Web',
+                    getOAuthToken: cb => { cb(token); },
+                    volume: 0.5
 
-            this.player.connect().then(console.log("CONECTADO"));
-        }
+                });
+                this.$store.state.player = this.player;
+                console.log(this.$store.state.player, "STORE PLAYER")
+                console.log(this.player, "player")
+                this.player.addListener('ready', ({ device_id }) => {
+                    this.$store.state.device_id = device_id;
+                    console.log('Ready with Device ID', device_id);
+                });
+                this.player.addListener('autoplay_failed', () => {
+                    console.log('Autoplay is not allowed by the browser autoplay rules');
+                });
+                // Not Ready
+                this.player.addListener('not_ready', ({ device_id }) => {
+                    console.log('Device ID has gone offline', device_id);
+                });
+
+                this.player.connect().then(console.log("CONECTADO"))
+
+                this.player.on('playback_error', ({ message }) => {
+                    console.error('Failed to perform playback', message);
+                });
+                this.player.on('playback_error', ({ message }) => {
+                    console.error('Failed to perform playback', message);
+                });
+            }
+        
     },
     methods: {
         togglePlay() {
-            this.player.previousTrack();
+            console.log(this.$store.state.player)
+            this.$store.state.player.togglePlay().then(() => {
+                console.log('Toggled playback!');
+            });
         },
         nextSong() {
-            this.player.togglePlay();
+            this.$store.state.player.nextTrack().then(() => {
+                console.log('Skipped to next track!');
+            });
         },
         previousSong() {
-            this.player.nextTrack();
+            this.$store.state.player.previousTrack().then(() => {
+                console.log('Set to previous track!');
+            });
         },
     }
 
@@ -66,7 +89,7 @@ export default {
 
   
 <style>
-.player{
+.player {
     display: flex;
     flex-direction: row;
     justify-content: center;

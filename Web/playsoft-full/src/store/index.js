@@ -62,7 +62,8 @@ export default new Vuex.Store({
         adminList: [],
         totalPages: 0,
         spotifyToken: "",
-        device_id: ""
+        device_id: "",
+        player: ""
     },
     getters: {
         getUsuario(state) {
@@ -406,7 +407,7 @@ export default new Vuex.Store({
         getSpotifyToken() {
             const clientId = 'ab06cb9da71b4009bd3623e37baf825d';
             const redirectUri = 'http://localhost:8080/songs';
-            const scope = 'user-read-private     user-read-email user-read-playback-state user-modify-playback-state  user-read-currently-playing app-remote-control streaming';
+            const scope = 'user-read-private user-read-email user-read-playback-state user-modify-playback-state  user-read-currently-playing app-remote-control streaming';
 
             const authorizeUrl = new URL('https://accounts.spotify.com/authorize');
             authorizeUrl.searchParams.append('response_type', 'token');
@@ -417,36 +418,40 @@ export default new Vuex.Store({
             window.location.href = authorizeUrl.toString()
         },
         getPlaybackStatus({ state, dispatch }) {
-            let a = state.spotifyToken
-            console.log(a)
             fetch("https://api.spotify.com/v1/me/player", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${state.spotifyToken}`
                 }
             }).then(response => {
-                console.log(response)
-                dispatch('transferPlayback');
+                console.log("PLAYBACK STATUS", response.status)
+                if (response.status == 204) {
+                    dispatch('transferPlayback');
+                }
             })
         },
         transferPlayback({ state }) {
-            console.log(state.device_id, "DEVICE_ID")
-            const devices = [state.device_id]
+            const devices = []
+            devices.push(state.device_id)
+            console.log(devices, "DEVICE_ID")
 
             const body = {
                 device_ids: devices,
                 play: true
             }
+            console.log(JSON.stringify(body), "bod")
             fetch("https://api.spotify.com/v1/me/player", {
                 method: "PUT",
                 headers: {
-                    Authorization: `Bearer ${state.spotifyToken}`
+                    Authorization: `Bearer ${state.spotifyToken}`,
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(body)
             }).then(response => {
                 console.log(response)
             })
-        }
+        },
+
     },
     plugins: [createPersistedState()]
 })
