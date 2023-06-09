@@ -55,7 +55,7 @@
                     <div style="padding-top: 10px;" class="songs grid" v-for="(song, index) in songList" :key="song.songID">
                         <div class="head">
                             <div style="margin-right: 40px; cursor: pointer;"
-                                @click="getSpotifyId(song.song.spotifySongID), getSongId(index), showPlayer = true">
+                                @click="getSpotifyId(song.song.spotifySongID), getSongId(index), play(index), showPlayer = true">
 
                                 <svg height="40" fill="purple" id="Layer_1" style="enable-background:new 0 0 512 512;"
                                     version="1.1" viewBox="0 0 512 512" width="40" xml:space="preserve"
@@ -64,8 +64,7 @@
                                         d="M405.2,232.9L126.8,67.2c-3.4-2-6.9-3.2-10.9-3.2c-10.9,0-19.8,9-19.8,20H96v344h0.1c0,11,8.9,20,19.8,20  c4.1,0,7.5-1.4,11.2-3.4l278.1-165.5c6.6-5.5,10.8-13.8,10.8-23.1C416,246.7,411.8,238.5,405.2,232.9z" />
                                 </svg>
                             </div>
-                            <img :src="song.song.album.image"
-                                style="width: 40px;height: 40px;" alt="">
+                            <img :src="song.song.album.image" style="width: 40px;height: 40px;" alt="">
                             <p style="max-width: 20px;" class="songName">{{ song.song.songName }} </p>
                         </div>
                         <div>
@@ -85,31 +84,13 @@
             <div v-else>
                 <h1 class="no-song">This playlist don't have any song.</h1>
             </div>
-            <div class="iframeContainer" v-if="showPlayer">
-                <iframe
-                    style="border-radius: 0px; left: 0; position: fixed;z-index: 1;bottom: 0px;width: 100%;height: 80px; "
-                    :src="'https://open.spotify.com/embed/track/' + spotifyId + '?utm_source=generator'" width="100%"
-                    height="352" frameBorder="0" allowfullscreen=""
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-                </iframe>
-                <button style="border-radius: 0px;position: fixed; z-index: 2;bottom: 0px; bottom: 3%; left: 55%;"
-                    title="Next song" @click=" nextSong()">
-                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-                        <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
-                    </svg>
-                </button>
-                <button style="border-radius: 0px;position: fixed; z-index: 2;bottom: 0px; bottom: 3%; left: 45%;"
-                    title="Previous song"><svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
-                        clip-rule="evenodd" @click=" prevSong()">
-                        <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
-                    </svg>
-                </button>
-            </div>
+
         </v-main>
     </v-app>
 </template>
 
 <script>
+
 
 import BackGround from '../components/BackGround.vue'
 import CreatePlaylistForm from './CreatePlaylistForm.vue';
@@ -121,7 +102,7 @@ export default {
         return {
             button: require('../assets/images/next-button.png'),
             isloading: true,
-            arrow : false,
+            arrow: false,
             showPlayer: false,
             spotifyId: '',
             songId: 0
@@ -137,30 +118,82 @@ export default {
         CreatePlaylistForm
     },
     async mounted() {
+
+        setTimeout(() => {
+            console.log("XX")
+            this.$store.dispatch('getPlaybackStatus');
+        }, 2000);
+        var query = window.location.hash.substring(1);
+        var params = new URLSearchParams(query);
+        var accessToken = params.get("access_token");
+
+        if (accessToken != null) {
+            this.$store.state.spotifyToken = accessToken;
+            this.$store.dispatch('setSpotifyToken', accessToken)
+        }
+
+        if (this.$store.state.spotifyToken == "") {
+
+            this.$store.dispatch('getSpotifyToken')
+        }
+
+
         try {
             this.$store.dispatch('getSongs', { undefined, orderKey: undefined });
         } catch (error) {
             console.error('Error fetching song list:', error);
         } finally {
             this.isloading = false;
-            console.log(this.isloading)
         }
     },
     methods: {
+        async play(index) {
+
+            this.$store.dispatch('getPlaybackStatus');
+
+            let token = this.$store.state.spotifyToken
+
+
+            let list = this.$store.state.Songs;
+
+            const queue = []
+            for (let i = index; i < list.length; i++) {
+                queue.push(`spotify:track:${list[i].song.spotifySongID}`);
+
+            }
+            for (let i = 0; i < index; i++) {
+                queue.push(`spotify:track:${list[i].song.spotifySongID}`);
+
+            }
+
+            const body = {
+                uris: queue,
+                "position_ms": 0,
+                device_id: this.$store.state.device_id
+            }
+
+
+            fetch("https://api.spotify.com/v1/me/player/play", {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+
+            }).catch(e => console.log(e))
+
+
+
+        },
+
+
         getSpotifyId(spotifyId) {
             this.spotifyId = spotifyId
         },
         getSongId(songId) {
             this.songId = songId
         },
-        nextSong() {
-            this.songId += 1;
-            this.spotifyId = this.$store.state.Songs[this.songId].song.spotifySongID
-        },
-        prevSong() {
-            this.songId -= 1;
-            this.spotifyId = this.$store.state.Songs[this.songId].song.spotifySongID
-        },
+
         toggleArrow(event) {
             this.arrow = true;
             const filters = document.getElementsByClassName("arrowDiv")

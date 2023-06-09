@@ -25,7 +25,8 @@ const routes = [{
         path: '/songs',
         name: 'songs',
         component: () =>
-            import ('../views/SongsView.vue')
+            import ('../views/SongsView.vue'),
+
     },
     {
         path: '/search',
@@ -54,7 +55,7 @@ const routes = [{
 ]
 
 const router = new VueRouter({
-    mode: 'hash',
+    mode: 'history',
     routes
 })
 

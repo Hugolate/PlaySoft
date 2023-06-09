@@ -1,24 +1,104 @@
 <template>
-    <div class="home">
-        <iframe
-            style="border-radius:50px; position: absolute; z-index: 1; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 40%;"
-            :src="'https://open.spotify.com/embed/track/' + id + '?utm_source=generator'" width="100%" height="352"
-            frameBorder="0" allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
+    <div>
+        <div class="player">
+            <div @click="previousSong()">Previous</div>
+            <div @click="togglePlay()">Play/Pause</div>
+            <div @click="nextSong()">Next</div>
+        </div>
     </div>
 </template>
-  
+
 <script>
+
 
 export default {
     name: 'PlayerComponent',
     data() {
         return {
-            id: '2f0Ft2XdvNSMSY5TUlZgEz'
+            player: null
         };
     },
-}
+    mounted() {
+        if (!document.querySelector('script[src="https://sdk.scdn.co/spotify-player.js"]')) {
+            const sdk = document.createElement("script");
+            sdk.setAttribute(
+                "src",
+                "https://sdk.scdn.co/spotify-player.js"
+            );
+
+            document.head.appendChild(sdk);
+        }
+       
+
+
+            window.onSpotifyWebPlaybackSDKReady = async () => {
+                const token = this.$store.state.spotifyToken;
+                this.player = await new window.Spotify.Player({
+                    name: 'Playsoft Web',
+                    getOAuthToken: cb => { cb(token); },
+                    volume: 0.5
+
+                });
+                this.$store.state.player = this.player;
+                console.log(this.$store.state.player, "STORE PLAYER")
+                console.log(this.player, "player")
+                this.player.addListener('ready', ({ device_id }) => {
+                    this.$store.state.device_id = device_id;
+                    console.log('Ready with Device ID', device_id);
+                });
+                this.player.addListener('autoplay_failed', () => {
+                    console.log('Autoplay is not allowed by the browser autoplay rules');
+                });
+                // Not Ready
+                this.player.addListener('not_ready', ({ device_id }) => {
+                    console.log('Device ID has gone offline', device_id);
+                });
+
+                this.player.connect().then(console.log("CONECTADO"))
+
+                this.player.on('playback_error', ({ message }) => {
+                    console.error('Failed to perform playback', message);
+                });
+                this.player.on('playback_error', ({ message }) => {
+                    console.error('Failed to perform playback', message);
+                });
+            }
+        
+    },
+    methods: {
+        togglePlay() {
+            console.log(this.$store.state.player)
+            this.$store.state.player.togglePlay().then(() => {
+                console.log('Toggled playback!');
+            });
+        },
+        nextSong() {
+            this.$store.state.player.nextTrack().then(() => {
+                console.log('Skipped to next track!');
+            });
+        },
+        previousSong() {
+            this.$store.state.player.previousTrack().then(() => {
+                console.log('Set to previous track!');
+            });
+        },
+    }
+
+};
 </script>
+
   
-<style></style>
+<style>
+.player {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+    height: 100px;
+    margin-top: 20px;
+    padding-top: 60px;
+    color: white;
+    background-color: rgb(43, 2, 37);
+}
+</style>
+  

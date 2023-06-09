@@ -56,10 +56,7 @@ export default {
     },
     components: { CreatePlaylistForm, BackGround },
     mounted: function logged() {
-        if (!this.$store.state.logged) {
-            localStorage.clear()
-            this.$router.push({ path: '/' }).catch(() => { });
-        }
+
     },
     methods: {
         redirigir(nombrepl) {
