@@ -55,7 +55,7 @@
                     <div style="padding-top: 10px;" class="songs grid" v-for="(song, index) in songList" :key="song.songID">
                         <div class="head">
                             <div style="margin-right: 40px; cursor: pointer;"
-                                @click="getSpotifyId(song.song.spotifySongID), getSongId(index), auth(index), showPlayer = true">
+                                @click="getSpotifyId(song.song.spotifySongID), getSongId(index), play(index), showPlayer = true">
 
                                 <svg height="40" fill="purple" id="Layer_1" style="enable-background:new 0 0 512 512;"
                                     version="1.1" viewBox="0 0 512 512" width="40" xml:space="preserve"
@@ -80,38 +80,18 @@
                         </div>
                     </div>
                 </v-container>
-                <div style="position: absolute; top: 200px; z-index: 99; color: white;" @click="a()">AAA</div>
             </div>
             <div v-else>
                 <h1 class="no-song">This playlist don't have any song.</h1>
             </div>
-            <div class="iframeContainer" v-if="showPlayer">
-                <iframe
-                    style="border-radius: 0px; left: 0; position: fixed;z-index: 1;bottom: 0px;width: 100%;height: 80px; "
-                    :src="'https://open.spotify.com/embed/track/' + spotifyId + '?utm_source=generator'" width="100%"
-                    height="352" frameBorder="0" allowfullscreen=""
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-                </iframe>
-                <button style="border-radius: 0px;position: fixed; z-index: 2;bottom: 0px; bottom: 3%; left: 55%;"
-                    title="Next song" @click=" nextSong()">
-                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-                        <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
-                    </svg>
-                </button>
-                <button style="border-radius: 0px;position: fixed; z-index: 2;bottom: 0px; bottom: 3%; left: 45%;"
-                    title="Previous song"><svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
-                        clip-rule="evenodd" @click=" prevSong()">
-                        <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
-                    </svg>
-                </button>
-            </div>
+ 
         </v-main>
     </v-app>
 </template>
 
 <script>
 
-import axios from 'axios';
+
 import BackGround from '../components/BackGround.vue'
 import CreatePlaylistForm from './CreatePlaylistForm.vue';
 
@@ -138,13 +118,23 @@ export default {
         CreatePlaylistForm
     },
     async mounted() {
-
         var query = window.location.hash.substring(1);
         var params = new URLSearchParams(query);
         var accessToken = params.get("access_token");
-        this.$store.state.spotifyToken = accessToken;
-        console.log(accessToken)
-        //this.$store.state.spotifyToken = accessToken;
+
+        if (accessToken != null) {
+            console.log("token changed")
+            this.$store.state.spotifyToken = accessToken;
+            this.$store.dispatch('setSpotifyToken', accessToken)
+        }
+
+        if (this.$store.state.spotifyToken == "") {
+
+            this.$store.dispatch('getSpotifyToken')
+        }
+
+        console.log(this.$store.state.spotifyToken)
+
         try {
             this.$store.dispatch('getSongs', { undefined, orderKey: undefined });
         } catch (error) {
@@ -154,68 +144,43 @@ export default {
         }
     },
     methods: {
-        async a() {
-            var data = {
-                context_uri: "spotify:track:1FrrTw07gsREPEiS3WOiu3",
-                position_ms: 0
-            }
-            const response = await fetch('https://api.spotify.com/v1/me/player/play', {
-                method: 'PUT',
-                mode: 'cors',
-                headers: {
-                    Authorization: `Bearer ${this.$store.state.spotifyToken}`,
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: JSON.stringify(data)
-            })
-            console.log(response)
-
-            console.log(`Bearer ${this.$store.state.spotifyToken}`)
-            axios.get('https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy', {
-                headers: {
-
-                }
-            }).catch(e => console.log(e))
-        },
-        auth(index) {
+        play(index) {
+          //  this.$store.dispatch('getPlaybackStatus')
             let token = this.$store.state.spotifyToken
             console.log(token)
-            if (token == null) {
 
-                this.$store.dispatch('getSpotifyToken')
-            } else {
-                let list = this.$store.state.Songs;
-                console.log(list.length, "  - ", index)
-                const queue = []
-                for (let i = index; i < list.length; i++) {
-                    queue.push(`spotify:track:${list[i].song.spotifySongID}`);
-                    console.log(list[i].song.songName)
-                }
-                for (let i = 0; i < index; i++) {
-                    queue.push(`spotify:track:${list[i].song.spotifySongID}`);
-                    console.log(list[i].song.songName)
-                }
+            let list = this.$store.state.Songs;
 
-                const body = {
-                    uris: queue,
-                    "position_ms": 0,
-                }
-                console.log(JSON.stringify(body));
-                console.log(queue)
-                fetch("https://api.spotify.com/v1/me/player/shuffle?state=false", {
-                    method: "PUT",
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                },)
-                fetch("https://api.spotify.com/v1/me/player/play", {
-                    method: "PUT",
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    },
-                    body: JSON.stringify(body)
-                }).catch(e => console.log(e))
+            const queue = []
+            for (let i = index; i < list.length; i++) {
+                queue.push(`spotify:track:${list[i].song.spotifySongID}`);
+
             }
+            for (let i = 0; i < index; i++) {
+                queue.push(`spotify:track:${list[i].song.spotifySongID}`);
+
+            }
+
+            const body = {
+                uris: queue,
+                "position_ms": 0,
+            }
+
+            console.log("queue:", queue)
+            fetch("https://api.spotify.com/v1/me/player/shuffle?state=false", {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            },)
+            fetch("https://api.spotify.com/v1/me/player/play", {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            }).catch(e => console.log(e))
+
 
 
         },
@@ -225,14 +190,7 @@ export default {
         getSongId(songId) {
             this.songId = songId
         },
-        nextSong() {
-            this.songId += 1;
-            this.spotifyId = this.$store.state.Songs[this.songId].song.spotifySongID
-        },
-        prevSong() {
-            this.songId -= 1;
-            this.spotifyId = this.$store.state.Songs[this.songId].song.spotifySongID
-        },
+
         toggleArrow(event) {
             this.arrow = true;
             const filters = document.getElementsByClassName("arrowDiv")
