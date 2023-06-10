@@ -63,7 +63,10 @@ export default new Vuex.Store({
         totalPages: 0,
         spotifyToken: "",
         device_id: "",
-        player: ""
+        player: "",
+        counter: 0,
+        currentPlayingID: null,
+        currentImage: ""
     },
     getters: {
         getUsuario(state) {
@@ -449,16 +452,41 @@ export default new Vuex.Store({
                 }
             })
         },
+        getCurrentTrack({ state }) {
+            console.log("ENTRADA")
+            fetch("https://api.spotify.com/v1/me/player/currently-playing", {
+                    headers: {
+                        Authorization: `Bearer ${state.spotifyToken}`
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Obtener el ID de la canción actual
+                    const currentTrack = data.item;
+                    const currentTrackId = currentTrack.id;
+
+                    // Comprobar si la canción actual ha cambiado
+                    if (currentTrackId !== state.currentPlayingID) {
+                        // Actualizar el ID de la canción actual
+                        state.currentPlayingID = currentTrackId;
+                        // Obtener la URL de la imagen del álbum de la canción actual
+                        state.currentImage = currentTrack.album.images[0].url;
+                        console.log(state.currentImage)
+                            // Mostrar la nueva imagen en la página
+                    }
+                })
+                .catch(error => {
+                    console.error("Error al obtener la información de la canción actual:", error);
+                });
+        },
+
         transferPlayback({ state }) {
             const devices = []
             devices.push(state.device_id)
-            console.log(devices, "DEVICE_ID")
-
             const body = {
                 device_ids: devices,
-                play: true
+                play: false
             }
-            console.log(JSON.stringify(body), "bod")
             fetch("https://api.spotify.com/v1/me/player", {
                 method: "PUT",
                 headers: {
@@ -468,7 +496,16 @@ export default new Vuex.Store({
                 body: JSON.stringify(body)
             }).then(response => {
                 console.log(response)
+
+                fetch("https://api.spotify.com/v1/me/player/pause", {
+                    method: "PUT",
+                    headers: {
+                        Authorization: `Bearer ${state.spotifyToken}`,
+                    },
+
+                }).then(console.log("Paused"))
             })
+
         },
 
     },

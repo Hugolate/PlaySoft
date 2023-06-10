@@ -180,7 +180,12 @@ export default {
                 },
                 body: JSON.stringify(body)
 
-            }).catch(e => console.log(e))
+            }).then(() => {
+        
+                this.$store.state.counter = 0
+                
+            })
+                .catch(e => console.log(e))
 
 
 
