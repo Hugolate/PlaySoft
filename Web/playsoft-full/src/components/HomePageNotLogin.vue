@@ -18,21 +18,13 @@
                     <img :src="$store.state.logo" width="300" style="z-index: 1;">
                 </v-container>
             </v-container>
-            <v-container class="fill-height" fluid style="justify-content: space-around;">
-                <v-card class="elevation-12" >
-                    <v-card-text class="mt-12">
-                        <h1 style="color: #6c176d">Register to start hearing now</h1>
-                        <router-link to="/about">
-                            <h2 style="padding-top: 5REM;">Go to login</h2>
-                        </router-link>
-                    </v-card-text>
-                </v-card>
-            </v-container>
+            <GraphicComponent></GraphicComponent>
         </v-main>
     </v-app>
 </template>
 
 <script>
+import GraphicComponent from './GraphicComponent.vue';
 
 export default {
     name: 'HomePageNotLogin',
@@ -51,7 +43,7 @@ export default {
 
 
     },
-    components: {}
+    components: { GraphicComponent }
 }
 </script>
 

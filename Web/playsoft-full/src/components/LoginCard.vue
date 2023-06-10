@@ -3,7 +3,7 @@
     <v-main class="pa-0">
       <BackGround></BackGround>
       <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center" >
+        <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="8">
             <v-card class="elevation-12">
               <v-window v-model="$store.state.step">
@@ -91,6 +91,7 @@
 
 <script>
 import BackGround from '../components/BackGround.vue'
+import Swal from 'sweetalert2'
 
 export default {
   data() {
@@ -106,11 +107,18 @@ export default {
   methods: {
     register() {
       if (this.$store.state.registerEmail == "" || this.$store.state.registerPassword == "" || this.$store.state.registerUsername == "" || this.$store.state.repeatPassword == "") {
-        this.registerError = true;
-        this.alertMessage = "All fields are required";
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops...',
+          text: 'All fields are required',
+        })
       } else if (this.$store.state.registerPassword != this.$store.state.repeatPassword) {
         this.alertMessage = "Passwords don't match";
-        this.registerError = true;
+        Swal.fire({
+          icon: 'error',
+          title: 'Passwords',
+          text: "Passwords don't match",
+        })
       } else {
         if (this.$store.state.registerError) {
           this.registerError = false;
@@ -124,8 +132,11 @@ export default {
         this.loginError = false;
       }
       if (this.$store.state.loginEmail == "" || this.$store.state.loginPassword == "") {
-        this.loginError = true;
-        this.alertMessage = "All fields are required";
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops...',
+          text: 'All fields are required',
+        })
       } else {
         this.$store.dispatch('doLogin')
       }
@@ -138,6 +149,9 @@ export default {
 </script>
 
 <style>
+.swal2-x-mark{
+  padding: none;
+}
 v-content {
   display: flex;
   justify-content: center;

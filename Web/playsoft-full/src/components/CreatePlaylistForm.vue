@@ -69,7 +69,14 @@ export default {
             this.$store.state.dialogCompose = false
         },
         nuevaPl() {
-            Swal.fire('Playlist ' + this.$store.state.playListName + ' created!')
+            
+            Swal.fire({
+                
+                icon: 'success',
+                title: 'Playlist ' + this.$store.state.playListName + ' created!',
+                showConfirmButton: false,
+                timer: 1500
+            })
             this.$store.dispatch('addPlaylist')
         },
         editPl(){
