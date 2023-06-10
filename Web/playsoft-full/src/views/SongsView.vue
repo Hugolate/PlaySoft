@@ -1,8 +1,8 @@
 <template>
     <div>
         <CabeceraPlaysoft></CabeceraPlaysoft>
-        <PlayerComponent ></PlayerComponent>
-        <SongListado></SongListado> SongListado>
+        <PlayerComponent></PlayerComponent>
+        <SongListado></SongListado>
 
         <SearchBar style="position: absolute; top: 20%; left: 0%;"></SearchBar>
     </div>

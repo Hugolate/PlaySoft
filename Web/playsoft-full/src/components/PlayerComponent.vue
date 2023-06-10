@@ -15,7 +15,9 @@ export default {
     name: 'PlayerComponent',
     data() {
         return {
-            player: null
+            player: null,
+            timer: null,
+            start: true
         };
     },
     mounted() {
@@ -28,50 +30,62 @@ export default {
 
             document.head.appendChild(sdk);
         }
-       
 
 
-            window.onSpotifyWebPlaybackSDKReady = async () => {
-                const token = this.$store.state.spotifyToken;
-                this.player = await new window.Spotify.Player({
-                    name: 'Playsoft Web',
-                    getOAuthToken: cb => { cb(token); },
-                    volume: 0.5
 
-                });
-                this.$store.state.player = this.player;
-                console.log(this.$store.state.player, "STORE PLAYER")
-                console.log(this.player, "player")
-                this.player.addListener('ready', ({ device_id }) => {
-                    this.$store.state.device_id = device_id;
-                    console.log('Ready with Device ID', device_id);
-                });
-                this.player.addListener('autoplay_failed', () => {
-                    console.log('Autoplay is not allowed by the browser autoplay rules');
-                });
-                // Not Ready
-                this.player.addListener('not_ready', ({ device_id }) => {
-                    console.log('Device ID has gone offline', device_id);
-                });
+        window.onSpotifyWebPlaybackSDKReady = async () => {
+            const token = this.$store.state.spotifyToken;
+            this.player = await new window.Spotify.Player({
+                name: 'Playsoft Web',
+                getOAuthToken: cb => { cb(token); },
+                volume: 0.5,
+                autoPlay: false
 
-                this.player.connect().then(console.log("CONECTADO"))
+            });
 
-                this.player.on('playback_error', ({ message }) => {
-                    console.error('Failed to perform playback', message);
-                });
-                this.player.on('playback_error', ({ message }) => {
-                    console.error('Failed to perform playback', message);
-                });
-            }
-        
+            this.$store.state.player = this.player;
+
+            this.player.addListener('ready', ({ device_id }) => {
+                this.$store.state.device_id = device_id;
+                console.log('Ready with Device ID', device_id);
+            });
+            this.player.addListener('autoplay_failed', () => {
+                console.log('Autoplay is not allowed by the browser autoplay rules');
+            });
+            // Not Ready
+            this.player.addListener('not_ready', ({ device_id }) => {
+                console.log('Device ID has gone offline', device_id);
+            });
+
+            this.player.connect().then(console.log("CONECTADO"))
+
+            this.player.on('playback_error', ({ message }) => {
+                console.error('Failed to perform playback', message);
+            });
+            this.player.on('playback_error', ({ message }) => {
+                console.error('Failed to perform playback', message);
+            });
+            this.$store.state.player.pause()
+        }
+
     },
     methods: {
         togglePlay() {
             console.log(this.$store.state.player)
             this.$store.state.player.togglePlay().then(() => {
                 console.log('Toggled playback!');
+                if (this.start) {
+                    //play
+                    this.start = false;
+                    this.timer = setInterval(this.count, 1);
+                } else {
+                    //pause
+                    this.start = true
+                    clearInterval(this.timer);
+                }
             });
         },
+
         nextSong() {
             this.$store.state.player.nextTrack().then(() => {
                 console.log('Skipped to next track!');
@@ -82,6 +96,11 @@ export default {
                 console.log('Set to previous track!');
             });
         },
+        count() {
+            // let index = 0;
+            this.$store.state.counter++;
+            console.log(this.$store.state.counter)
+        }
     }
 
 };
