@@ -7,8 +7,7 @@
                 <p @click="redirigir(playlist.playlist.playListName)"
                     v-on:click.right.prevent="deleteAlert(playlist.playlist); index1 = index" id="animated"
                     class="playlists wavy" v-for="(playlist, index) in PlayListsList" :key="playlist.playlist.playlistID">{{
-                        playlist.playlist.playListName
-                    }} {{ index }}
+                        playlist.playlist.playListName }}
 
                     <v-dialog v-model="dialog" width="500">
                         <v-card>

@@ -19,8 +19,8 @@
                             <div class="txt">{{ track.artists[0].name }}</div>
                         </div>
                     </v-list-item>
-                    <div class="save-btn">
-                        <button @click="showModal = true; getTrack(index)">Add to...</button>
+                    <div class="save-btn" @click="showModal = true; getTrack(index)">
+                        <button style="color: rgb(200, 167, 212);">Add to...</button>
                     </div>
                 </v-card>
             </div>

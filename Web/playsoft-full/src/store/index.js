@@ -11,6 +11,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         logo: require('../assets/images/Logo.png'),
+        settings: require('../assets/images/setting.png'),
         buttonIcon: require('../assets/images/next-button.png'),
         logoutPicture: require('../assets/images/logout.png'),
         adminIcon: require('../assets/images/adminIcon.png'),
@@ -191,7 +192,7 @@ export default new Vuex.Store({
                         console.log('la cancion es: ' + song.songName)
                         commit('setAddSong', song)
                     } else {
-                        alert('Esta cancion no existe')
+
                         this.alertMessage = "This song doesn't exist";
                     }
                 })
@@ -238,20 +239,22 @@ export default new Vuex.Store({
 
                 })
                 .then(function(response) {
-                    alert('repsuesta: ' + response.data)
-                    alert('PLID: ' + state.playlistID)
+
                     axios.post(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.playlistID}/songs`, {
                             playlistID: state.playlistID,
                             songID: response.data
                         })
-                        .then(function(response) {
-                            alert(response);
+                        .then(function() {
+
                             location.reload();
                         })
+                        .catch(e => {
+                            state.alertMessage = "Playlist already have this song"
+                            state.error = true;
+                            console.log(e);
+                        });
                 })
                 .catch(e => {
-                    this.alertMessage = "Playlist already have this song"
-                    this.error = true;
                     console.log(e);
                 });
 

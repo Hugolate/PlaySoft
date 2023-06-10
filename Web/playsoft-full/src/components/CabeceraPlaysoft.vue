@@ -1,19 +1,17 @@
 <template>
   <v-app-bar app>
-    <router-link to="/">
+    <router-link to="/" style="display: flex; align-items: center;">
       <div>
         <img :src="$store.state.logo" class="logo">
       </div>
+      <div class="d-flex align-center">
+        <h1> PLAYSOFT </h1>
+      </div>
     </router-link>
 
-    <div class="d-flex align-center">
-      <h1 class="title"> PLAYSOFT </h1>
-    </div>
 
     <v-spacer></v-spacer>
-    <router-link to="/">
-      <span class="mr-2 homeIcon">Home</span>
-    </router-link>
+
     <router-link to="/login" v-if="!this.$store.state.logged">
       <span class="mr-2 loginIcon">Login</span>
     </router-link>
@@ -23,7 +21,7 @@
       </div>
     </router-link> -->
     <div v-else-if="this.$store.state.logged">
-      <span class="mr-2"><img :src="$store.state.logo" alt="" width="50px" @click="displayMenu()"
+      <span class="mr-2"><img :src="$store.state.settings" alt="" width="35px" @click="displayMenu()"
           style="cursor: pointer;"></span>
     </div>
     <div class="sub-menu-wrap" id="subMenu">
@@ -45,7 +43,8 @@
           <p>Log Out</p>
           <span>></span>
         </a>
-        <a v-if="$store.state.usuario == 1 && this.$route.name != 'admin'" class="sub-menu-link" style="cursor: pointer;" @click="adminPageRedirect()">
+        <a v-if="$store.state.usuario == 1 && this.$route.name != 'admin'" class="sub-menu-link" style="cursor: pointer;"
+          @click="adminPageRedirect()">
           <img :src="$store.state.adminIcon" alt="">
           <p>Admin Page</p>
           <span>></span>

@@ -2,11 +2,11 @@
   <div class="modal-overlay" @click="$emit('close-modal')">
     <div class="modal" @click.stop>
       <img class="check" alt="" />
-      <h6>Choose a playlist</h6>
+      <h6 style="color:rgb(156, 90, 156); ">Choose a playlist</h6>
       <h4 @click="add(track, playlist.playlist.playlistID)" id="animated" v-for="playlist in filteredPlaylists"
         :key="playlist.playlist.playlistID">
         {{ playlist.playlist.playListName }}</h4>
-      <button>Go Home</button>
+      <button class="close" @click="$emit('close-modal')">Close</button>
     </div>
     <div class="close" @click="$emit('close-modal')">
     </div>
@@ -33,7 +33,6 @@ export default {
       console.log(track.name)
       let vue = this;
       //vue.$store.state.playlistID = nombrepl
-      alert(playlistID)
       vue.$store.state.songID = vue.track.id
       vue.$store.state.playlistID = playlistID
       this.$store.dispatch('postSong', vue.track)
@@ -60,13 +59,13 @@ export default {
 }
 
 h4 {
-  color: black;
+  color: rgb(196, 196, 196);
   cursor: pointer;
   margin: 10px;
 }
 
 h4:hover {
-  color: black;
+  color: white;
   cursor: pointer;
   font-size: 1.2rem;
 
@@ -74,7 +73,7 @@ h4:hover {
 
 .modal {
   text-align: center;
-  background-color: white;
+  background-color: rgb(16, 0, 31);
   height: 500px;
   width: 500px;
   margin-top: 10%;
@@ -108,7 +107,7 @@ p {
 }
 
 button {
-  background-color: rgb(128, 0, 128);
+  background-color: rgb(66, 34, 66);
   width: 150px;
   height: 40px;
   color: white;

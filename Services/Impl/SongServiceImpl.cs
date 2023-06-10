@@ -104,8 +104,8 @@ public class SongServiceImpl : ISongService
                 {
                     _artistRepository.PostArtist(artist);
                     _artistRepository.Save();
-                    artists.Add(_artistRepository.GetArtistBySpotifyID(artist.spotifyArtistID));
                 }
+                artists.Add(_artistRepository.GetArtistBySpotifyID(artist.spotifyArtistID));
             }
             foreach (var artist in artists)
             {
