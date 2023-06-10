@@ -1,6 +1,9 @@
 <template>
     <div>
         <div class="player">
+            <div>
+                <img class="albumImg" :src="$store.state.currentImage" alt="">
+            </div>
             <div @click="previousSong()">Previous</div>
             <div @click="togglePlay()">Play/Pause</div>
             <div @click="nextSong()">Next</div>
@@ -29,6 +32,11 @@ export default {
             );
 
             document.head.appendChild(sdk);
+            setInterval(() => {
+                this.$store.dispatch('getCurrentTrack');
+            }, 2000);
+
+
         }
 
 
@@ -74,15 +82,6 @@ export default {
             console.log(this.$store.state.player)
             this.$store.state.player.togglePlay().then(() => {
                 console.log('Toggled playback!');
-                if (this.start) {
-                    //play
-                    this.start = false;
-                    this.timer = setInterval(this.count, 1);
-                } else {
-                    //pause
-                    this.start = true
-                    clearInterval(this.timer);
-                }
             });
         },
 
@@ -96,11 +95,7 @@ export default {
                 console.log('Set to previous track!');
             });
         },
-        count() {
-            // let index = 0;
-            this.$store.state.counter++;
-            console.log(this.$store.state.counter)
-        }
+
     }
 
 };
@@ -113,11 +108,16 @@ export default {
     flex-direction: row;
     justify-content: center;
     gap: 25px;
+    align-items: center;
     height: 100px;
     margin-top: 20px;
-    padding-top: 60px;
+    padding-top: 47px;
     color: white;
     background-color: rgb(43, 2, 37);
+}
+.albumImg{
+    width: 48px;
+
 }
 </style>
   
