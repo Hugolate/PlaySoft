@@ -102,11 +102,13 @@ p {
         font-size: 2vw;
     }
 }
+
 @media(max-width: 875px) {
     p {
         font-size: 3vw;
     }
 }
+
 @media(max-width: 414px) {
     p {
         font-size: 4vw;

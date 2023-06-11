@@ -412,6 +412,25 @@ export default new Vuex.Store({
                     console.log(e);
                 });
         },
+        deleteSong({ state }, songID) {
+            state.adminList;
+            alert('CANCION ID EN METODO: ' + typeof songID)
+            alert('PLAYLIST ID : ' + typeof state.PlayListsID)
+            let plid = state.PlayListsID
+            axios
+                .delete(`https://tfgplaysoft.azurewebsites.net/Playlist/${plid}/songs`, {
+                    data: {
+                        playlistID: plid,
+                        songID: songID
+                    }
+
+                }).then(function (response) {
+                    console.log(response)
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
 
         editPlaylist({ commit, state }) {
             console.log(state.playListName)

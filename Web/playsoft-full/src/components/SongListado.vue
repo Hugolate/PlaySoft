@@ -52,7 +52,31 @@
                             </svg>
                         </div>
                     </div>
-                    <div style="padding-top: 10px;" class="songs grid" v-for="(song, index) in songList" :key="song.songID">
+                    <div style="padding-top: 10px;" v-on:click.right.prevent="deleteAlert(song); index1 = index" class="songs grid"
+                        v-for="(song, index) in songList" :key="song.songID"> <v-dialog v-model="dialog" width="500">
+                            <v-card>
+                                <v-card-title class="headline grey lighten-2" primary-title>
+                                    Delete/Remove list?
+                                </v-card-title>
+
+                                <v-card-text
+                                    style="display: flex; flex-direction: column;justify-content: center;align-items: center;margin-top: 15px">
+                                    <h2>{{ removeSng.playListName }}</h2>
+                                    <p>{{ removeSng.playlistDescription }}</p>
+                                </v-card-text>
+                                <v-divider></v-divider>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="blue-grey darken-1" @click="dialog = false" style="color: white;">
+                                        Cancel
+                                    </v-btn>
+                                    <v-btn @click="deleteSongs(songList), dialog = false;" color="red darken-1"
+                                        style="color: white;">
+                                        Delete
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
                         <div class="head">
                             <div style="margin-right: 40px; cursor: pointer;"
                                 @click="getSpotifyId(song.song.spotifySongID), getSongId(index), play(index), showPlayer = true">
@@ -105,7 +129,10 @@ export default {
             arrow: false,
             showPlayer: false,
             spotifyId: '',
-            songId: 0
+            songId: 0,
+            index1: 0,
+            removeSng: "",
+            songs: []
         };
     },
     computed: {
@@ -147,6 +174,23 @@ export default {
         }
     },
     methods: {
+        deleteAlert(song) {
+            console.log(song)
+            this.dialog = true;
+            this.removeSng = song;
+        },
+        deleteSongs(Songs) {
+            alert('plID: ' + this.songList[0].playlist.playlistID)
+            this.songs = Songs;
+            if (this.removeSng.owner) {
+                this.songs.splice(this.index1, 1);
+                this.$store.dispatch('deleteRow', { model: "playlist", id: this.removePl.playlistID });
+            } else {
+                this.songs.splice(this.index1, 1);
+                alert(this.removeSng.song.songID + ' ihafbiae')
+                this.$store.dispatch('deleteSong', this.removeSng.song.songID)
+            }
+        },
         async play(index) {
 
             this.$store.dispatch('getPlaybackStatus');
@@ -181,9 +225,9 @@ export default {
                 body: JSON.stringify(body)
 
             }).then(() => {
-        
+
                 this.$store.state.counter = 0
-                
+
             })
                 .catch(e => console.log(e))
 
