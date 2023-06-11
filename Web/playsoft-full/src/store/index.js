@@ -437,7 +437,7 @@ export default new Vuex.Store({
             commit('clearForm');
         },
         getSpotifyToken() {
-            const clientId = 'ab06cb9da71b4009bd3623e37baf825d';
+            const clientId = '47f877de46d949a5986cd09219ad5636';
             const redirectUri = 'http://localhost:8080/songs';
             const scope = 'user-read-private user-read-email user-read-playback-state user-modify-playback-state  user-read-currently-playing app-remote-control streaming';
 
