@@ -2,7 +2,7 @@
     <div id="app" v-cloak style="min-height: 0px;">
         <v-app style="max-height: 0px;">
 
-            <v-layout style="position: fixed; bottom: 6%; right: 0%;" class="btnContainer">
+            <v-layout style="position: fixed; bottom: 6%; right: 0%; z-index: 20';" class="btnContainer">
                 <v-btn v-if="this.$route.name == 'playlists'" class="btn" @click="compose({})">New Playlist</v-btn>
                 <v-btn v-else class="btn-edit" @click="compose({})">Edit Playlist</v-btn>
             </v-layout>
@@ -109,6 +109,5 @@ export default {
 .btn:hover {
     background-color: rgb(189, 15, 180) !important;
     height: 40px !important;
-    width: 190px;
 }
 </style>

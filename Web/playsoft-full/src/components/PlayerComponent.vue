@@ -4,9 +4,11 @@
             <div>
                 <img class="albumImg" :src="$store.state.currentImage" alt="">
             </div>
-            <div @click="previousSong()">Previous</div>
-            <div @click="togglePlay()">Play/Pause</div>
-            <div @click="nextSong()">Next</div>
+
+            <img style="width: 32px;" :src="$store.state.previousSong" @click="previousSong()" alt="previous">
+            <img id="play" style="width: 36px;" @click="togglePlay()" :src="$store.state.playBtn" alt="play">
+            <img style="width: 32px;" :src="$store.state.nextSong" @click="nextSong()" alt="next">
+
         </div>
     </div>
 </template>
@@ -20,7 +22,8 @@ export default {
         return {
             player: null,
             timer: null,
-            start: true
+            start: true,
+            pause: false
         };
     },
     mounted() {
@@ -65,7 +68,7 @@ export default {
                 console.log('Device ID has gone offline', device_id);
             });
 
-            this.player.connect().then(console.log("CONECTADO"))
+            this.player.connect().then(console.log("CONNECTED"))
 
             this.player.on('playback_error', ({ message }) => {
                 console.error('Failed to perform playback', message);
@@ -79,23 +82,35 @@ export default {
     },
     methods: {
         togglePlay() {
-            console.log(this.$store.state.player)
+            const btn = document.getElementById("play")
+            console.log(btn)
+
+      
             this.$store.state.player.togglePlay().then(() => {
                 console.log('Toggled playback!');
+                if (btn.src == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nO3SoQ3AQAwEwe+/6YRsAQH3QTOSoYHlPQcA/vV8nFv7Mw6Jj6xJK9Jak1aktSatSGtNWpHWmrQirTVpRVpr0oq01qQVaa1JK9Jak1akBQDnkhe+iKV3X20cDgAAAABJRU5ErkJggg==") {
+
+                    btn.src = this.$store.state.playBtn
+
+                } else {
+
+                    btn.src = this.$store.state.pauseBtn
+                }
             });
         },
 
         nextSong() {
             this.$store.state.player.nextTrack().then(() => {
                 console.log('Skipped to next track!');
+                document.getElementById("play").src = this.$store.state.pauseBtn
             });
         },
         previousSong() {
             this.$store.state.player.previousTrack().then(() => {
                 console.log('Set to previous track!');
+                document.getElementById("play").src = this.$store.state.pauseBtn
             });
         },
-
     }
 
 };
@@ -115,7 +130,8 @@ export default {
     color: white;
     background-color: rgb(43, 2, 37);
 }
-.albumImg{
+
+.albumImg {
     width: 48px;
 
 }
