@@ -37,7 +37,8 @@
                                 <path d="M7 10l5 5 5-5z"></path>
                             </svg>
                         </div>
-                        <div id="artistName" style="display: flex;" class="arrowDiv deleteArtists" v-on:click="toggleArrow($event)">
+                        <div id="artistName" style="display: flex;" class="arrowDiv deleteArtists"
+                            v-on:click="toggleArrow($event)">
                             Artists
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="white" width="30"
                                 viewBox="0 0 20 20">
@@ -95,7 +96,7 @@
                         <div id="albumID">
                             <p>{{ song.song.album.albumName }}</p>
                         </div>
-                        <div style="display: flex; gap: 5px;" >
+                        <div style="display: flex; gap: 5px;">
                             <p id="artistID" class="artists" v-for="artistSongs in song.song.artistSongs"
                                 :key="artistSongs.spotifyArtistID">
                                 {{ artistSongs.artistName }} </p>
@@ -134,6 +135,7 @@ export default {
             index1: 0,
             removeSng: "",
             songs: []
+
         };
     },
     computed: {
@@ -150,13 +152,27 @@ export default {
         setTimeout(() => {
             this.$store.dispatch('getPlaybackStatus');
         }, 1000);
-        var query = window.location.hash.substring(1);
-        var params = new URLSearchParams(query);
-        var accessToken = params.get("access_token");
+        // var query = window.location.hash.substring(1);
+        // var params = new URLSearchParams(query);
+        // var accessToken = params.get("accessToken");
 
-        if (accessToken != null) {
+
+        var url = window.location.href;
+        var queryString = url.split('?')[1];
+        if (queryString != null && queryString != undefined) {
+            var accessToken = queryString.substring(12)
+            
+            // Buscar el índice del primer carácter '&' para obtener la posición del siguiente parámetro
+            var ampersandIndex = accessToken.indexOf('%');
+
+            // Obtener la subcadena desde el inicio hasta el índice del primer carácter '&'
+            accessToken = accessToken.substring(0, ampersandIndex);
+        }
+        if (accessToken != null && accessToken != undefined) {
             this.$store.state.spotifyToken = accessToken;
             this.$store.dispatch('setSpotifyToken', accessToken)
+        } else {
+            accessToken = ""
         }
 
         if (this.$store.state.spotifyToken == "") {
@@ -179,7 +195,6 @@ export default {
             this.removeSng = song;
         },
         deleteSongs(Songs) {
-            alert('plID: ' + this.songList[0].playlist.playlistID)
             this.songs = Songs;
             if (this.removeSng.owner) {
                 this.songs.splice(this.index1, 1);
@@ -224,7 +239,7 @@ export default {
 
             }).then(() => {
 
-        
+
                 document.getElementById("play").src = this.$store.state.pauseBtn
             })
                 .catch(e => console.log(e))
@@ -357,10 +372,12 @@ export default {
     .grid {
         grid-template-columns: repeat(3, 1fr);
     }
-    .deleteDuration{
+
+    .deleteDuration {
         display: none;
     }
-    #durationID{
+
+    #durationID {
         display: none;
     }
 }
@@ -369,10 +386,12 @@ export default {
     .grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    #artistID{
+
+    #artistID {
         display: none;
     }
-    .deleteArtists{
+
+    .deleteArtists {
         display: none !important;
     }
 }
@@ -381,11 +400,13 @@ export default {
     .grid {
         grid-template-columns: repeat(1, 1fr);
     }
-    .deleteAlbum{
-        display: none !important; 
+
+    .deleteAlbum {
+        display: none !important;
 
     }
-    #albumID{
+
+    #albumID {
         display: none !important;
     }
 }

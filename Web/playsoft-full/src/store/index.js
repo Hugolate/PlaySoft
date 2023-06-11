@@ -442,7 +442,7 @@ export default new Vuex.Store({
         },
         getSpotifyToken() {
             const clientId = '47f877de46d949a5986cd09219ad5636';
-            const redirectUri = 'http://localhost:8080/songs';
+            const redirectUri = 'http://localhost:8080';
             const scope = 'user-read-private user-read-email user-read-playback-state user-modify-playback-state  user-read-currently-playing app-remote-control streaming';
 
             const authorizeUrl = new URL('https://accounts.spotify.com/authorize');
@@ -466,6 +466,7 @@ export default new Vuex.Store({
             })
         },
         getCurrentTrack({ state }) {
+            
             fetch("https://api.spotify.com/v1/me/player/currently-playing", {
                 headers: {
                     Authorization: `Bearer ${state.spotifyToken}`
