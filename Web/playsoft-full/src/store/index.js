@@ -107,6 +107,8 @@ export default new Vuex.Store({
         },
         setTracks(state, tracks) {
             state.searchTracks = tracks;
+            for (let i = 0; i < 10; i++)
+                state.searchTracks.pop()
         },
         setSearchPlaylists(state, playlists) {
             state.searchPlaylists = playlists;
@@ -179,7 +181,7 @@ export default new Vuex.Store({
                 .then(function (response) {
                     console.log(response.data)
                     commit('setSongs', response.data)
-                }).catch(() => {});
+                }).catch(() => { });
 
         },
 
@@ -243,14 +245,14 @@ export default new Vuex.Store({
                 },
                 artistInDTO
 
-                })
-                .then(function(response) {
+            })
+                .then(function (response) {
 
                     axios.post(`https://tfgplaysoft.azurewebsites.net/Playlist/${state.playlistID}/songs`, {
-                            playlistID: state.playlistID,
-                            songID: response.data
-                        })
-                        .then(function() {
+                        playlistID: state.playlistID,
+                        songID: response.data
+                    })
+                        .then(function () {
 
                             location.reload();
                         })
@@ -270,13 +272,13 @@ export default new Vuex.Store({
             if (state.playListName != "") {
                 var user = state.usuario.toString()
                 axios.post("https://tfgplaysoft.azurewebsites.net/Playlist", {
-                        playListName: state.playListName,
-                        userUKID: user,
-                        playlistDescription: state.playlistDescription,
-                        privacity: state.privacity,
+                    playListName: state.playListName,
+                    userUKID: user,
+                    playlistDescription: state.playlistDescription,
+                    privacity: state.privacity,
 
-                    })
-                    .then(function(response) {
+                })
+                    .then(function (response) {
                         response.data
                         dispatch('getPlaylistsAction')
                         setTimeout(function () {
@@ -359,7 +361,7 @@ export default new Vuex.Store({
             console.log(model)
             axios
                 .get(`https://tfgplaysoft.azurewebsites.net/${model}/count`)
-                .then(function(response) {
+                .then(function (response) {
                     console.log("records:", response.data)
                     commit('setCount', response.data);
 
@@ -421,9 +423,9 @@ export default new Vuex.Store({
                 location.reload()
             })
 
-            .catch(e => {
-                console.log(e)
-            })
+                .catch(e => {
+                    console.log(e)
+                })
             commit('clearForm');
         },
         getSpotifyToken() {
@@ -455,10 +457,10 @@ export default new Vuex.Store({
         getCurrentTrack({ state }) {
             console.log("ENTRADA")
             fetch("https://api.spotify.com/v1/me/player/currently-playing", {
-                    headers: {
-                        Authorization: `Bearer ${state.spotifyToken}`
-                    }
-                })
+                headers: {
+                    Authorization: `Bearer ${state.spotifyToken}`
+                }
+            })
                 .then(response => response.json())
                 .then(data => {
                     // Obtener el ID de la canción actual
@@ -472,7 +474,7 @@ export default new Vuex.Store({
                         // Obtener la URL de la imagen del álbum de la canción actual
                         state.currentImage = currentTrack.album.images[0].url;
                         console.log(state.currentImage)
-                            // Mostrar la nueva imagen en la página
+                        // Mostrar la nueva imagen en la página
                     }
                 })
                 .catch(error => {

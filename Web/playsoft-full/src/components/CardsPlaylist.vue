@@ -92,7 +92,28 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+p {
+    font-size: 1.5vw;
+}
+
+@media(max-width: 1400px) {
+    p {
+        font-size: 2vw;
+    }
+}
+@media(max-width: 875px) {
+    p {
+        font-size: 3vw;
+    }
+}
+@media(max-width: 414px) {
+    p {
+        font-size: 4vw;
+    }
+}
+
+
 .wavy {
     animation-name: wavy;
     animation-duration: 2.3s;
@@ -118,14 +139,12 @@ export default {
 }
 
 .pl-cont {
-    margin: 0;
     padding: 0;
 
     justify-content: center;
 }
 
 .playlists {
-    font-size: xx-large;
     color: white;
     z-index: 10;
     padding: 0px;
