@@ -8,32 +8,31 @@
                     v-on:click.right.prevent="deleteAlert(playlist.playlist); index1 = index" id="animated"
                     class="playlists wavy" v-for="(playlist, index) in PlayListsList" :key="playlist.playlist.playlistID">{{
                         playlist.playlist.playListName }}
-
-                    <v-dialog v-model="dialog" width="500">
-                        <v-card>
-                            <v-card-title class="headline grey lighten-2" primary-title>
-                                Delete/Remove list?
-                            </v-card-title>
-
-                            <v-card-text
-                                style="display: flex; flex-direction: column;justify-content: center;align-items: center;margin-top: 15px">
-                                <h2>{{ removePl.playListName }}</h2>
-                                <p>{{ removePl.playlistDescription }}</p>
-                            </v-card-text>
-                            <v-divider></v-divider>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="blue-grey darken-1" @click="dialog = false" style="color: white;">
-                                    Cancel
-                                </v-btn>
-                                <v-btn @click="deleteLibrary(PlayListsList), dialog = false;" color="red darken-1"
-                                    style="color: white;">
-                                    Delete
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
                 </p>
+                <v-dialog v-model="dialog" width="500">
+                    <v-card>
+                        <v-card-title class="headline grey lighten-2" primary-title>
+                            Delete/Remove list?
+                        </v-card-title>
+
+                        <v-card-text
+                            style="display: flex; flex-direction: column;justify-content: center;align-items: center;margin-top: 15px">
+                            <h2>{{ removePl.playListName }}</h2>
+                            <p>{{ removePl.playlistDescription }}</p>
+                        </v-card-text>
+                        <v-divider></v-divider>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue-grey darken-1" @click="dialog = false" style="color: white;">
+                                Cancel
+                            </v-btn>
+                            <v-btn @click="deleteLibrary(PlayListsList), dialog = false;" color="red darken-1"
+                                style="color: white;">
+                                Delete
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
             </v-container>
         </v-main>
     </v-app>
