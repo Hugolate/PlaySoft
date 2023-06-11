@@ -2,7 +2,7 @@
     <div class="cont">
         <div class="all-cards">
             <div class="crd">
-                <v-card class="mx-auto" max-width="400" min-width="400" border-radius="15"
+                <v-card class="mx-auto cardPl" max-width="400" min-width="400" border-radius="15"
                     style="background-color: rgb(34, 31, 34);" v-for="(track, index) in this.$store.state.searchTracks"
                     :key="track.id" outlined>
                     <v-list-item three-line>
@@ -14,7 +14,7 @@
                             <v-list-item-subtitle style="text-align: start; color: rgb(173, 173, 173);">{{ track.album.name
                             }}</v-list-item-subtitle>
                         </v-list-item-content>
-                        <div>
+                        <div class="imageTrack">
                             <img :src="track.album.images[0].url" style="width: 80px; margin-top: 10px;" alt="">
                             <div class="txt">{{ track.artists[0].name }}</div>
                         </div>
@@ -25,7 +25,7 @@
                 </v-card>
             </div>
             <div class="crd">
-                <v-card class="mx-auto crd" max-width="400" min-width="400" border-radius="15"
+                <v-card class="mx-auto crd cardPl" max-width="400" min-width="400" border-radius="15"
                     style="background-color: rgb(34, 31, 34);"
                     v-for="(playlist, index) in this.$store.state.searchPlaylists" :key="playlist.playlistID" outlined>
                     <v-list-item three-line>
@@ -101,8 +101,41 @@ export default {
 .all-cards {
     display: flex;
     flex-direction: row;
-    gap: 200px;
+    gap: 100px;
 }
+
+@media(max-width: 1000px) {
+    .cardPl {
+        min-width: 350px !important;
+        max-width: 350px !important;
+
+    }
+}
+
+@media(max-width: 850px) {
+    .all-cards {
+        flex-direction: column;
+    }
+    .cardPl {
+        min-width: 600px !important;
+        max-width: 600px !important;
+    }
+}
+
+@media(max-width: 700px) {
+    .cardPl {
+        min-width: 400px !important;
+        max-width: 400px !important;
+    }
+}
+
+@media(max-width: 480px) {
+    .cardPl {
+        min-width: 300px !important;
+        max-width: 300px !important;
+    }
+}
+
 
 .save-btn {
     background-color: rgba(128, 0, 128, 0.461);

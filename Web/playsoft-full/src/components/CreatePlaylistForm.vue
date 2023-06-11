@@ -1,13 +1,12 @@
 <template>
     <div id="app" v-cloak style="min-height: 0px;">
         <v-app style="max-height: 0px;">
-
-            <v-layout style="position: fixed; bottom: 6%; right: 0%; z-index: 20';" class="btnContainer">
+            <div style="position: fixed; bottom: 6%; right: 0%; margin: 6%;" class="btnContainer">
                 <v-btn v-if="this.$route.name == 'playlists'" class="btn" @click="compose({})">New Playlist</v-btn>
                 <v-btn v-else class="btn-edit" @click="compose({})">Edit Playlist</v-btn>
-            </v-layout>
+            </div>
 
-            <v-dialog v-model="$store.state.dialogCompose" width="500">
+            <v-dialog v-model="$store.state.dialogCompose" width="500" :retain-focus="false">
                 <v-card>
                     <v-card-title v-if="this.$route.name == 'playlists'" class="headline purple" primary-title>
                         New PLaylist
@@ -78,6 +77,7 @@ export default {
                 timer: 1500
             })
             this.$store.dispatch('addPlaylist')
+            
         },
         editPl(){
             Swal.fire('Playlist edited')

@@ -30,21 +30,21 @@
                                 <path d="M7 10l5 5 5-5z"></path>
                             </svg>
                         </div>
-                        <div id="Song.Album.albumName" class="arrowDiv" v-on:click="toggleArrow($event)">
+                        <div id="Song.Album.albumName" class="arrowDiv deleteAlbum" v-on:click="toggleArrow($event)">
                             Album
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="white" width="30"
                                 viewBox="0 0 20 20">
                                 <path d="M7 10l5 5 5-5z"></path>
                             </svg>
                         </div>
-                        <div id="artistName" style="display: flex;" class="arrowDiv" v-on:click="toggleArrow($event)">
+                        <div id="artistName" style="display: flex;" class="arrowDiv deleteArtists" v-on:click="toggleArrow($event)">
                             Artists
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="white" width="30"
                                 viewBox="0 0 20 20">
                                 <path d="M7 10l5 5 5-5z"></path>
                             </svg>
                         </div>
-                        <div id="Song.durationMs" class="arrowDiv" v-on:click="toggleArrow($event)">
+                        <div id="Song.durationMs" class="arrowDiv deleteDuration" v-on:click="toggleArrow($event)">
                             Duration
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="white" width="30"
                                 viewBox="0 0 20 20">
@@ -52,7 +52,32 @@
                             </svg>
                         </div>
                     </div>
-                    <div style="padding-top: 10px;" class="songs grid" v-for="(song, index) in songList" :key="song.songID">
+                    <div style="padding-top: 10px;" v-on:click.right.prevent="deleteAlert(song); index1 = index"
+                        class="songs grid" v-for="(song, index) in songList" :key="song.songID"> <v-dialog v-model="dialog"
+                            width="500">
+                            <v-card>
+                                <v-card-title class="headline grey lighten-2" primary-title>
+                                    Delete/Remove list?
+                                </v-card-title>
+
+                                <v-card-text
+                                    style="display: flex; flex-direction: column;justify-content: center;align-items: center;margin-top: 15px">
+                                    <h2>{{ removeSng.playListName }}</h2>
+                                    <p>{{ removeSng.playlistDescription }}</p>
+                                </v-card-text>
+                                <v-divider></v-divider>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="blue-grey darken-1" @click="dialog = false" style="color: white;">
+                                        Cancel
+                                    </v-btn>
+                                    <v-btn @click="deleteSongs(songList), dialog = false;" color="red darken-1"
+                                        style="color: white;">
+                                        Delete
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
                         <div class="head">
                             <div style="margin-right: 40px; cursor: pointer;"
                                 @click="getSpotifyId(song.song.spotifySongID), getSongId(index), play(index), showPlayer = true">
@@ -65,17 +90,17 @@
                                 </svg>
                             </div>
                             <img :src="song.song.album.image" style="width: 40px;height: 40px;" alt="">
-                            <p style="max-width: 20px;" class="songName">{{ song.song.songName }} </p>
+                            <p style="max-width: 20px;" class="songName" id="nameID">{{ song.song.songName }} </p>
                         </div>
-                        <div>
+                        <div id="albumID">
                             <p>{{ song.song.album.albumName }}</p>
                         </div>
-                        <div style="display: flex; gap: 5px;">
-                            <p class="artists" v-for="artistSongs in song.song.artistSongs"
+                        <div style="display: flex; gap: 5px;" >
+                            <p id="artistID" class="artists" v-for="artistSongs in song.song.artistSongs"
                                 :key="artistSongs.spotifyArtistID">
                                 {{ artistSongs.artistName }} </p>
                         </div>
-                        <div>
+                        <div id="durationID">
                             <p>{{ millisToMinutesAndSeconds(song.song.durationMs) }}</p>
                         </div>
                     </div>
@@ -105,7 +130,10 @@ export default {
             arrow: false,
             showPlayer: false,
             spotifyId: '',
-            songId: 0
+            songId: 0,
+            index1: 0,
+            removeSng: "",
+            songs: []
         };
     },
     computed: {
@@ -146,6 +174,21 @@ export default {
         }
     },
     methods: {
+        deleteAlert(song) {
+            this.dialog = true;
+            this.removeSng = song;
+        },
+        deleteSongs(Songs) {
+            alert('plID: ' + this.songList[0].playlist.playlistID)
+            this.songs = Songs;
+            if (this.removeSng.owner) {
+                this.songs.splice(this.index1, 1);
+                this.$store.dispatch('deleteRow', { model: "playlist", id: this.removePl.playlistID });
+            } else {
+                this.songs.splice(this.index1, 1);
+                this.$store.dispatch('deleteSong', this.removeSng.song.songID)
+            }
+        },
         async play(index) {
 
             this.$store.dispatch('getPlaybackStatus');
@@ -180,6 +223,7 @@ export default {
                 body: JSON.stringify(body)
 
             }).then(() => {
+
         
                 document.getElementById("play").src = this.$store.state.pauseBtn
             })
@@ -309,6 +353,42 @@ export default {
     z-index: 1;
 }
 
+@media(max-width: 1025px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .deleteDuration{
+        display: none;
+    }
+    #durationID{
+        display: none;
+    }
+}
+
+@media(max-width: 825px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #artistID{
+        display: none;
+    }
+    .deleteArtists{
+        display: none !important;
+    }
+}
+
+@media(max-width: 560px) {
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .deleteAlbum{
+        display: none !important; 
+
+    }
+    #albumID{
+        display: none !important;
+    }
+}
 
 .pl-name {
     font-size: xx-large;

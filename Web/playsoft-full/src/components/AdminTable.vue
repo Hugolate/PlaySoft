@@ -121,7 +121,11 @@ export default {
 }
 </script>
   
-<style>
+<style scoped>
+
+body{
+    background: #ccc5c5;
+}
 button {
     border: black solid 1px;
     background-color: rgb(194, 194, 194);
