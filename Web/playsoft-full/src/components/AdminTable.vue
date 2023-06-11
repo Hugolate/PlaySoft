@@ -27,7 +27,7 @@
                     :id="index">
                     <div>{{ item.songID }}</div>
                     <div>{{ item.songName }}</div>
-                    <div>{{ item.uri }}</div>
+                    <div>{{ getUri(item.uri) }}..</div>
                     <div>{{ item.durationMs }}ms</div>
                 </div>
                 <div :id="index" v-on:click.right.prevent="deleteItem(item.albumID, index)" class="parent hv"
@@ -76,6 +76,9 @@ export default {
         this.$store.dispatch('getAll', { model: 'song', pageNumber: 1 });
     },
     methods: {
+        getUri(uri){
+            return uri.substring(15,24)
+        },
         getAll(event) {
 
             if (event != null) {

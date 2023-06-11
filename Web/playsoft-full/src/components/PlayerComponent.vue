@@ -5,9 +5,10 @@
                 <img class="albumImg" :src="$store.state.currentImage" alt="">
             </div>
 
-            <img style="width: 32px;" :src="$store.state.previousSong" @click="previousSong()" alt="previous">
-            <img id="play" style="width: 36px;" @click="togglePlay()" :src="$store.state.playBtn" alt="play">
-            <img style="width: 32px;" :src="$store.state.nextSong" @click="nextSong()" alt="next">
+            <img style="width: 32px; cursor:pointer;" :src="$store.state.previousSong" @click="previousSong()"
+                alt="previous">
+            <img id="play" style="width: 36px; cursor:pointer;" @click="togglePlay()" :src="$store.state.playBtn" alt="play">
+            <img style="width: 32px; cursor:pointer;" :src="$store.state.nextSong" @click="nextSong()" alt="next">
 
         </div>
     </div>
@@ -85,7 +86,7 @@ export default {
             const btn = document.getElementById("play")
             console.log(btn)
 
-      
+
             this.$store.state.player.togglePlay().then(() => {
                 console.log('Toggled playback!');
                 if (btn.src == "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nO3SoQ3AQAwEwe+/6YRsAQH3QTOSoYHlPQcA/vV8nFv7Mw6Jj6xJK9Jak1aktSatSGtNWpHWmrQirTVpRVpr0oq01qQVaa1JK9Jak1akBQDnkhe+iKV3X20cDgAAAABJRU5ErkJggg==") {

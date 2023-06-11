@@ -1,7 +1,7 @@
 <template>
     <v-form class="form">
         <v-container>
-            <v-layout class="layout" style="position: fixed; z-index: 2; top: 18%;">
+            <v-layout class="layout" style="position: fixed; z-index: 2; top: 10%;">
                 <v-flex xs12 sm6 md3>
                     <v-text-field label="Search..." class="search" type="text" v-model="query" @input="Search()" autofocus 
                         solo></v-text-field>

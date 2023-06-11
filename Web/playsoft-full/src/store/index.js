@@ -255,7 +255,11 @@ export default new Vuex.Store({
                             location.reload();
                         })
                         .catch(e => {
-                            state.alertMessage = "Playlist already have this song"
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: "Song duplicated",
+                            })
                             state.error = true;
                             console.log(e);
                         });
