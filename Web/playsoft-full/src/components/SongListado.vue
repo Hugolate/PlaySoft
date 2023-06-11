@@ -148,9 +148,8 @@ export default {
     async mounted() {
 
         setTimeout(() => {
-            console.log("XX")
             this.$store.dispatch('getPlaybackStatus');
-        }, 2000);
+        }, 1000);
         var query = window.location.hash.substring(1);
         var params = new URLSearchParams(query);
         var accessToken = params.get("access_token");
@@ -225,8 +224,8 @@ export default {
 
             }).then(() => {
 
-                this.$store.state.counter = 0
-
+        
+                document.getElementById("play").src = this.$store.state.pauseBtn
             })
                 .catch(e => console.log(e))
 

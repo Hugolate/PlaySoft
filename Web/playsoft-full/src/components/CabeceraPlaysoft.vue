@@ -11,9 +11,7 @@
 
 
     <v-spacer></v-spacer>
-    <router-link to="/">
-      <span class="mr-2 homeIcon" style="padding: 1rem;">Home</span>
-    </router-link>
+
     <router-link to="/login" v-if="!this.$store.state.logged">
       <span class="mr-2 loginIcon" style="padding: 1rem;">Login</span>
     </router-link>
