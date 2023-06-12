@@ -442,7 +442,7 @@ export default new Vuex.Store({
         },
         getSpotifyToken() {
             const clientId = '47f877de46d949a5986cd09219ad5636';
-            const redirectUri = 'http://localhost:8080';
+            const redirectUri = 'https://untremendous-partne.000webhostapp.com/';
             const scope = 'user-read-private user-read-email user-read-playback-state user-modify-playback-state  user-read-currently-playing app-remote-control streaming';
 
             const authorizeUrl = new URL('https://accounts.spotify.com/authorize');
